@@ -1,4 +1,5 @@
 import React from 'react';
+import { getAssetPath } from '../../../utils/assetUtils';
 
 export default function VLMsForGeneration() {
     return (
@@ -57,7 +58,7 @@ export default function VLMsForGeneration() {
                     </ul>
                     <div className="mt-4">
                         <img
-                            src="/assets/VLM/LLaVA.jpg"
+                            src={getAssetPath("/assets/VLM/LLaVA.jpg")}
                             alt="LLaVA Architecture"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
@@ -91,7 +92,7 @@ export default function VLMsForGeneration() {
                     </ul>
                     <div className="mt-4">
                         <img
-                            src="/assets/VLM/Frozen.jpg"
+                            src={getAssetPath("/assets/VLM/Frozen.jpg")}
                             alt="Frozen Architecture"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
@@ -128,7 +129,7 @@ export default function VLMsForGeneration() {
                     </ul>
                     <div className="mt-4">
                         <img
-                            src="/assets/VLM/flamingo.jpg"
+                            src={getAssetPath("/assets/VLM/flamingo.jpg")}
                             alt="Flamingo Architecture"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
@@ -174,7 +175,7 @@ export default function VLMsForGeneration() {
                     <div className="mt-4 space-y-4">
                         <div>
                             <img
-                                src="/assets/VLM/Idefics.png"
+                                src={getAssetPath("/assets/VLM/Idefics.png")}
                                 alt="Idefics Architecture"
                                 className="rounded-lg shadow-md max-w-full h-auto"
                             />
@@ -182,7 +183,7 @@ export default function VLMsForGeneration() {
                         </div>
                         <div>
                             <img
-                                src="/assets/VLM/Idefics2.jpg"
+                                src={getAssetPath("/assets/VLM/Idefics2.jpg")}
                                 alt="Idefics2 Architecture"
                                 className="rounded-lg shadow-md max-w-full h-auto"
                             />
@@ -214,7 +215,7 @@ export default function VLMsForGeneration() {
                     </ul>
                     <div className="mt-4">
                         <img
-                            src="/assets/VLM/PaLI.jpg"
+                            src={getAssetPath("/assets/VLM/PaLI.jpg")}
                             alt="PaLI Architecture"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
@@ -245,7 +246,7 @@ export default function VLMsForGeneration() {
                     </ul>
                     <div className="mt-4">
                         <img
-                            src="/assets/VLM/PaLM-E.jpg"
+                            src={getAssetPath("/assets/VLM/PaLM-E.jpg")}
                             alt="PaLM-E Architecture"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
@@ -270,17 +271,17 @@ export default function VLMsForGeneration() {
                     </ul>
                     <div className="mt-4 space-y-4">
                         <img
-                            src="/assets/VLM/Qwen-VL.jpg"
+                            src={getAssetPath("/assets/VLM/Qwen-VL.jpg")}
                             alt="Qwen-VL Performance"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
                         <img
-                            src="/assets/VLM/Qwen-VL_2.jpg"
+                            src={getAssetPath("/assets/VLM/Qwen-VL_2.jpg")}
                             alt="Qwen-VL Chat Examples"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
                         <img
-                            src="/assets/VLM/Qwen-VL_3.jpg"
+                            src={getAssetPath("/assets/VLM/Qwen-VL_3.jpg")}
                             alt="Qwen-VL Training Pipeline"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
@@ -304,7 +305,7 @@ export default function VLMsForGeneration() {
                     </ul>
                     <div className="mt-4">
                         <img
-                            src="/assets/VLM/fuyu.png"
+                            src={getAssetPath("/assets/VLM/fuyu.png")}
                             alt="Fuyu Architecture"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
@@ -323,12 +324,12 @@ export default function VLMsForGeneration() {
                     </ul>
                     <div className="mt-4 space-y-4">
                         <img
-                            src="/assets/VLM/SPHINX.png"
+                            src={getAssetPath("/assets/VLM/SPHINX.png")}
                             alt="SPHINX Architecture"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
                         <img
-                            src="/assets/VLM/LongSPHINX.png"
+                            src={getAssetPath("/assets/VLM/LongSPHINX.png")}
                             alt="LongSPHINX"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
@@ -352,7 +353,7 @@ export default function VLMsForGeneration() {
                     </ul>
                     <div className="mt-4">
                         <img
-                            src="/assets/VLM/MIRASOL.jpg"
+                            src={getAssetPath("/assets/VLM/MIRASOL.jpg")}
                             alt="MIRASOL3B Architecture"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
@@ -376,7 +377,7 @@ export default function VLMsForGeneration() {
                     </ul>
                     <div className="mt-4">
                         <img
-                            src="/assets/VLM/BLIP.jpg"
+                            src={getAssetPath("/assets/VLM/BLIP.jpg")}
                             alt="BLIP Architecture"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
@@ -400,17 +401,17 @@ export default function VLMsForGeneration() {
                     </ul>
                     <div className="mt-4 space-y-4">
                         <img
-                            src="/assets/VLM/BLIP-2.jpg"
+                            src={getAssetPath("/assets/VLM/BLIP-2.jpg")}
                             alt="BLIP-2 Framework"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
                         <img
-                            src="/assets/VLM/BLIP-2_1.jpg"
+                            src={getAssetPath("/assets/VLM/BLIP-2_1.jpg")}
                             alt="Q-Former Architecture"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
                         <img
-                            src="/assets/VLM/BLIP-2_2.jpg"
+                            src={getAssetPath("/assets/VLM/BLIP-2_2.jpg")}
                             alt="BLIP-2 Second Stage"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
@@ -432,12 +433,12 @@ export default function VLMsForGeneration() {
                     </ul>
                     <div className="mt-4 space-y-4">
                         <img
-                            src="/assets/VLM/InstructBLIP.jpg"
+                            src={getAssetPath("/assets/VLM/InstructBLIP.jpg")}
                             alt="InstructBLIP Architecture"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
                         <img
-                            src="/assets/VLM/InstructBLIP2.jpg"
+                            src={getAssetPath("/assets/VLM/InstructBLIP2.jpg")}
                             alt="InstructBLIP Examples"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
@@ -461,7 +462,7 @@ export default function VLMsForGeneration() {
                     </ul>
                     <div className="mt-4">
                         <img
-                            src="/assets/VLM/MiniGPT.jpg"
+                            src={getAssetPath("/assets/VLM/MiniGPT.jpg")}
                             alt="MiniGPT-4 Architecture"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
@@ -485,12 +486,12 @@ export default function VLMsForGeneration() {
                     </ul>
                     <div className="mt-4 space-y-4">
                         <img
-                            src="/assets/VLM/MiniGPT2.jpg"
+                            src={getAssetPath("/assets/VLM/MiniGPT2.jpg")}
                             alt="MiniGPT-v2 Architecture"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
                         <img
-                            src="/assets/VLM/MiniGPT2_2.jpg"
+                            src={getAssetPath("/assets/VLM/MiniGPT2_2.jpg")}
                             alt="MiniGPT-v2 Performance"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
@@ -511,12 +512,12 @@ export default function VLMsForGeneration() {
                     </ul>
                     <div className="mt-4 space-y-4">
                         <img
-                            src="/assets/VLM/LLaVA-Plus1.jpg"
+                            src={getAssetPath("/assets/VLM/LLaVA-Plus1.jpg")}
                             alt="LLaVA-Plus Capabilities"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
                         <img
-                            src="/assets/VLM/LLaVA-Plus2.jpg"
+                            src={getAssetPath("/assets/VLM/LLaVA-Plus2.jpg")}
                             alt="LLaVA-Plus Pipeline"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
@@ -554,7 +555,7 @@ export default function VLMsForGeneration() {
                     </ul>
                     <div className="mt-4">
                         <img
-                            src="/assets/VLM/LLaVA-1.5.jpg"
+                            src={getAssetPath("/assets/VLM/LLaVA-1.5.jpg")}
                             alt="LLaVA-1.5 Performance"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
@@ -575,12 +576,12 @@ export default function VLMsForGeneration() {
                     </ul>
                     <div className="mt-4 space-y-4">
                         <img
-                            src="/assets/VLM/CogVLM2.jpg"
+                            src={getAssetPath("/assets/VLM/CogVLM2.jpg")}
                             alt="CogVLM Architecture"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
                         <img
-                            src="/assets/VLM/CogVLM1.jpg"
+                            src={getAssetPath("/assets/VLM/CogVLM1.jpg")}
                             alt="CogVLM Performance"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
@@ -618,12 +619,12 @@ export default function VLMsForGeneration() {
                     </ul>
                     <div className="mt-4 space-y-4">
                         <img
-                            src="/assets/VLM/Ferret2.jpg"
+                            src={getAssetPath("/assets/VLM/Ferret2.jpg")}
                             alt="Ferret Capabilities"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
                         <img
-                            src="/assets/VLM/Ferret.jpg"
+                            src={getAssetPath("/assets/VLM/Ferret.jpg")}
                             alt="Ferret Architecture"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
@@ -647,7 +648,7 @@ export default function VLMsForGeneration() {
                     </ul>
                     <div className="mt-4">
                         <img
-                            src="/assets/VLM/KOSMOS-1.jpg"
+                            src={getAssetPath("/assets/VLM/KOSMOS-1.jpg")}
                             alt="KOSMOS-1 Architecture"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
@@ -671,7 +672,7 @@ export default function VLMsForGeneration() {
                     </ul>
                     <div className="mt-4">
                         <img
-                            src="/assets/VLM/Kosmos2.jpg"
+                            src={getAssetPath("/assets/VLM/Kosmos2.jpg")}
                             alt="KOSMOS-2 Capabilities"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
@@ -695,7 +696,7 @@ export default function VLMsForGeneration() {
                     </ul>
                     <div className="mt-4">
                         <img
-                            src="/assets/VLM/MultiInstruct.jpg"
+                            src={getAssetPath("/assets/VLM/MultiInstruct.jpg")}
                             alt="MultiInstruct Tasks"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
@@ -719,12 +720,12 @@ export default function VLMsForGeneration() {
                     </ul>
                     <div className="mt-4 space-y-4">
                         <img
-                            src="/assets/VLM/LaVIN.jpg"
+                            src={getAssetPath("/assets/VLM/LaVIN.jpg")}
                             alt="LaVIN Comparison"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
                         <img
-                            src="/assets/VLM/LaVIN2.jpg"
+                            src={getAssetPath("/assets/VLM/LaVIN2.jpg")}
                             alt="LaVIN Architecture"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
@@ -748,12 +749,12 @@ export default function VLMsForGeneration() {
                     </ul>
                     <div className="mt-4 space-y-4">
                         <img
-                            src="/assets/VLM/TinyGPT1.jpg"
+                            src={getAssetPath("/assets/VLM/TinyGPT1.jpg")}
                             alt="TinyGPT-V Training"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
                         <img
-                            src="/assets/VLM/TinyGPT2.jpg"
+                            src={getAssetPath("/assets/VLM/TinyGPT2.jpg")}
                             alt="TinyGPT-V Architecture"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
@@ -777,12 +778,12 @@ export default function VLMsForGeneration() {
                     </ul>
                     <div className="mt-4 space-y-4">
                         <img
-                            src="/assets/VLM/CoVLM.jpg"
+                            src={getAssetPath("/assets/VLM/CoVLM.jpg")}
                             alt="CoVLM Comparison"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
                         <img
-                            src="/assets/VLM/CoVLM2.jpg"
+                            src={getAssetPath("/assets/VLM/CoVLM2.jpg")}
                             alt="CoVLM Framework"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
@@ -820,7 +821,7 @@ export default function VLMsForGeneration() {
                     </ul>
                     <div className="mt-4">
                         <img
-                            src="/assets/VLM/MoE-LLaVA.jpg"
+                            src={getAssetPath("/assets/VLM/MoE-LLaVA.jpg")}
                             alt="MoE-LLaVA Tuning"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
@@ -844,12 +845,12 @@ export default function VLMsForGeneration() {
                     </ul>
                     <div className="mt-4 space-y-4">
                         <img
-                            src="/assets/VLM/BLIVA1.jpg"
+                            src={getAssetPath("/assets/VLM/BLIVA1.jpg")}
                             alt="BLIVA Comparison"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
                         <img
-                            src="/assets/VLM/BLIVA2.jpg"
+                            src={getAssetPath("/assets/VLM/BLIVA2.jpg")}
                             alt="BLIVA Architecture"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
@@ -873,12 +874,12 @@ export default function VLMsForGeneration() {
                     </ul>
                     <div className="mt-4 space-y-4">
                         <img
-                            src="/assets/VLM/PALO2.jpg"
+                            src={getAssetPath("/assets/VLM/PALO2.jpg")}
                             alt="PALO vs English VLMs"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
                         <img
-                            src="/assets/VLM/PALO.jpg"
+                            src={getAssetPath("/assets/VLM/PALO.jpg")}
                             alt="PALO Architecture"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
@@ -899,7 +900,7 @@ export default function VLMsForGeneration() {
                     </ul>
                     <div className="mt-4">
                         <img
-                            src="/assets/VLM/DeepSeek.jpg"
+                            src={getAssetPath("/assets/VLM/DeepSeek.jpg")}
                             alt="DeepSeek-VL Training"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />
@@ -1026,7 +1027,7 @@ export default function VLMsForGeneration() {
                     </ul>
                     <div className="mt-4">
                         <img
-                            src="/assets/VLM/PaliGemma.jpg"
+                            src={getAssetPath("/assets/VLM/PaliGemma.jpg")}
                             alt="PaliGemma Architecture"
                             className="rounded-lg shadow-md max-w-full h-auto"
                         />

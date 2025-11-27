@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { getAssetPath } from '../../../utils/assetUtils';
+
 export default function QFormer() {
     return (
         <div className="mt-8">
@@ -49,7 +51,7 @@ export default function QFormer() {
             {/* <img src="/assets/VLM/BLIP-2_2.jpg" alt="BLIP-2 Architecture" className="my-4 rounded-lg shadow-md" /> */}
             <div className="mt-4">
                 <img
-                    src="/assets/VLM/BLIP-2_2.jpg"
+                    src={getAssetPath("/assets/VLM/BLIP-2_2.jpg")}
                     alt="BLIP-2 Architecture"
                     className="rounded-lg shadow-md max-w-full h-auto"
                 />

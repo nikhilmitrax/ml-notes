@@ -3,6 +3,7 @@ import { Layers, Activity } from 'lucide-react';
 import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
 import ImageCard from '../../../components/ImageCard';
+import { getAssetPath } from '../../../utils/assetUtils';
 
 
 const TheArchitecture = () => {
@@ -13,7 +14,7 @@ const TheArchitecture = () => {
             </p>
 
             <ImageCard
-                src="/assets/VariationalAutoencoders/vae_placeholder.png"
+                src={getAssetPath("/assets/VariationalAutoencoders/vae_placeholder.png")}
                 alt="VAE Architecture Diagram"
                 caption="Figure 1: High-level architecture of a Variational Autoencoder."
             />

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { getAssetPath } from '../../../utils/assetUtils';
+
 export default function MedicalVLMs() {
     return (
         <div className="mt-8">
@@ -31,7 +33,7 @@ export default function MedicalVLMs() {
                     </ul>
                     <div className="my-4">
                         <img
-                            src="/assets/VLM/Med-Flamingo.jpg"
+                            src={getAssetPath("/assets/VLM/Med-Flamingo.jpg")}
                             alt="Med-Flamingo"
                             className="w-full rounded-lg shadow-md"
                         />
@@ -81,7 +83,7 @@ export default function MedicalVLMs() {
                     </ul>
                     <div className="my-4">
                         <img
-                            src="/assets/VLM/Med-PaLM-M.jpg"
+                            src={getAssetPath("/assets/VLM/Med-PaLM-M.jpg")}
                             alt="Med-PaLM M"
                             className="w-full rounded-lg shadow-md"
                         />
@@ -120,7 +122,7 @@ export default function MedicalVLMs() {
                     </ul>
                     <div className="my-4">
                         <img
-                            src="/assets/VLM/LLaVA-Med.jpg"
+                            src={getAssetPath("/assets/VLM/LLaVA-Med.jpg")}
                             alt="LLaVA-Med"
                             className="w-full rounded-lg shadow-md"
                         />

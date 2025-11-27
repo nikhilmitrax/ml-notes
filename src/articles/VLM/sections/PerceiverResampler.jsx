@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { getAssetPath } from '../../../utils/assetUtils';
+
 export default function PerceiverResampler() {
     return (
         <div className="mt-8">
@@ -41,7 +43,7 @@ export default function PerceiverResampler() {
             {/* <img src="/assets/VLM/flamingo2.jpg" alt="Flamingo Architecture" className="my-4 rounded-lg shadow-md" /> */}
             <div className="mt-4">
                 <img
-                    src="/assets/VLM/flamingo2.jpg"
+                    src={getAssetPath("/assets/VLM/flamingo2.jpg")}
                     alt="Flamingo Architecture"
                     className="rounded-lg shadow-md max-w-full h-auto"
                 />

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Video } from 'lucide-react';
 import Section from '../../../components/Section';
+import { getAssetPath } from '../../../utils/assetUtils';
 
 export default function PopularVideoLLMs() {
     return (
@@ -38,7 +39,7 @@ export default function PopularVideoLLMs() {
                     </ul>
                     <div className="my-4">
                         <img
-                            src="/assets/VLM/VideoPoet1.jpg"
+                            src={getAssetPath("/assets/VLM/VideoPoet1.jpg")}
                             alt="VideoPoet"
                             className="w-full rounded-lg shadow-md"
                         />
@@ -138,7 +139,7 @@ export default function PopularVideoLLMs() {
                     </ul>
                     <div className="my-4">
                         <img
-                            src="/assets/VLM/VideoMAE.jpg"
+                            src={getAssetPath("/assets/VLM/VideoMAE.jpg")}
                             alt="VideoMAE"
                             className="w-full rounded-lg shadow-md"
                         />

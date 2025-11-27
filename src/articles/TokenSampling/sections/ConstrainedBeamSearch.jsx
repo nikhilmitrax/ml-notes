@@ -7,6 +7,8 @@ import List from '../../../components/List';
 import ListItem from '../../../components/ListItem';
 import InteractiveCard from '../../../components/InteractiveCard';
 
+import { getAssetPath } from '../../../utils/assetUtils';
+
 const BeamSearchVisualizer = () => {
     const beamWidth = 2;
 
@@ -169,13 +171,13 @@ const ConstrainedBeamSearch = () => {
             <List>
                 <ListItem>Now a practical next question would be, wouldn't forcing a token create nonsensical outputs? Using banks solves this problem by creating a balance between fulfilling the constraints and creating sensible output, and we can see this illustrated in the figure below:</ListItem>
             </List>
-            <img src="/assets/TokenSampling/6.png" alt="Banking" className="w-full rounded-lg my-4 border border-slate-200" />
+            <img src={getAssetPath("/assets/TokenSampling/6.png")} alt="Banking" className="w-full rounded-lg my-4 border border-slate-200" />
             <List>
                 <ListItem>"After sorting all the possible beams into their respective banks, we do a round-robin selection. With the above example, we'd select the most probable output from Bank 2, then most probable from Bank 1, one from Bank 0, the second most probable from Bank 2, the second most probable from Bank 1, and so forth. Assuming we're using three beams, we just do the above process three times to end up with <code className="bg-slate-100 px-1 rounded">["The is fast", "The dog is", "The dog and"]</code>."</ListItem>
                 <ListItem>Thus, even though we are forcing tokens on the model, we are still keeping track of other high probable sequences that are likely not nonsensical.</ListItem>
                 <ListItem>The image below shows the result and all the steps combined.</ListItem>
             </List>
-            <img src="/assets/TokenSampling/7.png" alt="Constrained Beam Search Result" className="w-full rounded-lg my-4 border border-slate-200" />
+            <img src={getAssetPath("/assets/TokenSampling/7.png")} alt="Constrained Beam Search Result" className="w-full rounded-lg my-4 border border-slate-200" />
         </Section>
     );
 };

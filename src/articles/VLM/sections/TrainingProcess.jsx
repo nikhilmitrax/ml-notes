@@ -1,6 +1,7 @@
 import React from 'react';
 import { GraduationCap } from 'lucide-react';
 import Section from '../../../components/Section';
+import { getAssetPath } from '../../../utils/assetUtils';
 
 export default function TrainingProcess() {
     return (
@@ -12,7 +13,7 @@ export default function TrainingProcess() {
             {/* <img src="/assets/VLM/VLMArch.jpg" alt="VLM Architecture" className="my-4 rounded-lg shadow-md" /> */}
             <div className="mt-4">
                 <img
-                    src="/assets/VLM/VLMArch.jpg"
+                    src={getAssetPath("/assets/VLM/VLMArch.jpg")}
                     alt="VLM Architecture Diagram"
                     className="rounded-lg shadow-md max-w-full h-auto"
                 />

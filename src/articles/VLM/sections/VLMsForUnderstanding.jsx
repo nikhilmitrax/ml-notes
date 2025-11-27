@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { getAssetPath } from '../../../utils/assetUtils';
+
 export default function VLMsForUnderstanding() {
     return (
         <div className="mt-8">
@@ -31,7 +33,7 @@ export default function VLMsForUnderstanding() {
                     </ul>
                     <div className="my-4">
                         <img
-                            src="/assets/VLM/CLIP.jpg"
+                            src={getAssetPath("/assets/VLM/CLIP.jpg")}
                             alt="CLIP Architecture"
                             className="w-full rounded-lg shadow-md"
                         />
@@ -140,7 +142,7 @@ export default function VLMsForUnderstanding() {
                     </ul>
                     <div className="my-4">
                         <img
-                            src="/assets/VLM/Alpha-CLIP.jpg"
+                            src={getAssetPath("/assets/VLM/Alpha-CLIP.jpg")}
                             alt="Alpha-CLIP Architecture"
                             className="w-full rounded-lg shadow-md"
                         />
@@ -152,7 +154,7 @@ export default function VLMsForUnderstanding() {
                     </ul>
                     <div className="my-4">
                         <img
-                            src="/assets/VLM/Alpha-CLIP2.jpg"
+                            src={getAssetPath("/assets/VLM/Alpha-CLIP2.jpg")}
                             alt="Alpha-CLIP Usage"
                             className="w-full rounded-lg shadow-md"
                         />
@@ -202,7 +204,7 @@ export default function VLMsForUnderstanding() {
                     </ul>
                     <div className="my-4">
                         <img
-                            src="/assets/VLM/GLIP.jpg"
+                            src={getAssetPath("/assets/VLM/GLIP.jpg")}
                             alt="GLIP Architecture"
                             className="w-full rounded-lg shadow-md"
                         />
@@ -217,7 +219,7 @@ export default function VLMsForUnderstanding() {
                     </ul>
                     <div className="my-4">
                         <img
-                            src="/assets/VLM/GLIP2.jpg"
+                            src={getAssetPath("/assets/VLM/GLIP2.jpg")}
                             alt="GLIP Zero-shot Transfer"
                             className="w-full rounded-lg shadow-md"
                         />
@@ -261,7 +263,7 @@ export default function VLMsForUnderstanding() {
                     </ul>
                     <div className="my-4">
                         <img
-                            src="/assets/VLM/ImageBind.jpg"
+                            src={getAssetPath("/assets/VLM/ImageBind.jpg")}
                             alt="ImageBind"
                             className="w-full rounded-lg shadow-md"
                         />

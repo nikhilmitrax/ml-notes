@@ -9,6 +9,8 @@ import List from '../../../components/List';
 import ListItem from '../../../components/ListItem';
 import Quote from '../../../components/Quote';
 
+import { getAssetPath } from '../../../utils/assetUtils';
+
 const TopP = () => {
     return (
         <Section title="Top-p (nucleus sampling)" icon={Filter}>
@@ -41,7 +43,7 @@ const TopP = () => {
             <List>
                 <ListItem>Based on OpenAI's GPT-3 API below, we should only use either nucleus sampling or temperature and that these parameters cannot be used in tandem. Put simply, these are different and disjoint methods of controlling the randomness of a language model's output.</ListItem>
             </List>
-            <img src="/assets/TokenSampling/API.jpg" alt="API" className="w-full rounded-lg my-4 border border-slate-200" />
+            <img src={getAssetPath("/assets/TokenSampling/API.jpg")} alt="API" className="w-full rounded-lg my-4 border border-slate-200" />
         </Section>
     );
 };

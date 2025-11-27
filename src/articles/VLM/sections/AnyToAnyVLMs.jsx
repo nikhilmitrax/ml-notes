@@ -1,6 +1,4 @@
-import React from 'react';
-import { Shuffle } from 'lucide-react';
-import Section from '../../../components/Section';
+import { getAssetPath } from '../../../utils/assetUtils';
 
 export default function AnyToAnyVLMs() {
     return (
@@ -30,7 +28,7 @@ export default function AnyToAnyVLMs() {
                     </ul>
                     <div className="my-4">
                         <img
-                            src="/assets/VLM/CoDi.jpg"
+                            src={getAssetPath("/assets/VLM/CoDi.jpg")}
                             alt="CoDi Architecture"
                             className="w-full rounded-lg shadow-md"
                         />
@@ -130,14 +128,14 @@ export default function AnyToAnyVLMs() {
                     </ul>
                     <div className="my-4">
                         <img
-                            src="/assets/VLM/CoDi-2.jpg"
+                            src={getAssetPath("/assets/VLM/CoDi-2.jpg")}
                             alt="CoDi-2 Architecture"
                             className="w-full rounded-lg shadow-md"
                         />
                     </div>
                     <div className="my-4">
                         <img
-                            src="/assets/VLM/CoDi-2_2.jpg"
+                            src={getAssetPath("/assets/VLM/CoDi-2_2.jpg")}
                             alt="CoDi-2 Examples"
                             className="w-full rounded-lg shadow-md"
                         />
@@ -164,7 +162,7 @@ export default function AnyToAnyVLMs() {
                     </ul>
                     <div className="my-4">
                         <img
-                            src="/assets/VLM/Gemini1.jpg"
+                            src={getAssetPath("/assets/VLM/Gemini1.jpg")}
                             alt="Gemini Capabilities"
                             className="w-full rounded-lg shadow-md"
                         />
@@ -182,14 +180,14 @@ export default function AnyToAnyVLMs() {
                     </ul>
                     <div className="my-4">
                         <img
-                            src="/assets/VLM/Gemini2.jpg"
+                            src={getAssetPath("/assets/VLM/Gemini2.jpg")}
                             alt="Gemini Physics Problem"
                             className="w-full rounded-lg shadow-md"
                         />
                     </div>
                     <div className="my-4">
                         <img
-                            src="/assets/VLM/Gemini3.jpg"
+                            src={getAssetPath("/assets/VLM/Gemini3.jpg")}
                             alt="Gemini Reasoning"
                             className="w-full rounded-lg shadow-md"
                         />
@@ -201,7 +199,7 @@ export default function AnyToAnyVLMs() {
                     </ul>
                     <div className="my-4">
                         <img
-                            src="/assets/VLM/Gemini4.jpg"
+                            src={getAssetPath("/assets/VLM/Gemini4.jpg")}
                             alt="Gemini Performance"
                             className="w-full rounded-lg shadow-md"
                         />
@@ -213,7 +211,7 @@ export default function AnyToAnyVLMs() {
                     </ul>
                     <div className="my-4">
                         <img
-                            src="/assets/VLM/Gemini5.jpg"
+                            src={getAssetPath("/assets/VLM/Gemini5.jpg")}
                             alt="Gemini Vision"
                             className="w-full rounded-lg shadow-md"
                         />
@@ -286,7 +284,7 @@ export default function AnyToAnyVLMs() {
                     </ul>
                     <div className="my-4">
                         <img
-                            src="/assets/VLM/NExT-GPT1.png"
+                            src={getAssetPath("/assets/VLM/NExT-GPT1.png")}
                             alt="NExT-GPT Architecture"
                             className="w-full rounded-lg shadow-md"
                         />
@@ -303,7 +301,7 @@ export default function AnyToAnyVLMs() {
                     </ul>
                     <div className="my-4">
                         <img
-                            src="/assets/VLM/NExT-GPT2.png"
+                            src={getAssetPath("/assets/VLM/NExT-GPT2.png")}
                             alt="NExT-GPT Inference"
                             className="w-full rounded-lg shadow-md"
                         />
@@ -331,7 +329,7 @@ export default function AnyToAnyVLMs() {
                     </ul>
                     <div className="my-4">
                         <img
-                            src="/assets/VLM/NExT-GPT3.png"
+                            src={getAssetPath("/assets/VLM/NExT-GPT3.png")}
                             alt="NExT-GPT Alignment"
                             className="w-full rounded-lg shadow-md"
                         />
@@ -348,7 +346,7 @@ export default function AnyToAnyVLMs() {
                     </ul>
                     <div className="my-4">
                         <img
-                            src="/assets/VLM/NExT-GPT4.png"
+                            src={getAssetPath("/assets/VLM/NExT-GPT4.png")}
                             alt="NExT-GPT MosIT"
                             className="w-full rounded-lg shadow-md"
                         />
@@ -368,7 +366,7 @@ export default function AnyToAnyVLMs() {
                     </ul>
                     <div className="my-4">
                         <img
-                            src="/assets/VLM/NExT-GPT5.png"
+                            src={getAssetPath("/assets/VLM/NExT-GPT5.png")}
                             alt="NExT-GPT Datasets"
                             className="w-full rounded-lg shadow-md"
                         />

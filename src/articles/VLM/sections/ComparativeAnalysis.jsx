@@ -1,6 +1,7 @@
 import React from 'react';
 import { GitCompare } from 'lucide-react';
 import Section from '../../../components/Section';
+import { getAssetPath } from '../../../utils/assetUtils';
 
 export default function ComparativeAnalysis() {
     return (
@@ -12,7 +13,7 @@ export default function ComparativeAnalysis() {
             </ul>
             <div className="my-4">
                 <img
-                    src="/assets/VLM/LMcomparativeanalysis.jpg"
+                    src={getAssetPath("/assets/VLM/LMcomparativeanalysis.jpg")}
                     alt="Comparative Analysis"
                     className="w-full rounded-lg shadow-md"
                 />
