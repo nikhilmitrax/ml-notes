@@ -35,7 +35,7 @@ const articles = Object.entries(articleModules)
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/ml-notes">
       <Routes>
         <Route path="/" element={<Layout articles={articles} />}>
           <Route index element={<Navigate to={articles[0]?.path || ''} replace />} />
