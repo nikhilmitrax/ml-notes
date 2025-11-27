@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
 import '../styles.css';
 
@@ -35,7 +35,7 @@ const articles = Object.entries(articleModules)
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter basename="/ml-notes">
+    <HashRouter>
       <Routes>
         <Route path="/" element={<Layout articles={articles} />}>
           <Route index element={<Navigate to={articles[0]?.path || ''} replace />} />
@@ -48,6 +48,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           ))}
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   </React.StrictMode>
 );
