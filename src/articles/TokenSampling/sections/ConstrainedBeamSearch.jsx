@@ -3,6 +3,7 @@ import { Filter, GitBranch, X, Check, RotateCcw, ChevronRight } from 'lucide-rea
 import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
 import Header3 from '../../../components/Header3';
+import Paragraph from '../../../components/Paragraph';
 import List from '../../../components/List';
 import ListItem from '../../../components/ListItem';
 import InteractiveCard from '../../../components/InteractiveCard';
@@ -142,9 +143,9 @@ const BeamSearchVisualizer = () => {
                 )}
             </div>
 
-            <p className="text-xs text-slate-500 mt-2">
+            <Paragraph variant="caption" className="mt-2 mb-0">
                 Beam search explores multiple paths simultaneously. At each step, it expands all current paths and keeps only the top k (k={beamWidth}) most probable ones.
-            </p>
+            </Paragraph>
         </div>
     );
 };

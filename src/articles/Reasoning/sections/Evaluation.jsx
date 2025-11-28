@@ -1,17 +1,18 @@
 import React from 'react';
 import { Target } from 'lucide-react';
 import Section from '../../../components/Section';
+import Paragraph from '../../../components/Paragraph';
 
 export default function Evaluation() {
     return (
         <Section title="Evaluation of reasoning using datasets" icon={Target}>
             <div className="space-y-6">
-                <p>
+                <Paragraph>
                     Evaluating reasoning is fundamentally harder than evaluating knowledge. A model can answer "What is the capital of France?" by rote memorization, but answering "If Paris were in Italy, would it be north of Rome?" requires manipulating geographical concepts.
-                </p>
-                <p>
+                </Paragraph>
+                <Paragraph>
                     We categorize reasoning benchmarks into tiers based on the <strong>depth of reasoning</strong> required:
-                </p>
+                </Paragraph>
                 <ul className="list-disc pl-6 space-y-2">
                     <li><strong>Tier 1: Arithmetic & Simple Logic</strong> (GSM8K, SVAMP) — Single-step or short-chain deduction.</li>
                     <li><strong>Tier 2: Complex Symbolic Reasoning</strong> (MATH, Theorem Proving) — Multi-step manipulation of abstract symbols.</li>

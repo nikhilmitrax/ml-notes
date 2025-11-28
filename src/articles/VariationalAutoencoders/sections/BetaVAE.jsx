@@ -4,6 +4,8 @@ import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
 import EquationBlock from '../../../components/EquationBlock';
 import InteractiveCard from '../../../components/InteractiveCard';
+import Header4 from '../../../components/Header4';
+import Paragraph from '../../../components/Paragraph';
 
 const BetaVAEViz = () => {
     const [beta, setBeta] = useState(1);
@@ -117,37 +119,37 @@ const BetaVAEViz = () => {
 const BetaVAE = () => {
     return (
         <Section title="Beta-VAE: Disentanglement" icon={Zap}>
-            <p className="mb-4 text-gray-700 dark:text-gray-300">
+            <Paragraph className="mb-4 text-gray-700 dark:text-gray-300">
                 Standard VAEs often learn <strong>entangled</strong> representations, where a single latent variable <Equation>z_i</Equation> might affect multiple features of the data (e.g., both color and shape).
-            </p>
-            <p className="mb-4 text-gray-700 dark:text-gray-300">
+            </Paragraph>
+            <Paragraph className="mb-4 text-gray-700 dark:text-gray-300">
                 <strong><Equation>\beta</Equation>-VAE</strong> introduces a hyperparameter <Equation>\beta</Equation> to the KL divergence term in the objective function:
-            </p>
+            </Paragraph>
 
             <EquationBlock><Equation>
                 {`\\mathcal{L}_{\\beta} = \\mathbb{E}_{q(z|x)}[\\log p(x|z)] - \\beta \\cdot D_{KL}(q(z|x) || p(z))`}
             </Equation></EquationBlock>
 
-            <p className="mb-4 text-gray-700 dark:text-gray-300">
+            <Paragraph className="mb-4 text-gray-700 dark:text-gray-300">
                 By setting <Equation>{'\\beta > 1'}</Equation>, we force the model to prioritize the independence of latent factors (matching the isotropic unit Gaussian prior).
                 This encourages <strong>disentanglement</strong>, where each latent dimension controls a single, interpretable factor of variation.
-            </p>
+            </Paragraph>
 
             <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border border-blue-200 dark:border-blue-800 mb-6">
-                <h4 className="font-bold text-blue-800 dark:text-blue-300 mb-2">Why does this work?</h4>
-                <p className="text-sm text-blue-800 dark:text-blue-200">
+                <Header4 className="font-bold text-blue-800 dark:text-blue-300 mb-2">Why does this work?</Header4>
+                <Paragraph variant="small" className="text-blue-800 dark:text-blue-200">
                     The standard normal prior <Equation>p(z) = \mathcal(N)(0, I)</Equation> has a diagonal covariance matrix, meaning its dimensions are statistically independent.
                     By heavily penalizing the KL divergence (with high <Equation>\beta</Equation>), we force the posterior <Equation>q(z|x)</Equation> to align closely with this independent prior.
                     The model is thus pressured to encode data features into these independent axes rather than mixing them.
-                </p>
+                </Paragraph>
             </div>
 
             <div className="bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-lg border border-yellow-200 dark:border-yellow-800 mb-6">
-                <h4 className="font-bold text-yellow-800 dark:text-yellow-300 mb-2">The Trade-off</h4>
-                <p className="text-sm text-yellow-800 dark:text-yellow-200">
+                <Header4 className="font-bold text-yellow-800 dark:text-yellow-300 mb-2">The Trade-off</Header4>
+                <Paragraph variant="small" className="text-yellow-800 dark:text-yellow-200">
                     Increasing <Equation>\beta</Equation> improves disentanglement but can degrade reconstruction quality (the "rate-distortion" trade-off).
                     The model might ignore fine details to satisfy the strict distribution constraints.
-                </p>
+                </Paragraph>
             </div>
 
             <InteractiveCard title="Effect of Beta on Disentanglement">

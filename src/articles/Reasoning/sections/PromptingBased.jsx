@@ -4,6 +4,9 @@ import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
 import EquationBlock from '../../../components/EquationBlock';
 import InteractiveCard from '../../../components/InteractiveCard';
+import Header3 from '../../../components/Header3';
+import Header4 from '../../../components/Header4';
+import Paragraph from '../../../components/Paragraph';
 
 const CoTVisualizer = () => {
     const [mode, setMode] = useState('standard');
@@ -53,9 +56,9 @@ const CoTVisualizer = () => {
                     {displayedText}
                     {isTyping && <span className="animate-pulse">|</span>}
                 </div>
-                <p className="text-sm text-slate-600 text-center italic">
+                <Paragraph variant="small" className="text-center italic mb-0">
                     {mode === 'standard' ? "Standard prompting jumps directly to the answer." : "CoT explicitizes the intermediate steps."}
-                </p>
+                </Paragraph>
             </div>
         </InteractiveCard>
     );
@@ -65,9 +68,9 @@ const PromptingBased = () => {
     return (
         <Section title="Prompting-Based Reasoning" icon={Lightbulb}>
             <div className="space-y-6">
-                <p>
+                <Paragraph>
                     Prompting-based approaches induce reasoning by structuring the input context to make intermediate thinking explicit or implicitly compositional. These methods rely purely on <strong>contextual cues</strong> rather than architectural or training modifications. Examples below:
-                </p>
+                </Paragraph>
                 <ul className="list-disc pl-6 space-y-2">
                     <li>
                         <strong>Chain-of-Thought (CoT) Prompting</strong>: Introduced by <a href="https://arxiv.org/abs/2201.11903" className="text-blue-600 hover:underline">Wei et al. (2022)</a>, CoT explicitly elicits step-by-step reasoning traces, guiding the model to externalize intermediate computations before giving the final answer. Formally, the model predicts
@@ -88,33 +91,33 @@ const PromptingBased = () => {
                     </li>
                 </ul>
 
-                <h3 className="text-2xl font-semibold text-slate-800 mt-8">Chain-of-Thought (CoT) prompting</h3>
-                <p>
+                <Header3 className="text-2xl font-semibold text-slate-800 mt-8">Chain-of-Thought (CoT) prompting</Header3>
+                <Paragraph>
                     The CoT methodology explicitly elicits step-by-step reasoning before producing an answer. Instead of directly predicting the output <Equation>y</Equation> from input <Equation>x</Equation>, the model is guided to generate intermediate steps <Equation>{`z_1, z_2, \\ldots, z_k`}</Equation> that form a coherent reasoning chain:
-                </p>
+                </Paragraph>
                 <EquationBlock><Equation>
                     {`x \\rightarrow z_1 \\rightarrow z_2 \\rightarrow \\cdots \\rightarrow z_k \\rightarrow y`}
                 </Equation></EquationBlock>
-                <p>
+                <Paragraph>
                     This approach was introduced in <a href="https://arxiv.org/abs/2201.11903" className="text-blue-600 hover:underline">Chain-of-Thought Prompting Elicits Reasoning in Large Language Models</a> by Wei et al. (2022). The key contribution of Wei et al. was to show that <strong>few-shot exemplars containing reasoning traces</strong> (〈input, reasoning, answer〉) dramatically improve reasoning performance. By providing examples of multi-step reasoning in the prompt, large models could successfully decompose problems into intermediate steps.
-                </p>
-                <p>
+                </Paragraph>
+                <Paragraph>
                     In contrast, <a href="https://arxiv.org/abs/2205.11916" className="text-blue-600 hover:underline">Large Language Models are Zero-Shot Reasoners</a> by Kojima et al. (2022) later demonstrated that the same multi-step reasoning could be triggered <strong>even without exemplars</strong>—by simply appending the phrase "Let's think step by step," enabling zero-shot reasoning. While Wei et al. highlighted reasoning as an emergent property of scale through structured exemplars, <a href="https://arxiv.org/abs/2205.11916" className="text-blue-600 hover:underline">Kojima et al. (2022)</a> revealed that linguistic cues alone can unlock latent reasoning abilities already present in pretrained LLMs.
-                </p>
+                </Paragraph>
 
                 <div className="my-8">
                     <CoTVisualizer />
                 </div>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Mechanism</h4>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Mechanism</Header4>
                 <ul className="list-disc pl-6 space-y-2">
                     <li><strong>Prompt-level induction:</strong> The prompt includes exemplars where the reasoning is explicit (<a href="https://arxiv.org/abs/2201.11903" className="text-blue-600 hover:underline">Wei et al. (2022)</a>).</li>
                     <li><strong>Latent structure exposure:</strong> The model learns to externalize intermediate computation as natural language.</li>
                     <li><strong>Generalization:</strong> Even without supervision, the model generalizes to unseen reasoning tasks (as shown by <a href="https://arxiv.org/abs/2205.11916" className="text-blue-600 hover:underline">Kojima et al. (2022)</a>).</li>
                 </ul>
-                <p>
+                <Paragraph>
                     Formally, CoT modifies inference to condition on a reasoning trace <Equation>z</Equation>:
-                </p>
+                </Paragraph>
                 <EquationBlock><Equation>
                     {`\\hat{y} = \\arg\\max_y \\sum_z p_\\theta(y, z \\mid x)`}
                 </Equation></EquationBlock>
@@ -127,46 +130,46 @@ const PromptingBased = () => {
                     <li><Equation>{`\\arg\\max_y`}</Equation>: selects the answer <Equation>y</Equation> with the highest overall likelihood after integrating over possible reasoning traces.</li>
                     <li><Equation>{`\\hat{y}`}</Equation>: the final selected output predicted by the model.</li>
                 </ul>
-                <p>
+                <Paragraph>
                     When CoT prompting is used, the summation is approximated by sampling one or several <Equation>z</Equation> sequences explicitly.
-                </p>
+                </Paragraph>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Variants</h4>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Variants</Header4>
                 <ul className="list-disc pl-6 space-y-2">
                     <li><strong>Zero-shot CoT:</strong> Introduced by <a href="https://arxiv.org/abs/2205.11916" className="text-blue-600 hover:underline">Kojima et al. (2022)</a>, who found that simply prompting with "Let's think step by step" elicits reasoning in the absence of any few-shot exemplars, proving that LLMs are zero-shot reasoners capable of multi-step inference without examples.</li>
                     <li><strong>Few-shot CoT:</strong> Proposed by <a href="https://arxiv.org/abs/2201.11903" className="text-blue-600 hover:underline">Wei et al. (2022)</a>, which relies on a few explicit reasoning demonstrations in the prompt to teach structured decomposition of problems.</li>
                     <li><strong>Multi-CoT aggregation:</strong> Proposed in <a href="https://arxiv.org/abs/2203.11171" className="text-blue-600 hover:underline">Self-Consistency Improves Chain of Thought Reasoning in Language Models</a> by Wang et al. (2022), combines multiple reasoning traces to improve robustness and consistency. By sampling diverse reasoning paths and aggregating their outcomes—through majority voting, confidence weighting, or entailment-based filtering—this approach mitigates random errors in individual chains and enhances overall answer reliability, particularly on complex or ambiguous reasoning tasks.</li>
                 </ul>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Advantages</h4>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Advantages</Header4>
                 <ul className="list-disc pl-6 space-y-2">
                     <li>Readable, auditable reasoning process.</li>
                     <li>Enables interpretability and debugging.</li>
                     <li>Boosts performance on tasks requiring intermediate computation.</li>
                 </ul>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Limitations</h4>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Limitations</Header4>
                 <ul className="list-disc pl-6 space-y-2">
                     <li>Prone to verbosity and "overthinking."</li>
                     <li>Can expose internal biases and hallucinations in intermediate steps.</li>
                     <li>Sensitive to prompt wording and length.</li>
                 </ul>
 
-                <h3 className="text-2xl font-semibold text-slate-800 mt-8">Implicit Reasoning via In-Context Composition</h3>
-                <p>
+                <Header3 className="text-2xl font-semibold text-slate-800 mt-8">Implicit Reasoning via In-Context Composition</Header3>
+                <Paragraph>
                     <strong>Implicit reasoning via in-context composition</strong> refers to the ability of LLMs to <em>perform structured reasoning without being explicitly instructed to reason step-by-step</em>. Instead of producing overt "thoughts" or intermediate rationales, the model <strong>implicitly composes reasoning patterns</strong> from the examples, instructions, and latent structure provided in the prompt.
-                </p>
-                <p>
+                </Paragraph>
+                <Paragraph>
                     This phenomenon underlies <em>few-shot learning</em> and <em>in-context learning</em> (ICL), first formalized in <em>Language Models are Few-Shot Learners</em> by <a href="https://arxiv.org/abs/2005.14165" className="text-blue-600 hover:underline">Brown et al. (2020)</a>.
-                </p>
-                <p>
+                </Paragraph>
+                <Paragraph>
                     In short, implicit reasoning through in-context composition reveals that LLMs can simulate reasoning procedures <em>internally</em>—demonstrating that reasoning is not only something models can "say," but also something they can <em>do silently</em>.
-                </p>
+                </Paragraph>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Core Idea</h4>
-                <p>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Core Idea</Header4>
+                <Paragraph>
                     During in-context learning, an LLM observes examples of input–output pairs in the prompt:
-                </p>
+                </Paragraph>
                 <pre className="bg-slate-100 p-4 rounded-md overflow-x-auto text-sm">
                     <code>
                         {`Example 1: x₁ → y₁
@@ -175,12 +178,12 @@ Example 2: x₂ → y₂
 Query: xₙ → ?`}
                     </code>
                 </pre>
-                <p>
+                <Paragraph>
                     Although no parameter updates occur, the model <strong>constructs an internal algorithm</strong> that maps inputs to outputs based on patterns in the examples. This implicit mechanism acts as a <em>temporary reasoning program</em> embedded within the attention dynamics of the transformer.
-                </p>
-                <p>
+                </Paragraph>
+                <Paragraph>
                     Mathematically, the model approximates:
-                </p>
+                </Paragraph>
                 <EquationBlock><Equation>
                     {`p_\\theta(y_n \\mid x_n, \\mathcal{C}) = f_\\theta(x_n; \\mathcal{C})`}
                 </Equation></EquationBlock>
@@ -188,14 +191,14 @@ Query: xₙ → ?`}
                     <li>where the context <Equation>{`\\mathcal{C} = \\{(x_i, y_i)\\}_{i=1}^{n-1}`}</Equation> acts as a soft prompt encoding the reasoning structure.</li>
                 </ul>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Mechanism</h4>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Mechanism</Header4>
                 <ol className="list-decimal pl-6 space-y-2">
                     <li><strong>Pattern induction:</strong> The attention mechanism identifies regularities across examples in the prompt (e.g., logical rules, transformations, or operations).</li>
                     <li><strong>Implicit composition:</strong> The model learns to simulate an algorithm consistent with those examples without explicit symbolic representation.</li>
                     <li><strong>Generalization:</strong> When applied to the query, the model executes the induced procedure on-the-fly, effectively performing reasoning within the hidden activations rather than the output text.</li>
                 </ol>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Evidence of Implicit Reasoning</h4>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Evidence of Implicit Reasoning</Header4>
                 <ul className="list-disc pl-6 space-y-2">
                     <li>
                         Several studies show that LLMs can encode algorithmic reasoning purely through in-context composition:
@@ -214,28 +217,28 @@ Query: xₙ → ?`}
                     </li>
                 </ul>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Examples</h4>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Examples</Header4>
                 <ul className="list-disc pl-6 space-y-2">
                     <li>In-context arithmetic reasoning (e.g., "2 + 3 = 5, 4 + 5 = 9, 6 + 7 = ?") where the model infers the pattern without showing intermediate steps.</li>
                     <li>Logical pattern induction (e.g., mapping "A<Equation>{`\\rightarrow`}</Equation>B, B<Equation>{`\\rightarrow`}</Equation>C, therefore A<Equation>{`\\rightarrow`}</Equation>C") purely from example structure.</li>
                     <li>Code pattern imitation: reproducing unseen programming functions after seeing analogous examples in the context.</li>
                 </ul>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Advantages</h4>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Advantages</Header4>
                 <ul className="list-disc pl-6 space-y-2">
                     <li><strong>Efficiency:</strong> No need for verbose intermediate reasoning.</li>
                     <li><strong>Speed:</strong> Faster inference due to single-pass computation.</li>
                     <li><strong>Adaptivity:</strong> Learns task-specific reasoning patterns dynamically from the prompt.</li>
                 </ul>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Limitations</h4>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Limitations</Header4>
                 <ul className="list-disc pl-6 space-y-2">
                     <li><strong>Opacity:</strong> Reasoning is latent and not interpretable.</li>
                     <li><strong>Fragility:</strong> Sensitive to prompt order, formatting, and example selection.</li>
                     <li><strong>Limited generalization:</strong> Implicit algorithms often fail outside the statistical range of given examples.</li>
                 </ul>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Relationship to Explicit Reasoning</h4>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Relationship to Explicit Reasoning</Header4>
                 <ul className="list-disc pl-6 space-y-2">
                     <li>
                         Implicit reasoning complements explicit reasoning (like CoT) along a spectrum:

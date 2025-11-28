@@ -3,20 +3,22 @@ import { Zap } from 'lucide-react';
 import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
 import EquationBlock from '../../../components/EquationBlock';
+import Header3 from '../../../components/Header3';
+import Paragraph from '../../../components/Paragraph';
 
 const InvokingReasoning = () => {
     return (
         <Section title="Invoking reasoning in LLMs" icon={Zap}>
             <div className="space-y-6">
-                <p>
+                <Paragraph>
                     Reasoning in LLMs is not an automatic or always-on capability—it is typically <strong>invoked</strong> through specific interfaces or training strategies that elicit structured intermediate computation. In other words, while an LLM can always generate text, certain <em>modes of interaction</em> encourage it to perform reasoning-like processes internally or externally.
-                </p>
-                <p>
+                </Paragraph>
+                <Paragraph>
                     Invoking reasoning can be viewed as shaping the latent variable <Equation>{`z`}</Equation> in the generative formulation <Equation>{`p_\\theta(y \\mid x)=\\sum_z p_\\theta(y \\mid x,z)p_\\theta(z \\mid x)`}</Equation>, so that the model generates more useful or verifiable intermediate structures (the "thoughts" <Equation>{`z`}</Equation>) instead of directly producing the final answer <Equation>{`y`}</Equation>.
-                </p>
-                <p>
+                </Paragraph>
+                <Paragraph>
                     At a top level, there are several paradigms (and methodologies per paradigm) to invoke reasoning:
-                </p>
+                </Paragraph>
                 <ul className="list-disc pl-6 space-y-2">
                     <li>
                         <strong>Prompting-based</strong>: Purely contextual reasoning induction through examples and instructions within the prompt, without modifying model parameters or architecture.
@@ -53,14 +55,14 @@ const InvokingReasoning = () => {
                         </ul>
                     </li>
                 </ul>
-                <p>
+                <Paragraph>
                     Each of these methods aims to transform a generic text generator into a compositional problem-solver, either through <em>prompting</em>, <em>decoding</em>, or <em>training modification</em>.
-                </p>
+                </Paragraph>
 
-                <h3 className="text-2xl font-semibold text-slate-800 mt-8">Methodologies for Invoking Reasoning in LLMs</h3>
-                <p>
+                <Header3 className="text-2xl font-semibold text-slate-800 mt-8">Methodologies for Invoking Reasoning in LLMs</Header3>
+                <Paragraph>
                     There are several overarching paradigms by which reasoning can be <em>invoked</em> in LLMs. Each family emphasizes a different mechanism—whether through prompting, decoding, exploration, tool use, or learning signals. Below, the principal methodologies are organized into five broad families.
-                </p>
+                </Paragraph>
             </div>
         </Section>
     );

@@ -5,6 +5,8 @@ import Equation from '../../../components/Equation';
 import EquationBlock from '../../../components/EquationBlock';
 import InteractiveCard from '../../../components/InteractiveCard';
 import CodeBlock from '../../../components/CodeBlock';
+import Header4 from '../../../components/Header4';
+import Paragraph from '../../../components/Paragraph';
 
 const SinusoidalViz = () => {
     const [pos, setPos] = useState(50);
@@ -51,9 +53,9 @@ const SinusoidalViz = () => {
                 <span>Dim 0</span>
                 <span>Dim {d_model}</span>
             </div>
-            <p className="text-xs text-slate-500 mt-2">
+            <Paragraph variant="caption" className="mt-2">
                 Blue = Sine, Green = Cosine. Notice how lower dimensions (left) oscillate rapidly while higher dimensions (right) change slowly as Position increases.
-            </p>
+            </Paragraph>
         </div>
     );
 };
@@ -127,10 +129,10 @@ const SinusoidalDotProductViz = () => {
                     );
                 })}
             </div>
-            <p className="text-xs text-slate-500">
+            <Paragraph variant="caption">
                 This graph shows <Equation>PE_t \cdot PE_x</Equation>. Notice the peak at <Equation>x=t</Equation> and the symmetrical decay.
                 This "bump" allows the model to easily attend to nearby tokens purely based on position.
-            </p>
+            </Paragraph>
         </div>
     );
 };
@@ -138,10 +140,10 @@ const SinusoidalDotProductViz = () => {
 const StandardSinusoidal = () => {
     return (
         <Section title="Standard Sinusoidal (Absolute)" icon={Move}>
-            <p className="mb-4 text-slate-700 leading-7">
+            <Paragraph>
                 Proposed in the original "Attention is All You Need" paper. It assigns a unique fixed vector to each absolute position <Equation>{'(0, 1, 2...)'}</Equation>.
                 It uses frequencies that form a geometric progression.
-            </p>
+            </Paragraph>
 
             <EquationBlock><Equation>
                 {`\\begin{aligned}
@@ -150,7 +152,7 @@ PE_{(pos, 2i+1)} &= \\cos(pos / 10000^{2i/d_{model}}) \\end{aligned}`}
             </Equation></EquationBlock>
 
             <div className="my-6">
-                <h4 className="text-sm font-bold text-slate-800 mb-2">Implementation (PyTorch Style)</h4>
+                <Header4 className="text-sm font-bold text-slate-800 mb-2">Implementation (PyTorch Style)</Header4>
                 <CodeBlock code={`def get_sinusoidal_embeddings(seq_len, d_model):
     # 1. Create position indices [0, 1, ..., seq_len-1]
     position = torch.arange(seq_len).unsqueeze(1)
@@ -170,13 +172,13 @@ PE_{(pos, 2i+1)} &= \\cos(pos / 10000^{2i/d_{model}}) \\end{aligned}`}
             </InteractiveCard>
 
             <div className="mt-8">
-                <h4 className="font-bold text-slate-800 mb-2">The "Relative" Secret</h4>
-                <p className="mb-4 text-slate-700 leading-7">
+                <Header4 className="font-bold text-slate-800 mb-2">The "Relative" Secret</Header4>
+                <Paragraph>
                     A key property of sinusoidal encodings is that for any fixed offset <Equation>k</Equation>, <Equation>PE_{'{pos+k}'}</Equation> can be represented as a linear function of <Equation>PE_{'{pos}'}</Equation>.
                     This suggests the model <em>can</em> learn relative distances easily.
                     <br /><br />
                     Below, observe how the dot product between a reference position and all others decays symmetrically, forming a distinct "attention bump."
-                </p>
+                </Paragraph>
                 <InteractiveCard title="Positional Dot Product Decay">
                     <SinusoidalDotProductViz />
                 </InteractiveCard>

@@ -6,6 +6,7 @@ import StandardLLMScene from './scenes/StandardLLMScene';
 import AutoencoderVisual from './scenes/AutoencoderVisual';
 import CALMFlow from './scenes/CALMFlow';
 import Controls from './Controls';
+import Paragraph from '../../components/Paragraph';
 import { STEPS, COLORS } from './constants';
 
 export const unfinished = true;
@@ -50,7 +51,7 @@ export default function CalmApp() {
       <div className="absolute top-0 left-0 w-full p-6 z-10 flex justify-between items-start pointer-events-none">
         <div className="pointer-events-auto">
           <h1 className="text-2xl font-bold text-slate-900 tracking-tight">CALM</h1>
-          <p className="text-sm text-slate-500 font-medium">Continuous Autoregressive Language Models</p>
+          <Paragraph variant="small" className="text-slate-500 font-medium mb-0">Continuous Autoregressive Language Models</Paragraph>
         </div>
         <a
           href="https://arxiv.org/abs/2510.27688"

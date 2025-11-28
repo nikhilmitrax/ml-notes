@@ -2,13 +2,15 @@ import React from 'react';
 import { Brain } from 'lucide-react';
 import Section from '../../../components/Section';
 import CodeBlock from '../../../components/CodeBlock';
+import Header3 from '../../../components/Header3';
+import Paragraph from '../../../components/Paragraph';
 
 const ImplementationDetails = () => {
     return (
         <Section title="Implementation Details" icon={Brain}>
-            <p className="mb-4 text-gray-700 dark:text-gray-300">
+            <Paragraph className="mb-4 text-gray-700 dark:text-gray-300">
                 Here is how a typical VAE is implemented in PyTorch. Notice the split into <code>fc21</code> (mean) and <code>fc22</code> (log variance) in the encoder.
-            </p>
+            </Paragraph>
             <CodeBlock code={`class VAE(nn.Module):
     def __init__(self, input_dim=784, hidden_dim=400, latent_dim=20):
         super(VAE, self).__init__()
@@ -39,10 +41,10 @@ const ImplementationDetails = () => {
         z = self.reparameterize(mu, logvar)
         return self.decode(z), mu, logvar`} />
 
-            <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mt-8 mb-2">The Loss Function</h3>
-            <p className="mb-4 text-gray-700 dark:text-gray-300">
+            <Header3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mt-8 mb-2">The Loss Function</Header3>
+            <Paragraph className="mb-4 text-gray-700 dark:text-gray-300">
                 The loss function is the sum of the reconstruction loss (Binary Cross Entropy) and the KL Divergence regularization term.
-            </p>
+            </Paragraph>
             <CodeBlock code={`def loss_function(recon_x, x, mu, logvar):
     # Reconstruction loss (Binary Cross Entropy for MNIST)
     # reduction='sum' sums over the batch
@@ -54,10 +56,10 @@ const ImplementationDetails = () => {
 
     return BCE + KLD`} />
 
-            <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mt-8 mb-2">Training Loop</h3>
-            <p className="mb-4 text-gray-700 dark:text-gray-300">
+            <Header3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mt-8 mb-2">Training Loop</Header3>
+            <Paragraph className="mb-4 text-gray-700 dark:text-gray-300">
                 The training loop is standard, but we need to handle the multiple outputs from the model (reconstruction, mean, and log variance) to compute the loss.
-            </p>
+            </Paragraph>
             <CodeBlock code={`optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
 
 def train(epoch):

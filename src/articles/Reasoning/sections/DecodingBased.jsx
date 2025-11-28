@@ -4,6 +4,11 @@ import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
 import EquationBlock from '../../../components/EquationBlock';
 import InteractiveCard from '../../../components/InteractiveCard';
+import Header3 from '../../../components/Header3';
+import Header4 from '../../../components/Header4';
+import Paragraph from '../../../components/Paragraph';
+import List from '../../../components/List';
+import ListItem from '../../../components/ListItem';
 
 const SelfConsistencyVisualizer = () => {
     const [paths, setPaths] = useState([]);
@@ -39,9 +44,9 @@ const SelfConsistencyVisualizer = () => {
     return (
         <InteractiveCard title="Self-Consistency: Majority Voting">
             <div className="space-y-4">
-                <p className="text-sm text-slate-600">
+                <Paragraph variant="small">
                     Click to sample multiple reasoning paths for the same problem. The system will aggregate the final answers to find the most consistent one.
-                </p>
+                </Paragraph>
                 <div className="flex justify-center">
                     <button
                         onClick={samplePaths}
@@ -66,8 +71,8 @@ const SelfConsistencyVisualizer = () => {
 
                 {consensus && (
                     <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-md text-center animate-in zoom-in duration-300">
-                        <h4 className="text-green-800 font-semibold">Consensus Reached</h4>
-                        <p className="text-green-700 text-lg font-bold">{consensus}</p>
+                        <Header4 className="text-green-800 font-semibold">Consensus Reached</Header4>
+                        <Paragraph className="text-green-700 text-lg font-bold">{consensus}</Paragraph>
                     </div>
                 )}
             </div>
@@ -79,164 +84,164 @@ const DecodingBased = () => {
     return (
         <Section title="Decoding and Aggregation-Based Reasoning" icon={GitBranch}>
             <div className="space-y-6">
-                <p>
+                <Paragraph>
                     <strong>Decoding and aggregation-based reasoning</strong> conceptualizes reasoning as a process of <strong>exploring multiple candidate reasoning trajectories during decoding</strong> and <strong>aggregating their outcomes</strong> to reach a consensus answer. Rather than committing to a single deterministic reasoning chain, these methods embrace <strong>stochastic diversity</strong>—sampling multiple reasoning paths via temperature-controlled decoding or beam search—and then consolidate the results through majority voting, weighted aggregation, or external verification (say with a different model, e.g., another LLM as a judge).
-                </p>
-                <p>
+                </Paragraph>
+                <Paragraph>
                     The central premise is that LLMs encode a distribution over many plausible reasoning paths; by <strong>sampling and marginalizing</strong> across this space, one can recover more reliable and consistent conclusions. This approach bridges statistical ensembling and reasoning robustness, effectively reducing variance and mitigating local hallucinations.
-                </p>
-                <p>
+                </Paragraph>
+                <Paragraph>
                     Representative methods in this family include <strong>Self-Consistency Decoding</strong> by <a href="https://arxiv.org/abs/2203.11171" className="text-blue-600 hover:underline">Wang et al. (2022)</a>, <strong>Majority-Vote CoT</strong>, <strong>Verifier-Guided Decoding</strong> by <a href="https://arxiv.org/abs/2305.20050" className="text-blue-600 hover:underline">Lightman et al. (2023)</a>, <strong>Weighted Self-Consistency</strong>, and <strong>Mixture-of-Reasoners / Ensemble CoT</strong> strategies. Together, they embody an ensemble-based philosophy of reasoning—achieving reliability not through a single flawless chain, but through <strong>statistical agreement among many plausible reasoning hypotheses.</strong>
-                </p>
+                </Paragraph>
 
-                <h3 className="text-2xl font-semibold text-slate-800 mt-8">Self-Consistency Decoding</h3>
-                <p>
+                <Header3 className="text-2xl font-semibold text-slate-800 mt-8">Self-Consistency Decoding</Header3>
+                <Paragraph>
                     <strong>Self-Consistency Decoding</strong> builds upon CoT prompting by introducing <strong>stochastic reasoning diversity</strong>—instead of generating a single reasoning chain, the model samples multiple independent reasoning paths and aggregates their final answers to reach a more reliable conclusion.
-                </p>
-                <p>
+                </Paragraph>
+                <Paragraph>
                     This method was proposed in <em>Self-Consistency Improves Chain-of-Thought Reasoning in Language Models</em> by <a href="https://arxiv.org/abs/2203.11171" className="text-blue-600 hover:underline">Wang et al. (2022)</a>.
-                </p>
+                </Paragraph>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Core Idea</h4>
-                <p>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Core Idea</Header4>
+                <Paragraph>
                     LLMs can produce many plausible reasoning paths <Equation>{`z^{(1)}, z^{(2)}, \\ldots, z^{(K)}`}</Equation> for the same input <Equation>x</Equation>. Each path ends with a potential answer <Equation>{`y^{(k)}`}</Equation>. Rather than trusting the first decoded path (which may be incorrect due to randomness or local bias), the model aggregates across samples to find the most <strong>self-consistent</strong> answer.
-                </p>
-                <p>
+                </Paragraph>
+                <Paragraph>
                     Formally, this can be written as:
-                </p>
+                </Paragraph>
                 <EquationBlock><Equation>
                     {`\\hat{y} = \\arg\\max_{y} \\sum_{k=1}^{K} \\mathbb{I}[y^{(k)} = y]`}
                 </Equation></EquationBlock>
-                <ul className="list-disc pl-6 space-y-2">
-                    <li><Equation>{`\\hat{y}`}</Equation>: the final predicted answer obtained by selecting the most frequently occurring outcome among sampled reasoning paths.</li>
-                    <li><Equation>y</Equation>: a candidate answer being evaluated for consistency across reasoning trajectories.</li>
-                    <li><Equation>{`y^{(k)}`}</Equation>: the final output generated from the <Equation>{`k^{th}`}</Equation> reasoning chain <Equation>{`z^{(k)}`}</Equation>.</li>
-                    <li><Equation>K</Equation>: the total number of sampled reasoning paths (i.e., the number of independent reasoning attempts by the model).</li>
-                    <li><Equation>{`\\mathbb{I}[y^{(k)} = y]`}</Equation>: an indicator function that equals 1 if the answer from the <Equation>{`k^{th}`}</Equation> reasoning path matches <Equation>y</Equation>, and 0 otherwise.</li>
-                    <li><Equation>{`\\sum_{k=1}^{K} \\mathbb{I}[y^{(k)} = y]`}</Equation>: counts how many times each candidate answer <Equation>y</Equation> appears across all reasoning samples.</li>
-                    <li><Equation>{`\\arg\\max_{y}`}</Equation>: selects the answer <Equation>y</Equation> that occurs most frequently (the <strong>mode</strong>) among the <Equation>K</Equation> generated reasoning paths, ensuring self-consistency through aggregation.</li>
-                </ul>
+                <List>
+                    <ListItem><Equation>{`\\hat{y}`}</Equation>: the final predicted answer obtained by selecting the most frequently occurring outcome among sampled reasoning paths.</ListItem>
+                    <ListItem><Equation>y</Equation>: a candidate answer being evaluated for consistency across reasoning trajectories.</ListItem>
+                    <ListItem><Equation>{`y^{(k)}`}</Equation>: the final output generated from the <Equation>{`k^{th}`}</Equation> reasoning chain <Equation>{`z^{(k)}`}</Equation>.</ListItem>
+                    <ListItem><Equation>K</Equation>: the total number of sampled reasoning paths (i.e., the number of independent reasoning attempts by the model).</ListItem>
+                    <ListItem><Equation>{`\\mathbb{I}[y^{(k)} = y]`}</Equation>: an indicator function that equals 1 if the answer from the <Equation>{`k^{th}`}</Equation> reasoning path matches <Equation>y</Equation>, and 0 otherwise.</ListItem>
+                    <ListItem><Equation>{`\\sum_{k=1}^{K} \\mathbb{I}[y^{(k)} = y]`}</Equation>: counts how many times each candidate answer <Equation>y</Equation> appears across all reasoning samples.</ListItem>
+                    <ListItem><Equation>{`\\arg\\max_{y}`}</Equation>: selects the answer <Equation>y</Equation> that occurs most frequently (the <strong>mode</strong>) among the <Equation>K</Equation> generated reasoning paths, ensuring self-consistency through aggregation.</ListItem>
+                </List>
 
                 <div className="my-8">
                     <SelfConsistencyVisualizer />
                 </div>
 
-                <p>
+                <Paragraph>
                     In practice, <Equation>K</Equation> ranges from 5 to 50 samples depending on model size and task complexity.
-                </p>
+                </Paragraph>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Mechanism</h4>
-                <ol className="list-decimal pl-6 space-y-2">
-                    <li><strong>Sampling phase:</strong> Use temperature sampling (e.g., <Equation>T = 0.7</Equation>) to generate diverse reasoning traces <Equation>{`z^{(k)}`}</Equation>.</li>
-                    <li><strong>Aggregation phase:</strong> Extract the final answers <Equation>{`y^{(k)}`}</Equation> and perform majority voting or probabilistic marginalization.</li>
-                    <li><strong>Selection phase:</strong> Choose the most frequent answer (or a weighted consensus based on log-probabilities).</li>
-                </ol>
-                <p>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Mechanism</Header4>
+                <List type="ordered">
+                    <ListItem><strong>Sampling phase:</strong> Use temperature sampling (e.g., <Equation>T = 0.7</Equation>) to generate diverse reasoning traces <Equation>{`z^{(k)}`}</Equation>.</ListItem>
+                    <ListItem><strong>Aggregation phase:</strong> Extract the final answers <Equation>{`y^{(k)}`}</Equation> and perform majority voting or probabilistic marginalization.</ListItem>
+                    <ListItem><strong>Selection phase:</strong> Choose the most frequent answer (or a weighted consensus based on log-probabilities).</ListItem>
+                </List>
+                <Paragraph>
                     This implicitly integrates over multiple latent reasoning variables <Equation>z</Equation>, approximating the marginalization in
-                </p>
+                </Paragraph>
                 <EquationBlock><Equation>
                     {`p_\\theta(y\\mid x) = \\sum_z p_\\theta(y\\mid x,z) p_\\theta(z\\mid x)`}
                 </Equation></EquationBlock>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Intuition</h4>
-                <ul className="list-disc pl-6 space-y-2">
-                    <li>Different reasoning paths represent samples from the model's internal "belief distribution" over possible reasoning chains. Self-Consistency acts as a <strong>Bayesian marginalization</strong> step, improving robustness to local hallucinations and premature reasoning collapses.</li>
-                    <li>Empirically, the method yields substantial gains on multi-step arithmetic and logic benchmarks such as GSM8K, MultiArith, and StrategyQA.</li>
-                </ul>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Intuition</Header4>
+                <List>
+                    <ListItem>Different reasoning paths represent samples from the model's internal "belief distribution" over possible reasoning chains. Self-Consistency acts as a <strong>Bayesian marginalization</strong> step, improving robustness to local hallucinations and premature reasoning collapses.</ListItem>
+                    <ListItem>Empirically, the method yields substantial gains on multi-step arithmetic and logic benchmarks such as GSM8K, MultiArith, and StrategyQA.</ListItem>
+                </List>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Advantages</h4>
-                <ul className="list-disc pl-6 space-y-2">
-                    <li>Reduces the variance and brittleness of individual CoT runs.</li>
-                    <li>Encourages exploration of diverse reasoning paths.</li>
-                    <li>Significantly improves accuracy on reasoning tasks without changing model parameters.</li>
-                </ul>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Advantages</Header4>
+                <List>
+                    <ListItem>Reduces the variance and brittleness of individual CoT runs.</ListItem>
+                    <ListItem>Encourages exploration of diverse reasoning paths.</ListItem>
+                    <ListItem>Significantly improves accuracy on reasoning tasks without changing model parameters.</ListItem>
+                </List>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Limitations</h4>
-                <ul className="list-disc pl-6 space-y-2">
-                    <li>Computationally expensive (requires many samples).</li>
-                    <li>Inefficient for tasks where answers are non-discrete or continuous.</li>
-                    <li>Aggregation may fail if reasoning errors are systematic across samples.</li>
-                </ul>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Limitations</Header4>
+                <List>
+                    <ListItem>Computationally expensive (requires many samples).</ListItem>
+                    <ListItem>Inefficient for tasks where answers are non-discrete or continuous.</ListItem>
+                    <ListItem>Aggregation may fail if reasoning errors are systematic across samples.</ListItem>
+                </List>
 
-                <h3 className="text-2xl font-semibold text-slate-800 mt-8">Reflection and Self-Verification Loops</h3>
-                <p>
+                <Header3 className="text-2xl font-semibold text-slate-800 mt-8">Reflection and Self-Verification Loops</Header3>
+                <Paragraph>
                     <strong>Reflection and self-verification</strong> methods extend reasoning by allowing a model to <strong>analyze, critique, and improve its own outputs</strong>. Rather than generating a single reasoning trace and final answer, the model iteratively reviews its reasoning, identifies potential errors, and either revises the reasoning or re-generates the answer.
-                </p>
-                <p>
+                </Paragraph>
+                <Paragraph>
                     This meta-cognitive process—analogous to human self-checking—is central to recent efforts to make reasoning both <strong>more reliable</strong> and <strong>more factual</strong>.
-                </p>
-                <p>
+                </Paragraph>
+                <Paragraph>
                     A key paper introducing this paradigm is <em>Reflexion: Language Agents with Verbal Reinforcement Learning</em> by <a href="https://arxiv.org/abs/2303.11366" className="text-blue-600 hover:underline">Shinn et al. (2023)</a>, and <em>Self-Refine: Iterative Refinement with Self-Feedback</em> by <a href="https://arxiv.org/abs/2303.17651" className="text-blue-600 hover:underline">Madaan et al. (2023)</a>.
-                </p>
+                </Paragraph>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Core Idea</h4>
-                <p>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Core Idea</Header4>
+                <Paragraph>
                     Reflection frameworks conceptualize reasoning as an <strong>iterative loop</strong> between <em>generation</em>, <em>evaluation</em>, and <em>revision</em>. A single pass through the LLM may produce a reasoning chain <Equation>z</Equation> and output <Equation>y</Equation>, but the model can further <em>reflect</em> on its own reasoning by generating a self-critique <Equation>c</Equation> that identifies flaws or inconsistencies.
-                </p>
-                <p>
+                </Paragraph>
+                <Paragraph>
                     This process can be formalized as:
-                </p>
+                </Paragraph>
                 <EquationBlock><Equation>
                     {`x \\xrightarrow{\\text{reason}} (z, y) \\xrightarrow{\\text{reflect}} c \\xrightarrow{\\text{revise}} (z', y')`}
                 </Equation></EquationBlock>
-                <p>
+                <Paragraph>
                     Each iteration ideally brings the reasoning trace closer to correctness or coherence.
-                </p>
+                </Paragraph>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Mechanism</h4>
-                <ol className="list-decimal pl-6 space-y-2">
-                    <li><strong>Initial reasoning phase:</strong> The model generates a reasoning chain and provisional answer.</li>
-                    <li><strong>Reflection phase:</strong> The model (or a secondary evaluator) reviews the reasoning for logical, factual, or procedural errors. Example prompt: <em>"Examine the above reasoning carefully. Identify mistakes or unsupported steps, and propose corrections."</em></li>
-                    <li><strong>Revision phase:</strong> The model generates a new reasoning chain incorporating the critique. Optionally, feedback can be looped over multiple rounds.</li>
-                    <li><strong>Termination:</strong> The loop ends when a confidence threshold or reflection limit is reached.</li>
-                </ol>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Mechanism</Header4>
+                <List type="ordered">
+                    <ListItem><strong>Initial reasoning phase:</strong> The model generates a reasoning chain and provisional answer.</ListItem>
+                    <ListItem><strong>Reflection phase:</strong> The model (or a secondary evaluator) reviews the reasoning for logical, factual, or procedural errors. Example prompt: <em>"Examine the above reasoning carefully. Identify mistakes or unsupported steps, and propose corrections."</em></ListItem>
+                    <ListItem><strong>Revision phase:</strong> The model generates a new reasoning chain incorporating the critique. Optionally, feedback can be looped over multiple rounds.</ListItem>
+                    <ListItem><strong>Termination:</strong> The loop ends when a confidence threshold or reflection limit is reached.</ListItem>
+                </List>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Theoretical Framing</h4>
-                <ul className="list-disc pl-6 space-y-2">
-                    <li>Reflection can be viewed as <strong>approximate gradient descent in the space of reasoning traces</strong>, where the model updates its "beliefs" about a solution through internal self-assessment.</li>
-                    <li>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Theoretical Framing</Header4>
+                <List>
+                    <ListItem>Reflection can be viewed as <strong>approximate gradient descent in the space of reasoning traces</strong>, where the model updates its "beliefs" about a solution through internal self-assessment.</ListItem>
+                    <ListItem>
                         Given an initial reasoning trace <Equation>{`z^{(0)}`}</Equation>, the update rule can be seen as:
                         <EquationBlock><Equation>
                             {`z^{(t+1)} = \\text{Refine}\\big(z^{(t)}, \\text{Critique}(z^{(t)})\\big)`}
                         </Equation></EquationBlock>
                         where <strong>Critique</strong> is an operator producing feedback and <strong>Refine</strong> modifies the reasoning accordingly.
-                    </li>
-                    <li>This closely parallels iterative inference in classical optimization and meta-learning frameworks.</li>
-                </ul>
+                    </ListItem>
+                    <ListItem>This closely parallels iterative inference in classical optimization and meta-learning frameworks.</ListItem>
+                </List>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Variants</h4>
-                <ul className="list-disc pl-6 space-y-2">
-                    <li><strong>Reflexion</strong> (<a href="https://arxiv.org/abs/2303.11366" className="text-blue-600 hover:underline">Shinn et al. (2023)</a>): Uses verbal reinforcement (self-generated critique and reward).</li>
-                    <li><strong>Self-Refine</strong> (<a href="https://arxiv.org/abs/2303.17651" className="text-blue-600 hover:underline">Madaan et al. (2023)</a>): Separates roles into <em>task solver</em>, <em>feedback provider</em>, and <em>reviser</em>.</li>
-                    <li><strong>Critic–Judge systems</strong> (<a href="https://arxiv.org/abs/2305.20050" className="text-blue-600 hover:underline">Zhou et al. (2023)</a>): Introduces a secondary "critic" model to evaluate and score reasoning traces.</li>
-                    <li><strong>RCOT (Reflective Chain-of-Thought)</strong> (<a href="https://arxiv.org/abs/2402.05402" className="text-blue-600 hover:underline">Zhang et al. (2024)</a>): Adds structured self-correction within CoT reasoning.</li>
-                </ul>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Variants</Header4>
+                <List>
+                    <ListItem><strong>Reflexion</strong> (<a href="https://arxiv.org/abs/2303.11366" className="text-blue-600 hover:underline">Shinn et al. (2023)</a>): Uses verbal reinforcement (self-generated critique and reward).</ListItem>
+                    <ListItem><strong>Self-Refine</strong> (<a href="https://arxiv.org/abs/2303.17651" className="text-blue-600 hover:underline">Madaan et al. (2023)</a>): Separates roles into <em>task solver</em>, <em>feedback provider</em>, and <em>reviser</em>.</ListItem>
+                    <ListItem><strong>Critic–Judge systems</strong> (<a href="https://arxiv.org/abs/2305.20050" className="text-blue-600 hover:underline">Zhou et al. (2023)</a>): Introduces a secondary "critic" model to evaluate and score reasoning traces.</ListItem>
+                    <ListItem><strong>RCOT (Reflective Chain-of-Thought)</strong> (<a href="https://arxiv.org/abs/2402.05402" className="text-blue-600 hover:underline">Zhang et al. (2024)</a>): Adds structured self-correction within CoT reasoning.</ListItem>
+                </List>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Advantages</h4>
-                <ul className="list-disc pl-6 space-y-2">
-                    <li>Improves factual correctness and logical soundness of reasoning chains.</li>
-                    <li>Encourages interpretable, auditable reasoning corrections.</li>
-                    <li>Can operate with minimal supervision—feedback is model-generated.</li>
-                </ul>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Advantages</Header4>
+                <List>
+                    <ListItem>Improves factual correctness and logical soundness of reasoning chains.</ListItem>
+                    <ListItem>Encourages interpretable, auditable reasoning corrections.</ListItem>
+                    <ListItem>Can operate with minimal supervision—feedback is model-generated.</ListItem>
+                </List>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Limitations</h4>
-                <ul className="list-disc pl-6 space-y-2">
-                    <li>Computationally expensive due to iterative passes.</li>
-                    <li>Susceptible to feedback loops—reflections may amplify minor errors.</li>
-                    <li>Quality of reflection depends heavily on prompt design and model calibration.</li>
-                </ul>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Limitations</Header4>
+                <List>
+                    <ListItem>Computationally expensive due to iterative passes.</ListItem>
+                    <ListItem>Susceptible to feedback loops—reflections may amplify minor errors.</ListItem>
+                    <ListItem>Quality of reflection depends heavily on prompt design and model calibration.</ListItem>
+                </List>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Relationship to RL and CoT</h4>
-                <ul className="list-disc pl-6 space-y-2">
-                    <li>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Relationship to RL and CoT</Header4>
+                <List>
+                    <ListItem>
                         Reflection complements <strong>RL</strong> and <strong>CoT</strong>:
-                        <ul className="list-circle pl-6 mt-2 space-y-1">
-                            <li>Like RL, it provides a feedback signal, but in natural language form rather than scalar rewards.</li>
-                            <li>Like CoT, it operates at the level of reasoning traces, but introduces a <strong>meta-layer</strong> of critique.</li>
-                        </ul>
-                    </li>
-                    <li>This synergy is foundational in modern autonomous reasoning agents that continuously self-improve through reflection cycles.</li>
-                </ul>
+                        <List className="mt-2">
+                            <ListItem>Like RL, it provides a feedback signal, but in natural language form rather than scalar rewards.</ListItem>
+                            <ListItem>Like CoT, it operates at the level of reasoning traces, but introduces a <strong>meta-layer</strong> of critique.</ListItem>
+                        </List>
+                    </ListItem>
+                    <ListItem>This synergy is foundational in modern autonomous reasoning agents that continuously self-improve through reflection cycles.</ListItem>
+                </List>
             </div>
         </Section>
     );

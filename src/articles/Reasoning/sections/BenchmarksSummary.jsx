@@ -1,14 +1,15 @@
 import React from 'react';
 import { List } from 'lucide-react';
 import Section from '../../../components/Section';
+import Paragraph from '../../../components/Paragraph';
 
 export default function BenchmarksSummary() {
     return (
         <Section title="Summary of Reasoning Benchmarks" icon={List}>
             <div className="space-y-6">
-                <p>
+                <Paragraph>
                     No single dataset captures "reasoning." We can taxonomize them by domain and evaluation type:
-                </p>
+                </Paragraph>
                 <div className="overflow-x-auto">
                     <table className="min-w-full text-sm text-left text-slate-600">
                         <thead className="text-xs text-slate-700 uppercase bg-slate-100">
@@ -65,9 +66,9 @@ export default function BenchmarksSummary() {
                         </tbody>
                     </table>
                 </div>
-                <p>
+                <Paragraph>
                     <strong>Trend:</strong> Newer benchmarks (2023+) increasingly favor <strong>process-level evaluation</strong> (verifying the steps) over simple outcome accuracy, as this distinguishes genuine reasoning from memorization.
-                </p>
+                </Paragraph>
             </div>
         </Section>
     );

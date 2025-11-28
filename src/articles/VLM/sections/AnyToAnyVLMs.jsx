@@ -1,5 +1,7 @@
 import { getAssetPath } from '../../../utils/assetUtils';
-
+import { Shuffle } from 'lucide-react';
+import Section from '../../../components/Section';
+import Header4 from '../../../components/Header4';
 export default function AnyToAnyVLMs() {
     return (
         <Section title="Any-to-Any VLMs" icon={Shuffle}>
@@ -7,11 +9,11 @@ export default function AnyToAnyVLMs() {
             <div className="space-y-8">
                 {/* CoDi */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://arxiv.org/abs/2305.11846" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             CoDi
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2305.11846" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Any-to-Any Generation via Composable Diffusion</a> by Tang et al. from UNCC and Microsoft, Composable Diffusion (CoDi) is a state-of-the-art generative model. CoDi uniquely generates any combination of output modalities (language, image, video, audio) from any combination of input modalities.
@@ -101,11 +103,11 @@ export default function AnyToAnyVLMs() {
 
                 {/* CoDi-2 */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://arxiv.org/abs/2311.18775" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             CoDi-2
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2311.18775" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">CoDi-2: In-Context Interleaved and Interactive Any-to-Any Generation</a> by Tang et al. from UC Berkeley, Microsoft Azure AI, Zoom, and UNC Chapel Hill, CoDi-2 is a multimodal generation model that builds upon CoDi.
@@ -144,11 +146,11 @@ export default function AnyToAnyVLMs() {
 
                 {/* Gemini */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://storage.googleapis.com/deepmind-media/gemini/gemini_1_report.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             Gemini
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://storage.googleapis.com/deepmind-media/gemini/gemini_1_report.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Gemini: A Family of Highly Capable Multimodal Models</a>, Google's Gemini series represents a milestone in AI development.
@@ -237,11 +239,11 @@ export default function AnyToAnyVLMs() {
 
                 {/* NExT-GPT */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://arxiv.org/abs/2309.05519" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             NExT-GPT
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2309.05519" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">NExT-GPT: Any-to-Any Multimodal LLM</a>.

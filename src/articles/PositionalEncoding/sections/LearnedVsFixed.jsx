@@ -2,6 +2,8 @@ import React, { useState, useMemo } from 'react';
 import { Database } from 'lucide-react';
 import Section from '../../../components/Section';
 import InteractiveCard from '../../../components/InteractiveCard';
+import Header4 from '../../../components/Header4';
+import Paragraph from '../../../components/Paragraph';
 
 const LearnedVsFixedViz = () => {
     const [steps, setSteps] = useState(0);
@@ -20,13 +22,13 @@ const LearnedVsFixedViz = () => {
     return (
         <div className="flex flex-col md:flex-row gap-8 items-center">
             <div className="flex-1 space-y-4">
-                <h4 className="font-semibold text-slate-700 flex items-center gap-2">
+                <Header4 className="font-semibold text-slate-700 flex items-center gap-2">
                     <Database size={16} /> Learned Embedding
-                </h4>
-                <p className="text-sm text-slate-600">
+                </Header4>
+                <Paragraph variant="small">
                     Parameters are initialized randomly and updated via backprop.
                     They "learn" to represent position, but are limited to sequence lengths seen during training.
-                </p>
+                </Paragraph>
                 <div className="space-y-2">
                     <label className="text-xs font-bold text-slate-500 uppercase">Training Progress: {steps * 10}%</label>
                     <input
@@ -75,14 +77,14 @@ const LearnedVsFixedViz = () => {
 const LearnedVsFixed = () => {
     return (
         <Section title="Learned vs. Fixed Encodings" icon={Database}>
-            <p className="mb-4 text-slate-700 leading-7">
+            <Paragraph>
                 Early Transformer models (like BERT and GPT-2) used <strong>Learned Positional Embeddings</strong>.
                 The model simply learned a unique vector for Position 1, Position 2, etc., treating them as parameters to optimize.
-            </p>
-            <p className="mb-6 text-slate-700 leading-7">
+            </Paragraph>
+            <Paragraph className="mb-6">
                 Later models (original Transformer, and modern Llama/Mistral via RoPE) use <strong>Fixed (Functional) Encodings</strong>.
                 These are calculated mathematically, requiring no training updates and often generalizing better to unseen lengths.
-            </p>
+            </Paragraph>
 
             <InteractiveCard title="Comparison: Evolving Weights vs. Mathematical Functions">
                 <LearnedVsFixedViz />

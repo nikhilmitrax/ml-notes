@@ -1,11 +1,13 @@
 import React from 'react';
+import Header3 from '../../../components/Header3';
+import Paragraph from '../../../components/Paragraph';
 
 export default function ArchitectureDifferences() {
     return (
         <div className="mt-8">
-            <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
+            <Header3 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
                 VLM: Differences from Large Language Models (LLMs)
-            </h3>
+            </Header3>
             <ol className="list-decimal pl-6 space-y-4 text-gray-700 dark:text-gray-300">
                 <li>
                     <strong>Input Modalities</strong>:
@@ -36,9 +38,9 @@ export default function ArchitectureDifferences() {
                     <strong>Use Cases</strong>: VLMs are particularly useful in scenarios where both visual and textual understanding is crucial, such as in social media analysis, where both image and text content are prevalent. LLMs are more focused on applications like text summarization, chatbots, and content creation where the primary medium is text.
                 </li>
             </ol>
-            <p className="mt-4 text-gray-700 dark:text-gray-300">
+            <Paragraph className="mt-4 text-gray-700 dark:text-gray-300">
                 In summary, while both VLMs and LLMs are advanced AI models leveraging deep learning, VLMs stand out for their ability to understand and synthesize information from both visual and textual data, offering a broader range of applications that require multimodal understanding.
-            </p>
+            </Paragraph>
         </div>
     );
 }

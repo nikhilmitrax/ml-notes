@@ -2,6 +2,7 @@ import React from 'react';
 import { Video } from 'lucide-react';
 import Section from '../../../components/Section';
 import { getAssetPath } from '../../../utils/assetUtils';
+import Header4 from '../../../components/Header4';
 
 export default function PopularVideoLLMs() {
     return (
@@ -9,11 +10,11 @@ export default function PopularVideoLLMs() {
             <div className="space-y-8">
                 {/* VideoPoet */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://arxiv.org/abs/2312.14125" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             VideoPoet
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2312.14125" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">VideoPoet: A Large Language Model for Zero-Shot Video Generation</a> by Kondratyuk et al. from Google Research.
@@ -48,11 +49,11 @@ export default function PopularVideoLLMs() {
 
                 {/* LLaMA-VID */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://arxiv.org/abs/2311.17043" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             LLaMA-VID
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2311.17043" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">LLaMA-VID: An Image is Worth 2 Tokens in Large Language Models</a> by Li et al. from The Chinese University of Hong Kong and SmartMore.
@@ -80,11 +81,11 @@ export default function PopularVideoLLMs() {
 
                 {/* Video-LLaMA */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://arxiv.org/abs/2306.02858" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             Video-LLaMA
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2306.02858" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Video-LLaMA: An Instruction-tuned Audio-Visual Language Model for Video Understanding</a> by Zhang et al. from DAMO Academy, Alibaba Group.
@@ -112,11 +113,11 @@ export default function PopularVideoLLMs() {
 
                 {/* VideoMAE */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://arxiv.org/abs/2203.12602" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             VideoMAE
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2203.12602" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">VideoMAE: Masked Autoencoders are Data-Efficient Learners for Self-Supervised Video Pre-training</a> by Tong et al. from Nanjing University, SenseTime Research, and Shanghai AI Laboratory.
@@ -148,11 +149,11 @@ export default function PopularVideoLLMs() {
 
                 {/* VideoCoCa */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://arxiv.org/abs/2211.09807" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             VideoCoCa
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2211.09807" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">VideoCoCa: Video-Text Modeling with Zero-Shot Transfer from Contrastive Captioners</a> by Yan et al. from Google Research.
@@ -174,11 +175,11 @@ export default function PopularVideoLLMs() {
 
                 {/* Video-ChatGPT */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://arxiv.org/abs/2306.05424" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             Video-ChatGPT
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2306.05424" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Video-ChatGPT: Towards Detailed Video Understanding via Large Vision and Language Models</a> by Maaz et al. from MBZUAI.
@@ -203,11 +204,11 @@ export default function PopularVideoLLMs() {
 
                 {/* Verbalize Videos */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://arxiv.org/abs/2308.12879" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             Verbalize Videos
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2308.12879" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">LlaVA-Hound: Exploring the Boundaries of Video-LLMs</a> by Zhang et al.
@@ -229,11 +230,11 @@ export default function PopularVideoLLMs() {
 
                 {/* Emu2 */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://arxiv.org/abs/2312.10840" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             Emu2
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2312.10840" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Generative Multimodal Models are In-Context Learners</a> by Sun et al. from BAAI.
@@ -258,11 +259,11 @@ export default function PopularVideoLLMs() {
 
                 {/* LLaVA-NeXT (Video) */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://llava-vl.github.io/blog/2024-04-30-llava-next-video/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             LLaVA-NeXT (Video)
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://llava-vl.github.io/blog/2024-04-30-llava-next-video/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">LLaVA-NeXT: A Strong Zero-shot Video Understanding Model</a>.
@@ -284,11 +285,11 @@ export default function PopularVideoLLMs() {
 
                 {/* VideoCLIP */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://arxiv.org/abs/2109.14084" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             VideoCLIP
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2109.14084" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">VideoCLIP: Contrastive Pre-training for Zero-shot Video-Text Understanding</a> by Xu et al. from Facebook AI.

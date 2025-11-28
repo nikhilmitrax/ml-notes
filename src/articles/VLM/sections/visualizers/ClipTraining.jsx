@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { RefreshCw, Check, X } from 'lucide-react';
+import Header4 from '../../../../components/Header4';
 
 export default function ClipTraining() {
     const [step, setStep] = useState(0); // 0: Random, 1: Aligned
@@ -13,9 +14,9 @@ export default function ClipTraining() {
     return (
         <div className="my-8 p-6 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800">
             <div className="flex justify-between items-center mb-6">
-                <h4 className="text-lg font-semibold text-gray-800 dark:text-white">
+                <Header4 className="text-gray-800 dark:text-white mt-0 mb-0">
                     CLIP Contrastive Training
-                </h4>
+                </Header4>
                 <button
                     onClick={toggleTraining}
                     className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors"

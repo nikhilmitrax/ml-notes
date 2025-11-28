@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronRight, ChevronLeft, RefreshCw } from 'lucide-react';
+import Header3 from '../../../components/Header3';
+import Paragraph from '../../../components/Paragraph';
 
 const BeamSearchVisualizer = () => {
     const [step, setStep] = useState(0);
@@ -102,8 +104,8 @@ const BeamSearchVisualizer = () => {
         <div className="w-full bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden my-6">
             <div className="p-4 border-b border-slate-100 bg-slate-50 flex justify-between items-center">
                 <div>
-                    <h3 className="font-semibold text-slate-800">Beam Search Visualization (k=2)</h3>
-                    <p className="text-sm text-slate-500">{currentData.title}</p>
+                    <Header3 className="font-semibold text-slate-800 mt-0 mb-0 text-base">Beam Search Visualization (k=2)</Header3>
+                    <Paragraph variant="small" className="text-slate-500 mb-0">{currentData.title}</Paragraph>
                 </div>
                 <div className="flex gap-2">
                     <button
@@ -134,7 +136,7 @@ const BeamSearchVisualizer = () => {
             </div>
 
             <div className="p-6">
-                <p className="text-slate-600 mb-6 text-sm">{currentData.description}</p>
+                <Paragraph className="text-slate-600 mb-6 text-sm">{currentData.description}</Paragraph>
 
                 <div className="relative h-[400px] w-full bg-slate-50 rounded-lg border border-slate-100 overflow-hidden">
                     {/* SVG for connections */}

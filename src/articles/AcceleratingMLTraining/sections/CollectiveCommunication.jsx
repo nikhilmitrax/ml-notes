@@ -13,6 +13,7 @@ import {
 import Section from '../../../components/Section';
 import InteractiveCard from '../../../components/InteractiveCard';
 import Header3 from '../../../components/Header3';
+import SideBySide from '../../../components/SideBySide';
 
 // --- Internal Components ---
 
@@ -466,7 +467,7 @@ const CollectiveCommunication = () => {
             <p className="mb-4 text-gray-700 dark:text-gray-300">
                 AllReduce is the workhorse of Data Parallel training. Gradients from all GPUs are summed up (Reduced) and then the updated weights (or averaged gradients) are available on all GPUs.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <SideBySide>
                 <InteractiveCard title="Reduce (Sum)">
                     <ReduceVisualizer />
                     <p className="mt-4 text-sm text-gray-500 text-center">
@@ -479,14 +480,14 @@ const CollectiveCommunication = () => {
                         Values are summed and result is shared with all.
                     </p>
                 </InteractiveCard>
-            </div>
+            </SideBySide>
 
             <Header3>Gather and AllGather</Header3>
             <p className="mb-4 text-gray-700 dark:text-gray-300">
                 <strong>Gather</strong> collects data chunks from all nodes and concatenates them on a single root node.
                 <strong>AllGather</strong> collects data from all nodes and ensures every node receives the full concatenated dataset.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <SideBySide>
                 <InteractiveCard title="Gather">
                     <GatherVisualizer />
                     <p className="mt-4 text-sm text-gray-500 text-center">
@@ -499,14 +500,14 @@ const CollectiveCommunication = () => {
                         Everyone gets [A, B, C, D].
                     </p>
                 </InteractiveCard>
-            </div>
+            </SideBySide>
 
             <Header3>Scatter and ReduceScatter</Header3>
             <p className="mb-4 text-gray-700 dark:text-gray-300">
                 <strong>Scatter</strong> takes a list of data on one node and slices it, sending one chunk to each node. It is the inverse of Gather.
                 <strong>ReduceScatter</strong> is equivalent to a Reduce followed by a Scatter. It reduces the data (e.g., sums vectors) and then scatters the result blocks to the nodes.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <SideBySide>
                 <InteractiveCard title="Scatter">
                     <ScatterVisualizer />
                     <p className="mt-4 text-sm text-gray-500 text-center">
@@ -519,7 +520,7 @@ const CollectiveCommunication = () => {
                         Vectors are summed, then split across nodes.
                     </p>
                 </InteractiveCard>
-            </div>
+            </SideBySide>
 
             <Header3>Ring AllReduce</Header3>
             <p className="mb-4 text-gray-700 dark:text-gray-300">

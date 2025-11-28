@@ -5,6 +5,8 @@ import Equation from '../../../components/Equation';
 import EquationBlock from '../../../components/EquationBlock';
 import InteractiveCard from '../../../components/InteractiveCard';
 import CodeBlock from '../../../components/CodeBlock';
+import Header4 from '../../../components/Header4';
+import Paragraph from '../../../components/Paragraph';
 
 const RopeViz = () => {
     const [theta, setTheta] = useState(0.5); // Base rotation amount
@@ -115,10 +117,10 @@ const RopeScalingViz = () => {
                             onChange={e => setScale(parseFloat(e.target.value))}
                             className="w-full accent-orange-500"
                         />
-                        <p className="text-xs text-slate-500">
+                        <Paragraph variant="caption">
                             Scale = 1.0: Original training.
                             Scale &gt; 1.0: "Squeezing" positions to fit longer context into known rotation range.
-                        </p>
+                        </Paragraph>
                     </div>
 
                     <div className="p-3 bg-orange-50 border border-orange-100 rounded text-sm text-orange-800">
@@ -150,10 +152,10 @@ const RopeScalingViz = () => {
                     </svg>
                 </div>
             </div>
-            <p className="text-xs text-slate-500 italic text-center">
+            <Paragraph variant="caption" className="italic text-center">
                 Yellow ticks = Trained positions. Grey ticks = Extended positions.
                 Notice how increasing Scale pulls the grey ticks back "into" the valid rotation range (before the red line).
-            </p>
+            </Paragraph>
         </div>
     );
 };
@@ -161,10 +163,10 @@ const RopeScalingViz = () => {
 const RoPE = () => {
     return (
         <Section title="RoPE (Rotary Positional Embeddings)" icon={RotateCw}>
-            <p className="mb-4 text-slate-700 leading-7">
+            <Paragraph>
                 RoPE encodes position by <strong>rotating</strong> the query and key vectors.
                 It unifies absolute and relative approaches: we apply an absolute operation (rotation by angle <Equation>m\theta</Equation>) that results in a relative interaction in the dot product.
-            </p>
+            </Paragraph>
 
             <EquationBlock><Equation>
                 {`\\begin{aligned}
@@ -173,10 +175,10 @@ const RoPE = () => {
             </Equation></EquationBlock>
 
             <div className="my-6">
-                <h4 className="text-sm font-bold text-slate-800 mb-2">Implementation (Complex Numbers)</h4>
-                <p className="text-sm text-slate-600 mb-2">
+                <Header4 className="text-sm font-bold text-slate-800 mb-2">Implementation (Complex Numbers)</Header4>
+                <Paragraph variant="small" className="mb-2">
                     In practice (e.g., Llama 3), RoPE is efficiently implemented by treating pairs of dimensions as complex numbers.
-                </p>
+                </Paragraph>
                 <CodeBlock code={`def apply_rope(xq, xk, freqs_cos, freqs_sin):
     # xq: [batch, seq_len, dim]
     # Standard trick: rotate pairs [-x2, x1]
@@ -191,33 +193,33 @@ def rotate_half(x):
     return torch.cat((-x2, x1), dim=-1)`} />
             </div>
 
-            <p className="mb-4 text-slate-700 leading-7 mt-4">
+            <Paragraph className="mt-4">
                 When we take the dot product of Query at <Equation>m</Equation> and Key at <Equation>n</Equation>:
-            </p>
+            </Paragraph>
 
             <EquationBlock><Equation>
                 {`(R_m q) \\cdot (R_n k) = q^T (R_m^T R_n) k = q^T R_{n-m} k`}
             </Equation></EquationBlock>
 
-            <p className="text-sm text-slate-600 mb-6">
+            <Paragraph variant="small" className="mb-6">
                 The result only depends on <Equation>n - m</Equation> (relative distance).
-            </p>
+            </Paragraph>
 
             <InteractiveCard title="Interactive Rotation">
                 <RopeViz />
             </InteractiveCard>
 
             <div className="mt-8">
-                <h4 className="font-bold text-slate-800 mb-2 flex items-center gap-2">
+                <Header4 className="font-bold text-slate-800 mb-2 flex items-center gap-2">
                     <Maximize size={18} />
                     Context Extension & Interpolation
-                </h4>
-                <p className="mb-4 text-slate-700 leading-7">
+                </Header4>
+                <Paragraph>
                     What happens if we want to use a model trained on 4k tokens for 16k tokens?
                     If we just continue rotating, we hit angles the model hasn't seen.
                     <br />
                     <strong>Position Interpolation (PI)</strong> solves this by "slowing down" the rotation (scaling), effectively squeezing the new longer sequence into the original rotation range.
-                </p>
+                </Paragraph>
                 <InteractiveCard title="RoPE Scaling (Linear Interpolation)">
                     <RopeScalingViz />
                 </InteractiveCard>

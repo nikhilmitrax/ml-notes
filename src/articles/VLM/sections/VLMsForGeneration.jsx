@@ -1,21 +1,23 @@
 import React from 'react';
 import { getAssetPath } from '../../../utils/assetUtils';
+import Header3 from '../../../components/Header3';
+import Header4 from '../../../components/Header4';
 
 export default function VLMsForGeneration() {
     return (
         <div className="mt-8">
-            <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
+            <Header3 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
                 VLMs for Generation
-            </h3>
+            </Header3>
 
             <div className="space-y-12">
                 {/* GPT-4V */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://openai.com/research/gpt-4v-system-card" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             GPT-4V
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             GPT-4 with vision (GPT-4V) enables users to instruct GPT-4 to analyze image inputs provided by the user.
@@ -28,11 +30,11 @@ export default function VLMsForGeneration() {
 
                 {/* LLaVA */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://llava-vl.github.io/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             LLaVA
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             <a href="https://arxiv.org/abs/2304.08485" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">LLaVA</a> is the most popular open-source multimodal framework.
@@ -68,11 +70,11 @@ export default function VLMsForGeneration() {
 
                 {/* Frozen */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://arxiv.org/abs/2106.13884" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             Frozen
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2106.13884" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Multimodal Few-Shot Learning with Frozen Language Models</a> by Tsimpoukelli et al. from DeepMind.
@@ -102,11 +104,11 @@ export default function VLMsForGeneration() {
 
                 {/* Flamingo */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://arxiv.org/abs/2204.14198" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             Flamingo
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2204.14198" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Flamingo: a Visual Language Model for Few-Shot Learning</a> by Alayrac et al. from DeepMind.
@@ -139,11 +141,11 @@ export default function VLMsForGeneration() {
 
                 {/* OpenFlamingo */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://laion.ai/blog/open-flamingo/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             OpenFlamingo
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             <a href="https://laion.ai/blog/open-flamingo/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">OpenFlamingo</a> is an open-source reproduction of the Flamingo model.
@@ -159,11 +161,11 @@ export default function VLMsForGeneration() {
 
                 {/* Idefics */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://huggingface.co/HuggingFaceM4/idefics-80b-instruct" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             Idefics
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             <a href="https://github.com/huggingface/m4-logs/blob/master/memos/README.md" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Knowledge sharing memo for IDEFICS, an open-source reproduction of Flamingo</a>
@@ -194,11 +196,11 @@ export default function VLMsForGeneration() {
 
                 {/* PaLI */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://arxiv.org/abs/2209.06794" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             PaLI
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2209.06794" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">PaLI: A Jointly-Scaled Multilingual Language-Image Model</a> by Chen et al. from Google Research.
@@ -225,11 +227,11 @@ export default function VLMsForGeneration() {
 
                 {/* PaLM-E */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://arxiv.org/abs/2303.03378" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             PaLM-E
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2303.03378" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">PaLM-E: An Embodied Multimodal Language Model</a> by Driess et al. from Google Research.
@@ -256,11 +258,11 @@ export default function VLMsForGeneration() {
 
                 {/* Qwen-VL */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://arxiv.org/abs/2308.12966" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             Qwen-VL
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Introduced in <a href="https://arxiv.org/abs/2308.12966" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Qwen-VL: A Frontier Large Vision-Language Model with Versatile Abilities</a>, the Qwen-VL series are a set of large-scale vision-language models designed to perceive and understand both text and images.
@@ -290,11 +292,11 @@ export default function VLMsForGeneration() {
 
                 {/* Fuyu-8B */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://huggingface.co/adept/fuyu-8b" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             Fuyu-8B
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             <a href="https://www.adept.ai/blog/fuyu-8b" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Fuyu-8B</a> is a multi-modal text and image transformer trained by Adept AI.
@@ -314,9 +316,9 @@ export default function VLMsForGeneration() {
 
                 {/* SPHINX */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         SPHINX
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             SPHINX is a versatile multi-modal large language model (MLLM) with a mixer of training tasks, data domains, and visual embeddings.
@@ -338,11 +340,11 @@ export default function VLMsForGeneration() {
 
                 {/* MIRASOL3B */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://arxiv.org/abs/2311.05698" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             MIRASOL3B
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2311.05698" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">MIRASOL3B: A Multimodal Autoregressive Model for Time-Aligned and Contextual Modalities</a>.
@@ -362,11 +364,11 @@ export default function VLMsForGeneration() {
 
                 {/* BLIP */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://arxiv.org/abs/2201.12086" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             BLIP
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2201.12086" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">BLIP: Bootstrapping Language-Image Pre-training</a>.
@@ -386,11 +388,11 @@ export default function VLMsForGeneration() {
 
                 {/* BLIP-2 */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://arxiv.org/abs/2301.12597" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             BLIP-2
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2301.12597" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">BLIP-2</a>.
@@ -420,9 +422,9 @@ export default function VLMsForGeneration() {
 
                 {/* InstructBLIP */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         InstructBLIP
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2305.06500" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">InstructBLIP</a>.
@@ -447,11 +449,11 @@ export default function VLMsForGeneration() {
 
                 {/* MiniGPT-4 */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://arxiv.org/abs/2304.10592" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             MiniGPT-4
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2304.10592" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">MiniGPT-4</a>.
@@ -471,11 +473,11 @@ export default function VLMsForGeneration() {
 
                 {/* MiniGPT-v2 */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://arxiv.org/abs/2310.09478" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             MiniGPT-v2
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2310.09478" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">MiniGPT-v2</a>.
@@ -500,11 +502,11 @@ export default function VLMsForGeneration() {
 
                 {/* LLaVA-Plus */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://llava-vl.github.io/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             LLaVA-Plus
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             LLaVA-Plus is a general-purpose multimodal assistant that systematically expands capabilities through visual instruction tuning and tool use.
@@ -526,11 +528,11 @@ export default function VLMsForGeneration() {
 
                 {/* BakLLaVA */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://huggingface.co/SkunkworksAI/BakLLaVA-1" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             BakLLaVA
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             BakLLaVA uses a Mistral 7B base augmented with the LLaVA 1.5 architecture.
@@ -540,11 +542,11 @@ export default function VLMsForGeneration() {
 
                 {/* LLaVA-1.5 */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://llava-vl.github.io/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             LLaVA-1.5
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Introduced in <a href="https://arxiv.org/abs/2310.03744" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Improved Baselines with Visual Instruction Tuning</a>.
@@ -564,11 +566,11 @@ export default function VLMsForGeneration() {
 
                 {/* CogVLM */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://github.com/THUDM/CogVLM" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             CogVLM
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             CogVLM integrates a trainable visual expert module with a pretrained language model for deep fusion.
@@ -590,11 +592,11 @@ export default function VLMsForGeneration() {
 
                 {/* CogVLM 2 */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://github.com/THUDM/CogVLM2" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             CogVLM 2
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             CogVLM 2 beats GPT4-V, Gemini Pro on TextVQA, DocVQA and ChartQA.
@@ -604,11 +606,11 @@ export default function VLMsForGeneration() {
 
                 {/* FERRET */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://arxiv.org/abs/2310.07704" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             FERRET
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2310.07704" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">FERRET</a>.
@@ -633,11 +635,11 @@ export default function VLMsForGeneration() {
 
                 {/* KOSMOS-1 */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://arxiv.org/abs/2302.14045" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             KOSMOS-1
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2302.14045" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Language Is Not All You Need</a>.
@@ -657,11 +659,11 @@ export default function VLMsForGeneration() {
 
                 {/* KOSMOS-2 */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://arxiv.org/abs/2306.14824" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             KOSMOS-2
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2306.14824" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">KOSMOS-2</a>.
@@ -681,11 +683,11 @@ export default function VLMsForGeneration() {
 
                 {/* OFAMultiInstruct */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://arxiv.org/abs/2212.10773" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             OFAMultiInstruct
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2212.10773" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">MultiInstruct</a>.
@@ -705,11 +707,11 @@ export default function VLMsForGeneration() {
 
                 {/* LaVIN */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://arxiv.org/abs/2305.15023" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             LaVIN
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2305.15023" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Cheap and Quick</a>.
@@ -734,11 +736,11 @@ export default function VLMsForGeneration() {
 
                 {/* TinyGPT-V */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://arxiv.org/abs/2312.16862" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             TinyGPT-V
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2312.16862" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">TinyGPT-V</a>.
@@ -763,11 +765,11 @@ export default function VLMsForGeneration() {
 
                 {/* CoVLM */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://arxiv.org/abs/2311.03354" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             CoVLM
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2311.03354" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">CoVLM</a>.
@@ -792,11 +794,11 @@ export default function VLMsForGeneration() {
 
                 {/* FireLLaVA */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://fireworks.ai/blog/firellava-the-first-commercially-permissive-oss-llava-model" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             FireLLaVA
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             FireLLaVA is the first commercially permissive OSS multi-modality model available under the Llama 2 Community License.

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { MessageSquare, Image as ImageIcon, ArrowDown } from 'lucide-react';
+import Header4 from '../../../../components/Header4';
+import Paragraph from '../../../../components/Paragraph';
 
 export default function TransformerFusion() {
     const [hoveredToken, setHoveredToken] = useState(null);
@@ -18,12 +20,12 @@ export default function TransformerFusion() {
 
     return (
         <div className="my-8 p-6 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800">
-            <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+            <Header4>
                 Cross-Modal Attention Mechanism
-            </h4>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
+            </Header4>
+            <Paragraph variant="small" className="mb-6">
                 Hover over the text tokens to see how the language model "attends" to relevant parts of the image.
-            </p>
+            </Paragraph>
 
             <div className="flex flex-col md:flex-row items-center justify-center gap-12">
                 {/* Text Modality (Queries) */}
@@ -38,8 +40,8 @@ export default function TransformerFusion() {
                                 onMouseEnter={() => setHoveredToken(idx)}
                                 onMouseLeave={() => setHoveredToken(null)}
                                 className={`cursor-pointer px-3 py-2 rounded-md border text-sm font-medium transition-colors ${hoveredToken === idx
-                                        ? 'bg-blue-500 text-white border-blue-600 scale-110'
-                                        : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300'
+                                    ? 'bg-blue-500 text-white border-blue-600 scale-110'
+                                    : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300'
                                     }`}
                                 whileHover={{ y: -2 }}
                             >
@@ -71,8 +73,8 @@ export default function TransformerFusion() {
                                 <motion.div
                                     key={idx}
                                     className={`w-8 h-8 rounded-sm transition-colors duration-300 ${isAttended
-                                            ? 'bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]'
-                                            : 'bg-gray-200 dark:bg-gray-700'
+                                        ? 'bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]'
+                                        : 'bg-gray-200 dark:bg-gray-700'
                                         }`}
                                     animate={{
                                         scale: isAttended ? 1.1 : 1,

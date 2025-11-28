@@ -5,6 +5,8 @@ import Equation from '../../../components/Equation';
 import EquationBlock from '../../../components/EquationBlock';
 import InteractiveCard from '../../../components/InteractiveCard';
 import CodeBlock from '../../../components/CodeBlock';
+import Header4 from '../../../components/Header4';
+import Paragraph from '../../../components/Paragraph';
 
 const AlibiViz = () => {
     const [heads, setHeads] = useState(4);
@@ -59,10 +61,10 @@ const AlibiViz = () => {
                     );
                 })}
             </div>
-            <p className="text-xs text-slate-500">
+            <Paragraph variant="caption">
                 Heatmaps show the attention penalty. Darker = higher attention retained.
                 Different heads have different slopes, allowing the model to attend to varying context lengths.
-            </p>
+            </Paragraph>
         </div>
     );
 };
@@ -70,17 +72,17 @@ const AlibiViz = () => {
 const AliBi = () => {
     return (
         <Section title="AliBi (Attention with Linear Biases)" icon={Type}>
-            <p className="mb-4 text-slate-700 leading-7">
+            <Paragraph>
                 AliBi abandons adding embeddings to the input. Instead, it modifies the <strong>attention score</strong> directly.
                 It subtracts a static bias proportional to the distance between query and key.
-            </p>
+            </Paragraph>
 
             <EquationBlock><Equation>
                 {`\\text{Attention}(q_i, k_j) = \\text{softmax}(q_i k_j^T + m \\cdot -(i - j))`}
             </Equation></EquationBlock>
 
             <div className="my-6">
-                <h4 className="text-sm font-bold text-slate-800 mb-2">Implementation (Bias Injection)</h4>
+                <Header4 className="text-sm font-bold text-slate-800 mb-2 mt-0">Implementation (Bias Injection)</Header4>
                 <CodeBlock code={`def get_alibi_bias(seq_len, num_heads):
     # 1. Generate geometric slopes for each head
     slopes = get_slopes(num_heads) 
@@ -97,11 +99,11 @@ const AliBi = () => {
     return bias`} />
             </div>
 
-            <p className="mb-4 text-slate-700 leading-7 mt-4">
+            <Paragraph className="mt-4">
                 <strong>Why it works:</strong> It imposes a strong prior that "nearby things are more important."
                 The slope <Equation>m</Equation> is specific to each attention head, allowing some heads to focus locally and others to look further back.
                 It has excellent extrapolation properties.
-            </p>
+            </Paragraph>
 
             <InteractiveCard title="Bias Visualization per Head">
                 <AlibiViz />

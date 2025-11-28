@@ -1,6 +1,7 @@
 import React from 'react';
 import { Star } from 'lucide-react';
 import Section from '../../../components/Section';
+import Paragraph from '../../../components/Paragraph';
 import VLMsForGeneration from './VLMsForGeneration';
 import VLMsForUnderstanding from './VLMsForUnderstanding';
 import MedicalVLMs from './MedicalVLMs';
@@ -9,9 +10,9 @@ import IndicVLMs from './IndicVLMs';
 export default function PopularVLMs() {
     return (
         <Section title="Popular VLMs" icon={Star}>
-            <p className="mb-4 text-gray-700 dark:text-gray-300">
+            <Paragraph className="mb-4 text-gray-700 dark:text-gray-300">
                 This section covers some of the most popular Vision-Language Models, categorized by their primary function.
-            </p>
+            </Paragraph>
             <VLMsForGeneration />
             <VLMsForUnderstanding />
             <MedicalVLMs />

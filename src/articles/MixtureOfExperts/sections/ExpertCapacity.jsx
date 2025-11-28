@@ -4,6 +4,9 @@ import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
 import EquationBlock from '../../../components/EquationBlock';
 import InteractiveCard from '../../../components/InteractiveCard';
+import Header3 from '../../../components/Header3';
+import Header4 from '../../../components/Header4';
+import Paragraph from '../../../components/Paragraph';
 
 const CapacityViz = () => {
     const [capacityFactor, setCapacityFactor] = useState(1.0);
@@ -102,9 +105,9 @@ const CapacityViz = () => {
                     <span className="text-sm text-red-600 dark:text-red-400">Dropped: <strong>{droppedCount}</strong></span>
                 </div>
             </div>
-            <p className="text-xs text-center text-gray-500">
+            <Paragraph variant="caption" className="text-center">
                 *Simulation uses a biased router to demonstrate load imbalance. Experts 1 & 2 are popular.
-            </p>
+            </Paragraph>
         </div>
     );
 };
@@ -112,18 +115,18 @@ const CapacityViz = () => {
 const ExpertCapacity = () => {
     return (
         <Section title="Expert Capacity and Capacity Factor" icon={Scale}>
-            <p className="mb-4 text-gray-700 dark:text-gray-300">
+            <Paragraph className="mb-4 text-gray-700 dark:text-gray-300">
                 Expert capacity defines the upper bound on how many tokens may be routed to each expert during a step. This concept, formalized in the <strong>Switch Transformer</strong> (2021), is essential for efficient distributed training.
-            </p>
+            </Paragraph>
 
             <InteractiveCard title="Capacity Simulation">
                 <CapacityViz />
             </InteractiveCard>
 
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mt-6 mb-3">Formal Definition</h3>
-            <p className="mb-4 text-gray-700 dark:text-gray-300">
+            <Header3 className="text-lg font-semibold text-gray-900 dark:text-white mt-6 mb-3">Formal Definition</Header3>
+            <Paragraph className="mb-4 text-gray-700 dark:text-gray-300">
                 The expert capacity <Equation>C</Equation> is defined as:
-            </p>
+            </Paragraph>
             <EquationBlock><Equation>
                 {`C = \\frac{T}{N} \\times \\alpha`}
             </Equation></EquationBlock>
@@ -133,20 +136,20 @@ const ExpertCapacity = () => {
                 <li><Equation>\alpha</Equation>: <strong>Capacity Factor</strong> (hyper-parameter).</li>
             </ul>
 
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mt-6 mb-3">Role of the Capacity Factor (<Equation>\alpha</Equation>)</h3>
-            <p className="mb-4 text-gray-700 dark:text-gray-300">
+            <Header3 className="text-lg font-semibold text-gray-900 dark:text-white mt-6 mb-3">Role of the Capacity Factor (<Equation>\alpha</Equation>)</Header3>
+            <Paragraph className="mb-4 text-gray-700 dark:text-gray-300">
                 The capacity factor controls the buffer for routing imbalance.
-            </p>
+            </Paragraph>
             <ul className="list-disc pl-5 space-y-2 text-gray-700 dark:text-gray-300">
                 <li><strong><Equation>{`\\alpha > 1.0`}</Equation>:</strong> Creates a safety buffer. <Equation>\alpha = 1.25</Equation> is a common default, allowing experts to handle 25% more tokens than a perfectly balanced load.</li>
                 <li><strong><Equation>\alpha \approx 1.0</Equation>:</strong> Maximizes memory efficiency but risks high token drop rates if routing is unbalanced.</li>
             </ul>
 
             <div className="mt-6 border-l-4 border-yellow-500 pl-4 py-2 bg-yellow-50 dark:bg-yellow-900/10">
-                <h4 className="font-bold text-yellow-900 dark:text-yellow-100">Token Overflow</h4>
-                <p className="text-sm text-yellow-800 dark:text-yellow-200">
+                <Header4 className="font-bold text-yellow-900 dark:text-yellow-100">Token Overflow</Header4>
+                <Paragraph variant="small" className="text-yellow-800 dark:text-yellow-200">
                     When an expert receives more than <Equation>C</Equation> tokens, the excess tokens are <strong>dropped</strong> (skipped) or rerouted. Dropped tokens pass through the residual connection without expert processing, which can degrade performance if the drop rate is high (&gt;1%).
-                </p>
+                </Paragraph>
             </div>
         </Section>
     );

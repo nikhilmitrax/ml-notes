@@ -1,16 +1,18 @@
 import React from 'react';
 
 import { getAssetPath } from '../../../utils/assetUtils';
+import Header4 from '../../../components/Header4';
+import Paragraph from '../../../components/Paragraph';
 
 export default function PerceiverResampler() {
     return (
         <div className="mt-8">
-            <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">
+            <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">
                 Perceiver Resampler
-            </h4>
-            <p className="mb-4 text-gray-700 dark:text-gray-300">
+            </Header4>
+            <Paragraph className="mb-4 text-gray-700 dark:text-gray-300">
                 The Perceiver Resampler, utilized in the <a href="https://arxiv.org/abs/2204.14198" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Flamingo: a Visual Language Model for Few-Shot Learning</a> is an integral component designed to efficiently bridge the gap between vision and language processing in the model. Here's a breakdown of its composition and role:
-            </p>
+            </Paragraph>
 
             <h5 className="text-md font-semibold text-gray-800 dark:text-white mb-2 mt-4">
                 Composition of Perceiver Resampler
@@ -36,9 +38,9 @@ export default function PerceiverResampler() {
             <h5 className="text-md font-semibold text-gray-800 dark:text-white mb-2 mt-4">
                 Flamingo: A Visual Summary
             </h5>
-            <p className="mb-4 text-gray-700 dark:text-gray-300">
+            <Paragraph className="mb-4 text-gray-700 dark:text-gray-300">
                 The following figure from the paper shows the Flamingo architecture overview.
-            </p>
+            </Paragraph>
             {/* Image placeholder */}
             {/* <img src="/assets/VLM/flamingo2.jpg" alt="Flamingo Architecture" className="my-4 rounded-lg shadow-md" /> */}
             <div className="mt-4">
@@ -47,7 +49,7 @@ export default function PerceiverResampler() {
                     alt="Flamingo Architecture"
                     className="rounded-lg shadow-md max-w-full h-auto"
                 />
-                <p className="text-sm text-gray-500 mt-2 text-center">Flamingo Architecture</p>
+                <Paragraph variant="caption" className="mt-2 text-center">Flamingo Architecture</Paragraph>
             </div>
 
             <h5 className="text-md font-semibold text-gray-800 dark:text-white mb-2 mt-4">

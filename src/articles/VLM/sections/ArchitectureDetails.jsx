@@ -2,13 +2,14 @@ import React from 'react';
 import ModalityFusionTypes from './visualizers/ModalityFusionTypes';
 import TransformerFusion from './visualizers/TransformerFusion';
 import ClipTraining from './visualizers/ClipTraining';
+import Header3 from '../../../components/Header3';
 
 export default function ArchitectureDetails() {
     return (
         <div className="mt-6">
-            <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
+            <Header3>
                 Architecture of Vision-Language Models
-            </h3>
+            </Header3>
             <ol className="list-decimal pl-6 space-y-4 text-gray-700 dark:text-gray-300">
                 <li>
                     <strong>Modality Fusion</strong>:

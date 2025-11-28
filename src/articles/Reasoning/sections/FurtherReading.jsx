@@ -1,14 +1,15 @@
 import React from 'react';
 import { BookOpen } from 'lucide-react';
 import Section from '../../../components/Section';
+import Paragraph from '../../../components/Paragraph';
 
 export default function FurtherReading() {
     return (
         <Section title="Further Reading" icon={BookOpen}>
             <div className="space-y-4">
-                <p>
+                <Paragraph>
                     Explore these resources for deeper understanding:
-                </p>
+                </Paragraph>
                 <ul className="list-disc pl-6 space-y-2 text-blue-600">
                     <li><a href="https://arcprize.org" className="hover:underline">ARC Prize: Advancing Human-Level Reasoning</a></li>
                     <li><a href="https://openai.com/research" className="hover:underline">OpenAI Research: Reasoning in GPT Models</a></li>

@@ -2,13 +2,14 @@ import React from 'react';
 import { GraduationCap } from 'lucide-react';
 import Section from '../../../components/Section';
 import { getAssetPath } from '../../../utils/assetUtils';
+import Paragraph from '../../../components/Paragraph';
 
 export default function TrainingProcess() {
     return (
         <Section title="Training Process" icon={GraduationCap}>
-            <p className="mb-4 text-gray-700 dark:text-gray-300">
+            <Paragraph className="mb-4 text-gray-700 dark:text-gray-300">
                 The diagram below illustrates the structure of a typical vision language model, depicting its components during different phases: pre-training and fine-tuning.
-            </p>
+            </Paragraph>
             {/* Image placeholder */}
             {/* <img src="/assets/VLM/VLMArch.jpg" alt="VLM Architecture" className="my-4 rounded-lg shadow-md" /> */}
             <div className="mt-4">
@@ -76,9 +77,9 @@ export default function TrainingProcess() {
                     </ul>
                 </li>
             </ol>
-            <p className="mt-4 text-gray-700 dark:text-gray-300">
+            <Paragraph className="mt-4 text-gray-700 dark:text-gray-300">
                 This structure enables the model to leverage both visual and textual information effectively, adapting to various tasks by fine-tuning specific components.
-            </p>
+            </Paragraph>
         </Section>
     );
 }

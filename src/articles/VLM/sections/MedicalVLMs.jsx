@@ -1,22 +1,24 @@
 import React from 'react';
 
 import { getAssetPath } from '../../../utils/assetUtils';
+import Header3 from '../../../components/Header3';
+import Header4 from '../../../components/Header4';
 
 export default function MedicalVLMs() {
     return (
         <div className="mt-8">
-            <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
+            <Header3>
                 Medical VLMs for Generation
-            </h3>
+            </Header3>
 
             <div className="space-y-8">
                 {/* Med-Flamingo */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4>
                         <a href="https://arxiv.org/abs/2307.15189" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             Med-Flamingo
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2307.15189" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Med-Flamingo: a Multimodal Medical Few-shot Learner</a>.
@@ -53,11 +55,11 @@ export default function MedicalVLMs() {
 
                 {/* Med-PaLM M */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4>
                         <a href="https://arxiv.org/abs/2307.14334" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             Med-PaLM M
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2307.14334" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Towards Generalist Biomedical AI</a> by Tu et al. from Google Research and Google DeepMind, Med-PaLM M is a large multimodal generative model that flexibly encodes and interprets biomedical data including clinical language, imaging, and genomics with the same set of model weights.
@@ -92,11 +94,11 @@ export default function MedicalVLMs() {
 
                 {/* LLaVA-Med */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4>
                         <a href="https://arxiv.org/abs/2306.00890" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             LLaVA-Med
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2306.00890" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">LLaVA-Med: Training a Large Language-and-Vision Assistant for Biomedicine in One Day</a> by Li et al. from Microsoft Research, UW-Madison, and Columbia University.
@@ -142,11 +144,11 @@ export default function MedicalVLMs() {
 
                 {/* Med-Gemini */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4>
                         <a href="https://arxiv.org/abs/2404.18416" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             Med-Gemini
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2404.18416" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Capabilities of Gemini Models in Medicine</a> by Google Research and Google DeepMind.

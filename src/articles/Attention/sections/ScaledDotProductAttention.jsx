@@ -4,6 +4,10 @@ import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
 import EquationBlock from '../../../components/EquationBlock';
 import InteractiveCard from '../../../components/InteractiveCard';
+import Header3 from '../../../components/Header3';
+import Header4 from '../../../components/Header4';
+import Paragraph from '../../../components/Paragraph';
+import SideBySide from '../../../components/SideBySide';
 
 const AttentionVisualization = () => {
     const [query, setQuery] = useState([0.8, 0.2]);
@@ -47,10 +51,10 @@ const AttentionVisualization = () => {
 
     return (
         <div className="flex flex-col gap-6 p-4 bg-slate-50 rounded-lg border border-slate-200">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <SideBySide className="gap-8">
                 {/* Inputs */}
                 <div className="space-y-4">
-                    <h4 className="font-semibold text-slate-700">Query Vector (Q)</h4>
+                    <Header4 className="font-semibold text-slate-700">Query Vector (Q)</Header4>
                     <div className="flex gap-2">
                         {query.map((q, i) => (
                             <div key={i} className="flex flex-col items-center">
@@ -69,7 +73,7 @@ const AttentionVisualization = () => {
                         ))}
                     </div>
 
-                    <h4 className="font-semibold text-slate-700 mt-6">Key Vectors (K)</h4>
+                    <Header4 className="font-semibold text-slate-700 mt-6">Key Vectors (K)</Header4>
                     <div className="space-y-2">
                         {keys.map((k, i) => (
                             <div key={i} className="flex items-center gap-2 text-sm font-mono bg-white p-2 rounded border border-slate-200">
@@ -82,7 +86,7 @@ const AttentionVisualization = () => {
 
                 {/* Calculations */}
                 <div className="space-y-4">
-                    <h4 className="font-semibold text-slate-700">Attention Weights (Softmax)</h4>
+                    <Header4 className="font-semibold text-slate-700">Attention Weights (Softmax)</Header4>
                     <div className="space-y-2">
                         {attentionWeights.map((w, i) => (
                             <div key={i} className="flex items-center gap-2">
@@ -97,17 +101,17 @@ const AttentionVisualization = () => {
                         ))}
                     </div>
 
-                    <h4 className="font-semibold text-slate-700 mt-6">Output Vector (Weighted Sum of V)</h4>
+                    <Header4 className="font-semibold text-slate-700 mt-6">Output Vector (Weighted Sum of V)</Header4>
                     <div className="p-4 bg-blue-50 rounded-lg border border-blue-100">
                         <div className="font-mono text-lg text-blue-700 text-center">
                             [{output.map(v => v.toFixed(2)).join(', ')}]
                         </div>
-                        <p className="text-xs text-blue-600 text-center mt-2">
+                        <Paragraph variant="caption" className="text-blue-600 text-center mt-2">
                             Result = Σ (Weight_i × Value_i)
-                        </p>
+                        </Paragraph>
                     </div>
                 </div>
-            </div>
+            </SideBySide>
         </div>
     );
 };
@@ -115,24 +119,24 @@ const AttentionVisualization = () => {
 const ScaledDotProductAttention = () => {
     return (
         <Section title="Scaled Dot-Product Attention" icon={Eye}>
-            <p className="mb-4">
+            <Paragraph className="mb-4">
                 The core building block of modern Transformers is <strong>Scaled Dot-Product Attention</strong> (Vaswani et al., 2017).
-            </p>
+            </Paragraph>
             <EquationBlock><Equation>
                 {`Attention(Q, K, V) = \\text{softmax}\\left(\\frac{QK^T}{\\sqrt{d_k}}\\right)V`}
             </Equation></EquationBlock>
-            <p className="mb-4 text-slate-700">
+            <Paragraph className="mb-4 text-slate-700">
                 The scaling factor <Equation>{`\\frac{1}{\\sqrt{d_k}}`}</Equation> prevents small gradients when dot products are large.
-            </p>
+            </Paragraph>
 
-            <h3 className="text-lg font-semibold text-slate-800 mb-4">Comparative Analysis: Additive vs. Scaled Dot-Product Attention</h3>
-            <p className="mb-4 text-slate-700">
+            <Header3 className="text-lg font-semibold text-slate-800 mb-4">Comparative Analysis: Additive vs. Scaled Dot-Product Attention</Header3>
+            <Paragraph className="mb-4 text-slate-700">
                 Among the various types of attention mechanisms, additive attention and scaled dot-product attention are the most commonly used. Here is a detailed comparison:
-            </p>
+            </Paragraph>
 
             <div className="space-y-6 mb-8">
                 <div>
-                    <h4 className="font-bold text-slate-800 mb-2">1. Origins and Definitions</h4>
+                    <Header4 className="font-bold text-slate-800 mb-2">1. Origins and Definitions</Header4>
                     <ul className="list-disc list-inside text-slate-700 space-y-2 ml-4">
                         <li>
                             <strong>Additive Attention</strong>: Proposed by Bahdanau et al. (2015). It computes the alignment score using a feed-forward neural network with a single hidden layer.
@@ -146,7 +150,7 @@ const ScaledDotProductAttention = () => {
                 </div>
 
                 <div>
-                    <h4 className="font-bold text-slate-800 mb-2">2. Computational Efficiency</h4>
+                    <Header4 className="font-bold text-slate-800 mb-2">2. Computational Efficiency</Header4>
                     <ul className="list-disc list-inside text-slate-700 space-y-2 ml-4">
                         <li>
                             <strong>Additive Attention</strong>: More complex computation due to the feed-forward network. Generally slower in practice as it cannot fully leverage optimized matrix multiplication libraries. Requires additional parameters (<Equation>{`W_q, W_k, v`}</Equation>).
@@ -158,17 +162,17 @@ const ScaledDotProductAttention = () => {
                 </div>
 
                 <div>
-                    <h4 className="font-bold text-slate-800 mb-2">3. Theoretical Complexity</h4>
-                    <p className="text-slate-700 ml-4">
+                    <Header4 className="font-bold text-slate-800 mb-2">3. Theoretical Complexity</Header4>
+                    <Paragraph className="text-slate-700 ml-4">
                         Both have <Equation>{`O(n^2 \\cdot d)`}</Equation> complexity, but Dot-Product is faster in real-world applications due to hardware optimizations.
-                    </p>
+                    </Paragraph>
                 </div>
             </div>
 
             <InteractiveCard title="Interactive Attention Calculation">
-                <p className="mb-4 text-sm text-slate-600">
+                <Paragraph className="mb-4 text-sm text-slate-600">
                     Adjust the <strong>Query Vector</strong> to see how it matches against different <strong>Key Vectors</strong>.
-                </p>
+                </Paragraph>
                 <AttentionVisualization />
             </InteractiveCard>
         </Section>

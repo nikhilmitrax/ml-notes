@@ -6,6 +6,7 @@ import InteractiveCard from '../../../components/InteractiveCard';
 import List from '../../../components/List';
 import ListItem from '../../../components/ListItem';
 import Quote from '../../../components/Quote';
+import Paragraph from '../../../components/Paragraph';
 
 const SamplingVisualizer = ({ defaultMethod = 'top-k' }) => {
     const [method, setMethod] = useState(defaultMethod);
@@ -125,11 +126,11 @@ const SamplingVisualizer = ({ defaultMethod = 'top-k' }) => {
                     );
                 })}
             </div>
-            <p className="text-xs text-slate-500">
+            <Paragraph variant="caption">
                 {method === 'top-k' && `Selects the top ${k} most probable tokens.`}
                 {method === 'top-p' && `Selects the smallest set of tokens whose cumulative probability exceeds ${p}.`}
                 {method === 'min-p' && `Selects tokens with probability >= ${minP} * max_prob (${(minP * tokens[0].prob).toFixed(3)}).`}
-            </p>
+            </Paragraph>
         </div>
     );
 };

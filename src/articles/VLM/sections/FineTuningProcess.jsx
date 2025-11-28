@@ -1,18 +1,20 @@
 import React from 'react';
 import { Settings } from 'lucide-react';
 import Section from '../../../components/Section';
+import Header3 from '../../../components/Header3';
+import Paragraph from '../../../components/Paragraph';
 
 export default function FineTuningProcess() {
     return (
         <Section title="Fine-Tuning Process" icon={Settings}>
-            <p className="mb-4 text-gray-700 dark:text-gray-300">
+            <Paragraph>
                 When fine-tuning a VLM, the decision of which layers to fine-tune is guided by the model's architecture and the specific objectives of the fine-tuning task. Here's a detailed breakdown:
-            </p>
+            </Paragraph>
 
             <div className="mt-6">
-                <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
+                <Header3>
                     Vision Encoder Layers
-                </h3>
+                </Header3>
                 <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                     <li>
                         <strong>Role:</strong> These layers process and encode the visual input, such as images. They capture features from the visual data that are then used by the model to understand and integrate with text.
@@ -24,9 +26,9 @@ export default function FineTuningProcess() {
             </div>
 
             <div className="mt-6">
-                <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
+                <Header3>
                     Language Model (LLM) Layers
-                </h3>
+                </Header3>
                 <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                     <li>
                         <strong>Role:</strong> These layers are responsible for processing and encoding textual input, such as captions or descriptions. They interpret and generate text based on the information received from the vision encoder and projection layers.
@@ -38,9 +40,9 @@ export default function FineTuningProcess() {
             </div>
 
             <div className="mt-6">
-                <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
+                <Header3>
                     Projection/Cross-Attention Layers
-                </h3>
+                </Header3>
                 <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                     <li>
                         <strong>Role:</strong> In many VLM architectures, projection/cross-attention layers allow the model to integrate and align visual and textual inputs, facilitating the interaction between these modalities.
@@ -52,9 +54,9 @@ export default function FineTuningProcess() {
             </div>
 
             <div className="mt-6">
-                <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
+                <Header3>
                     Common Fine-Tuning Strategies
-                </h3>
+                </Header3>
                 <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                     <li>
                         <strong>Fine-Tuning the Entire Model:</strong> This involves fine-tuning all layers (vision encoder, LLM, and projection layers). While this approach is resource-intensive, it allows the model to fully adapt to the new task, making it the most comprehensive strategy.
@@ -69,9 +71,9 @@ export default function FineTuningProcess() {
             </div>
 
             <div className="mt-6">
-                <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
+                <Header3>
                     Use of LoRA (Low-Rank Adaptation)
-                </h3>
+                </Header3>
                 <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                     <li>
                         <strong>LoRA Application:</strong> LoRA can be applied to any of these layers (Vision Encoder, LLM, or Projection) to introduce efficient, lightweight fine-tuning. By adding trainable low-rank matrices to the existing model parameters, LoRA allows for fine-tuning with minimal additional computational overhead. This approach is particularly useful in scenarios where full model fine-tuning is impractical due to resource constraints.
@@ -80,12 +82,12 @@ export default function FineTuningProcess() {
             </div>
 
             <div className="mt-6">
-                <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
+                <Header3>
                     Summary
-                </h3>
-                <p className="mb-4 text-gray-700 dark:text-gray-300">
+                </Header3>
+                <Paragraph>
                     In summary, whether you fine-tune the Vision Encoder layers, LLM layers, or Projection layers depends on the nature of your task:
-                </p>
+                </Paragraph>
                 <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                     <li>
                         Fine-tune <strong>Vision Encoder Layers</strong> for tasks involving new or different visual domains.

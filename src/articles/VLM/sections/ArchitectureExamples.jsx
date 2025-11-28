@@ -1,14 +1,16 @@
 import React from 'react';
+import Header3 from '../../../components/Header3';
+import Paragraph from '../../../components/Paragraph';
 
 export default function ArchitectureExamples() {
     return (
         <div className="mt-8">
-            <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
+            <Header3 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
                 Examples of Popular VLMs and Their Architectural Choices
-            </h3>
-            <p className="mb-4 text-gray-700 dark:text-gray-300">
+            </Header3>
+            <Paragraph className="mb-4 text-gray-700 dark:text-gray-300">
                 Each of the below models represents a unique approach to integrating and aligning text and image data, showcasing the diverse methodologies within the field of VLMs. The choice of architecture and fusion strategy depends largely on the specific application and the nature of the tasks the model is designed to perform.
-            </p>
+            </Paragraph>
             <ol className="list-decimal pl-6 space-y-4 text-gray-700 dark:text-gray-300">
                 <li>
                     <strong>CLIP (Contrastive Language--Image Pretraining)</strong>:

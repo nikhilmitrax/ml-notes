@@ -4,6 +4,9 @@ import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
 import EquationBlock from '../../../components/EquationBlock';
 import InteractiveCard from '../../../components/InteractiveCard';
+import Header3 from '../../../components/Header3';
+import Header4 from '../../../components/Header4';
+import Paragraph from '../../../components/Paragraph';
 
 const ToTVisualizer = () => {
     const [expanded, setExpanded] = useState({ 'root': true });
@@ -80,25 +83,25 @@ export default function SearchBased() {
     return (
         <Section title="Search-Based Reasoning" icon={Search}>
             <div className="space-y-6">
-                <p>
+                <Paragraph>
                     <strong>Search-based reasoning</strong> extends CoT and Tree-of-Thought paradigms by formalizing reasoning as an <strong>explicit search or planning process</strong> through a structured state space of partial thoughts. Rather than producing a single reasoning trajectory, the model dynamically explores multiple hypotheses, evaluates their promise, and selectively expands the most promising reasoning branches. This approach transforms reasoning from <strong>sequence generation</strong> into <strong>strategic exploration</strong>—closer to the deliberative search processes in classical AI.
-                </p>
-                <p>
+                </Paragraph>
+                <Paragraph>
                     The key insight behind search-based reasoning is that complex reasoning tasks (e.g., mathematical proofs, algorithmic puzzles, or or multi-hop reasoning) often require <strong>exploring alternative reasoning directions</strong>, pruning dead-ends, and backtracking—capabilities absent from purely linear text generation.
-                </p>
-                <p>
+                </Paragraph>
+                <Paragraph>
                     This family includes <strong>Tree-of-Thoughts (ToT)</strong> by <a href="https://arxiv.org/abs/2305.10601" className="text-blue-600 hover:underline">Yao et al. (2023)</a>, <strong>Monte Carlo Tree Search (MCTS)</strong>-augmented reasoning, <strong>value-guided search</strong> frameworks, and hybrid <strong>plan–execute–evaluate</strong> reasoning systems that embed search within or atop language model inference.
-                </p>
+                </Paragraph>
 
-                <h3 className="text-2xl font-semibold text-slate-800 mt-8">Tree-of-Thoughts (ToT) Prompting</h3>
-                <p>
+                <Header3 className="text-2xl font-semibold text-slate-800 mt-8">Tree-of-Thoughts (ToT) Prompting</Header3>
+                <Paragraph>
                     <strong>Tree-of-Thoughts (ToT)</strong> generalizes CoT prompting into a <strong>structured search process</strong> over multiple reasoning paths. Instead of committing to a single linear reasoning chain, ToT explores a branching search tree where each node corresponds to a partial "thought," and branches represent possible continuations of reasoning.
-                </p>
-                <p>
+                </Paragraph>
+                <Paragraph>
                     This approach was introduced in <em>Tree of Thoughts: Deliberate Problem Solving with Large Language Models</em> by <a href="https://arxiv.org/abs/2305.10601" className="text-blue-600 hover:underline">Yao et al. (2023)</a>.
-                </p>
+                </Paragraph>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Core Idea</h4>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Core Idea</Header4>
                 <ul className="list-disc pl-6 space-y-2">
                     <li>
                         CoT prompting treats reasoning as a single sampled trajectory:
@@ -113,24 +116,24 @@ export default function SearchBased() {
                         </Equation></EquationBlock>
                     </li>
                 </ul>
-                <p>
+                <Paragraph>
                     The model explicitly evaluates partial thoughts <Equation>{`z_{1:t}`}</Equation> using a <strong>heuristic function</strong> or <strong>value model</strong>, guiding the expansion toward promising reasoning directions.
-                </p>
+                </Paragraph>
 
                 <div className="my-8">
                     <ToTVisualizer />
                 </div>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Mechanism</h4>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Mechanism</Header4>
                 <ol className="list-decimal pl-6 space-y-2">
                     <li><strong>Thought generation:</strong> The model generates candidate continuations for the current thought, e.g., <Equation>{`z_t^{(1)}, z_t^{(2)}, \\ldots, z_t^{(b)}`}</Equation></li>
                     <li><strong>Evaluation:</strong> Each partial reasoning sequence <Equation>{`z_{1:t}`}</Equation> is scored by the model itself or a learned value function <Equation>{`V_\\phi(z_{1:t})`}</Equation>, estimating expected success.</li>
                     <li><strong>Search algorithm:</strong> Employs strategies such as <strong>breadth-first search (BFS)</strong>, <strong>depth-first search (DFS)</strong>, or <strong>Monte Carlo Tree Search (MCTS)</strong> to explore reasoning paths selectively.</li>
                     <li><strong>Selection:</strong> The final answer is derived from the highest-valued complete reasoning path or an ensemble of top candidates.</li>
                 </ol>
-                <p>
+                <Paragraph>
                     Mathematically, this resembles a policy/value formulation:
-                </p>
+                </Paragraph>
                 <EquationBlock><Equation>
                     {`z_{t+1} \\sim \\pi_\\theta(z_t \\mid z_{1:t}) \\quad \\text{and} \\quad V_\\phi(z_{1:t}) \\approx \\mathbb{E}[R \\mid z_{1:t}]`}
                 </Equation></EquationBlock>
@@ -138,7 +141,7 @@ export default function SearchBased() {
                     <li>where <Equation>R</Equation> is a reward for a correct or high-quality final output.</li>
                 </ul>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Example</h4>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Example</Header4>
                 <ul className="list-disc pl-6 space-y-2">
                     <li>
                         For a math problem such as <em>"Find the smallest integer satisfying ..."</em>, the ToT procedure may branch into:
@@ -151,21 +154,21 @@ export default function SearchBased() {
                     <li>The model evaluates which partial derivation yields progress and prunes unpromising branches, effectively performing <strong>deliberate reasoning</strong>.</li>
                 </ul>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Advantages</h4>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Advantages</Header4>
                 <ul className="list-disc pl-6 space-y-2">
                     <li>Encourages <strong>exploration over multiple reasoning directions</strong>, avoiding early commitment to incorrect logic.</li>
                     <li>Enables <strong>planning and backtracking</strong>, crucial for complex reasoning.</li>
                     <li>Integrates well with external evaluators or reward functions.</li>
                 </ul>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Limitations</h4>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Limitations</Header4>
                 <ul className="list-disc pl-6 space-y-2">
                     <li><strong>Computationally expensive</strong>: exponential search space mitigated only by pruning heuristics.</li>
                     <li>Requires a reliable evaluation function to score partial reasoning.</li>
                     <li>Harder to parallelize and tune compared to CoT or Self-Consistency.</li>
                 </ul>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Relation to Other Methods</h4>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Relation to Other Methods</Header4>
                 <ul className="list-disc pl-6 space-y-2">
                     <li>
                         Tree-of-Thoughts bridges the gap between:
@@ -177,34 +180,34 @@ export default function SearchBased() {
                     <li>In this sense, it operationalizes the idea that reasoning should be <strong>deliberative</strong>, not merely <strong>associative</strong>.</li>
                 </ul>
 
-                <h3 className="text-2xl font-semibold text-slate-800 mt-8">Monte Carlo Tree Search (MCTS)-based Reasoning</h3>
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Core Idea</h4>
-                <p>
+                <Header3 className="text-2xl font-semibold text-slate-800 mt-8">Monte Carlo Tree Search (MCTS)-based Reasoning</Header3>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Core Idea</Header4>
+                <Paragraph>
                     <strong>Monte Carlo Tree Search (MCTS)-based reasoning</strong> refines search-based reasoning by using <strong>stochastic simulations</strong> to balance exploration and exploitation over the reasoning space. Each node in the search tree represents a <em>partial reasoning trace</em> <Equation>{`z_{1:t} = (z_1, z_2, \\ldots, z_t)`}</Equation>, and edges represent possible next reasoning steps <Equation>{`z_{t+1}`}</Equation>. Unlike simple breadth-first or depth-first traversal, MCTS uses probabilistic sampling to explore promising reasoning branches while still allocating some computation to less-visited ones, ensuring a balance between <strong>discovering new reasoning paths</strong> and <strong>refining strong candidates</strong>.
-                </p>
-                <p>
+                </Paragraph>
+                <Paragraph>
                     Formally, reasoning unfolds as a growing search tree <Equation>{`\\mathcal{T}`}</Equation>:
-                </p>
+                </Paragraph>
                 <EquationBlock><Equation>
                     {`\\mathcal{T} = \\{ z_{1:t} \\mid z_{1:t-1} \\in \\mathcal{T},\\ z_t \\in \\text{Expand}(z_{1:t-1}) \\}`}
                 </Equation></EquationBlock>
                 <ul className="list-disc pl-6 space-y-2">
                     <li>where the <strong>Expand</strong> step is guided by the LLM's conditional distribution <Equation>{`p_\\theta(z_t \\mid z_{1:t-1}, x)`}</Equation>, and the <strong>evaluation function</strong> <Equation>{`V_\\phi(z_{1:t})`}</Equation> estimates how promising each partial reasoning sequence is.</li>
                 </ul>
-                <p>
+                <Paragraph>
                     MCTS then uses <strong>simulated rollouts</strong>—partial reasoning trajectories extended to completion—to estimate downstream rewards, which are <strong>backpropagated</strong> through the tree to update value and visit counts. The algorithm repeatedly selects nodes using an upper-confidence bound (UCB) criterion that trades off exploration and exploitation:
-                </p>
+                </Paragraph>
                 <EquationBlock><Equation>
                     {`a^* = \\arg\\max_a \\left( Q(s, a) + c \\sqrt{\\frac{\\log N(s)}{N(s, a) + 1}} \\right)`}
                 </Equation></EquationBlock>
                 <ul className="list-disc pl-6 space-y-2">
                     <li>where <Equation>{`Q(s, a)`}</Equation> is the average reward for taking reasoning step <Equation>a</Equation> in state <Equation>s</Equation>, <Equation>{`N(s, a)`}</Equation> the number of visits, and <Equation>c</Equation> a temperature constant controlling exploration.</li>
                 </ul>
-                <p>
+                <Paragraph>
                     This process continues until reasoning trajectories reach terminal states—complete solutions <Equation>y</Equation>—and the highest-valued trace or ensemble of top traces is selected as the model's output.
-                </p>
+                </Paragraph>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Mechanism</h4>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Mechanism</Header4>
                 <ol className="list-decimal pl-6 space-y-2">
                     <li><strong>Selection</strong>: From the root node, traverse the tree by selecting the child that maximizes the <strong>UCB</strong> criterion, balancing high-value and underexplored reasoning branches.</li>
                     <li><strong>Expansion</strong>: When an underexplored node is reached, the model generates several possible next reasoning steps <Equation>{`z_t^{(1)}, z_t^{(2)}, \\ldots, z_t^{(b)} \\sim p_\\theta(z_t \\mid z_{1:t-1}, x)`}</Equation>, forming new branches for exploration.</li>
@@ -214,7 +217,7 @@ export default function SearchBased() {
                     <li><strong>Selection of Final Output</strong>: After sufficient iterations, the reasoning path with the highest cumulative value (or visit count) is chosen as the final answer.</li>
                 </ol>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Theoretical Framing</h4>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Theoretical Framing</Header4>
                 <ul className="list-disc pl-6 space-y-2">
                     <li>
                         MCTS-based reasoning can be interpreted as an <strong>approximate Bayesian inference</strong> mechanism, marginalizing over reasoning paths by repeated stochastic sampling and value-based weighting. It formalizes reasoning as a <strong>policy–value system</strong>:
@@ -226,7 +229,7 @@ export default function SearchBased() {
                     <li>This structure directly parallels <strong>AlphaZero</strong>-style planning in RL: reasoning steps are "moves," the value function measures progress toward correctness, and search iterations improve reasoning through <strong>self-guided exploration</strong>.</li>
                 </ul>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Example: Mathematical Problem Solving</h4>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Example: Mathematical Problem Solving</Header4>
                 <ul className="list-disc pl-6 space-y-2">
                     <li>
                         Consider a geometry proof question. A linear CoT might pursue a single argument, but an MCTS-based reasoner could simulate multiple reasoning directions:
@@ -239,7 +242,7 @@ export default function SearchBased() {
                     <li>Each branch is evaluated through rollouts—checking consistency or partial correctness—and promising directions are expanded further, while unproductive branches are pruned. Over multiple iterations, the search converges on the most coherent reasoning trace, yielding deliberate and explainable reasoning rather than heuristic guessing.</li>
                 </ul>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Variants and Extensions</h4>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Variants and Extensions</Header4>
                 <ol className="list-decimal pl-6 space-y-2">
                     <li><strong>LLM-MCTS (Yao et al. (2024))</strong>: Combines MCTS with Tree-of-Thought reasoning, using the LLM both for expansion and value estimation.</li>
                     <li><strong>Verifier-Guided MCTS</strong>: Integrates external verifiers to provide precise reward signals at rollout, improving pruning accuracy.</li>
@@ -247,7 +250,7 @@ export default function SearchBased() {
                     <li><strong>Hybrid Planning Frameworks</strong>: Combine symbolic planners (A*, BFS) with MCTS exploration to scale reasoning in code, logic, or multi-agent environments.</li>
                 </ol>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Advantages</h4>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Advantages</Header4>
                 <ul className="list-disc pl-6 space-y-2">
                     <li>Balances <strong>exploration and exploitation</strong>, avoiding premature convergence.</li>
                     <li>Can discover <strong>nonlinear, multi-path reasoning solutions</strong>.</li>
@@ -255,7 +258,7 @@ export default function SearchBased() {
                     <li>Compatible with <strong>verifier-guided</strong> or <strong>reward-shaped</strong> supervision, enabling hybrid reasoning pipelines.</li>
                 </ul>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Limitations</h4>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Limitations</Header4>
                 <ul className="list-disc pl-6 space-y-2">
                     <li><strong>High computational cost</strong>: repeated rollouts and evaluations are expensive.</li>
                     <li><strong>Value-model sensitivity</strong>: incorrect scoring can misdirect exploration.</li>
@@ -263,7 +266,7 @@ export default function SearchBased() {
                     <li><strong>Diminishing returns</strong>: excessive exploration may not improve accuracy proportionally.</li>
                 </ul>
 
-                <h4 className="text-xl font-semibold text-slate-800 mt-6">Relationship to Other Reasoning Methods</h4>
+                <Header4 className="text-xl font-semibold text-slate-800 mt-6">Relationship to Other Reasoning Methods</Header4>
                 <ul className="list-disc pl-6 space-y-2">
                     <li>MCTS generalizes <strong>Tree-of-Thoughts (ToT)</strong> by adding quantitative evaluation and stochastic rollouts, bridging symbolic search and probabilistic reasoning.</li>
                     <li>It operationalizes <strong>planning in reasoning space</strong>, complementing <strong>RL-based reasoning</strong> (which learns heuristics) and <strong>Self-Consistency decoding</strong> (which averages independent samples rather than guided rollouts).</li>

@@ -3,23 +3,25 @@ import { Hash } from 'lucide-react';
 import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
 import EquationBlock from '../../../components/EquationBlock';
+import Header3 from '../../../components/Header3';
+import Paragraph from '../../../components/Paragraph';
 
 export default function DROP() {
     return (
         <Section title="DROP and Numerical Reading-Comprehension Reasoning" icon={Hash}>
             <div className="space-y-6">
-                <p>
+                <Paragraph>
                     The <strong>DROP dataset</strong> (<em>Discrete Reasoning Over Paragraphs</em>) was introduced by <a href="https://arxiv.org/abs/1903.00161" className="text-blue-600 hover:underline">Dua et al. (2019)</a> as a benchmark to test reading comprehension that goes <strong>beyond span extraction</strong> and requires <strong>numerical, logical, and discrete reasoning</strong> grounded in text. It remains a canonical benchmark for assessing <em>textual reasoning with numbers</em> and has influenced numerous architectures and evaluation methods that integrate symbolic or programmatic reasoning into LLMs.
-                </p>
+                </Paragraph>
 
-                <h3 className="text-2xl font-semibold text-slate-800 mt-8">Dataset Overview</h3>
+                <Header3 className="text-2xl font-semibold text-slate-800 mt-8">Dataset Overview</Header3>
                 <ul className="list-disc pl-6 space-y-2">
                     <li><strong>Source</strong>: Passages drawn from Wikipedia.</li>
                     <li><strong>Scale</strong>: ~96,000 question–answer pairs.</li>
                     <li><strong>Format</strong>: Each instance consists of a paragraph and a question requiring counting, addition/subtraction, sorting, or comparison.</li>
                     <li><strong>Answer types</strong>: integers, dates, or text spans that must be <em>computed</em>, not just extracted.</li>
                 </ul>
-                <p className="mt-4">
+                <Paragraph className="mt-4">
                     <strong>Example:</strong>
                     <br />
                     <strong>Paragraph:</strong> "The Lakers scored 30 points in the first quarter, 27 in the second, and 33 in the third."
@@ -27,23 +29,23 @@ export default function DROP() {
                     <strong>Question:</strong> "How many points did they score in the first three quarters?"
                     <br />
                     <strong>Answer:</strong> 90.
-                </p>
-                <p>
+                </Paragraph>
+                <Paragraph>
                     A standard span-based model (like BERT QA) fails here because the answer does not appear verbatim in the paragraph—it must be <strong>derived</strong>.
-                </p>
+                </Paragraph>
 
-                <h3 className="text-2xl font-semibold text-slate-800 mt-8">Motivation and Reasoning Focus</h3>
-                <p>
+                <Header3 className="text-2xl font-semibold text-slate-800 mt-8">Motivation and Reasoning Focus</Header3>
+                <Paragraph>
                     DROP was created to probe whether language models can perform <strong>discrete reasoning operations</strong>—arithmetic, comparison, and logic—over textual contexts. It shifts evaluation from "pattern recognition" to <em>programmatic inference</em>, where solving a question entails recovering the latent computational procedure:
-                </p>
+                </Paragraph>
                 <EquationBlock><Equation>
                     {`y^\\star = f(x) = \\text{Compute}(\\text{Extract}(x)).`}
                 </Equation></EquationBlock>
-                <p>
+                <Paragraph>
                     Here, Extract identifies relevant numbers and entities, while Compute performs arithmetic or comparison.
-                </p>
+                </Paragraph>
 
-                <h3 className="text-2xl font-semibold text-slate-800 mt-8">Evaluation Metrics</h3>
+                <Header3 className="text-2xl font-semibold text-slate-800 mt-8">Evaluation Metrics</Header3>
                 <ol className="list-decimal pl-6 space-y-2">
                     <li>
                         <strong>Exact Match (EM):</strong>
@@ -63,7 +65,7 @@ export default function DROP() {
                     </li>
                 </ol>
 
-                <h3 className="text-2xl font-semibold text-slate-800 mt-8">Baselines and Key Results</h3>
+                <Header3 className="text-2xl font-semibold text-slate-800 mt-8">Baselines and Key Results</Header3>
                 <ul className="list-disc pl-6 space-y-2">
                     <li><strong>BERT + span extraction</strong> (2019 baseline): ~33 F1 on dev set—failed on arithmetic.</li>
                     <li><strong>NumNet and NAQANet</strong> by <a href="https://arxiv.org/abs/1903.00161" className="text-blue-600 hover:underline">Dua et al. (2019)</a>: introduced neural modules for number reasoning (addition, counting).</li>
@@ -71,7 +73,7 @@ export default function DROP() {
                     <li><strong>ReAct frameworks</strong> (see <a href="https://arxiv.org/abs/2210.03629" className="text-blue-600 hover:underline">Yao et al. (2022)</a>): used reasoning + acting loops to dynamically extract, compute, and verify numeric answers.</li>
                 </ul>
 
-                <h3 className="text-2xl font-semibold text-slate-800 mt-8">Reasoning Interfaces and Enhancements</h3>
+                <Header3 className="text-2xl font-semibold text-slate-800 mt-8">Reasoning Interfaces and Enhancements</Header3>
                 <ol className="list-decimal pl-6 space-y-2">
                     <li>
                         <strong>CoT + Numeric Parsing</strong>: LLMs produce structured reasoning steps such as:
@@ -89,14 +91,14 @@ export default function DROP() {
                     </li>
                 </ol>
 
-                <h3 className="text-2xl font-semibold text-slate-800 mt-8">Dataset Extensions and Successors</h3>
+                <Header3 className="text-2xl font-semibold text-slate-800 mt-8">Dataset Extensions and Successors</Header3>
                 <ul className="list-disc pl-6 space-y-2">
                     <li><strong>QASC</strong> (<a href="https://arxiv.org/abs/2001.07166" className="text-blue-600 hover:underline">Khot et al. (2020)</a>): tests multi-hop science reasoning with facts, complementing DROP's numerical focus.</li>
                     <li><strong>MathQA-NL</strong> (<a href="https://arxiv.org/abs/1905.13319" className="text-blue-600 hover:underline">Amini et al. (2019)</a>): converts math word problems into natural language arithmetic reasoning tasks.</li>
                     <li><strong>NumGLUE</strong> (<a href="https://arxiv.org/abs/2204.05456" className="text-blue-600 hover:underline">Lin et al. (2022)</a>): provides broader numeric reasoning tasks across diverse NLP settings.</li>
                 </ul>
 
-                <h3 className="text-2xl font-semibold text-slate-800 mt-8">Key Insights from DROP</h3>
+                <Header3 className="text-2xl font-semibold text-slate-800 mt-8">Key Insights from DROP</Header3>
                 <ul className="list-disc pl-6 space-y-2">
                     <li><strong>Discrete reasoning is bottlenecked by arithmetic grounding</strong>, not linguistic comprehension.</li>
                     <li><strong>Tool augmentation</strong> consistently boosts performance by externalizing computation.</li>

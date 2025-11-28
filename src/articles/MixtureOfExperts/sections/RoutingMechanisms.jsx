@@ -4,6 +4,8 @@ import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
 import EquationBlock from '../../../components/EquationBlock';
 import InteractiveCard from '../../../components/InteractiveCard';
+import Header3 from '../../../components/Header3';
+import Paragraph from '../../../components/Paragraph';
 
 const MoERoutingViz = () => {
     const [topK, setTopK] = useState(1);
@@ -37,6 +39,31 @@ const MoERoutingViz = () => {
         }, 1500);
         return () => clearInterval(interval);
     }, [isAnimating, tokens.length]);
+
+    // Calculate arrow geometry
+    const calculateArrowStyle = (expertIndex, totalExperts) => {
+        const EXPERT_WIDTH = 80; // w-20 = 5rem = 80px
+        const GAP = 8; // gap-2 = 0.5rem = 8px
+        const VERTICAL_DISTANCE = 32; // gap-8 = 2rem = 32px
+
+        const totalWidth = totalExperts * EXPERT_WIDTH + (totalExperts - 1) * GAP;
+        const startX = -totalWidth / 2;
+        const expertCenterX = startX + expertIndex * (EXPERT_WIDTH + GAP) + EXPERT_WIDTH / 2;
+
+        const angleRad = Math.atan2(expertCenterX, VERTICAL_DISTANCE);
+        const length = Math.sqrt(expertCenterX * expertCenterX + VERTICAL_DISTANCE * VERTICAL_DISTANCE);
+
+        // In CSS with origin-top:
+        // Positive rotation (clockwise) moves bottom to LEFT
+        // Negative rotation (counter-clockwise) moves bottom to RIGHT
+        // We want positive X (right) to have negative rotation
+        const angleDeg = -angleRad * (180 / Math.PI);
+
+        return {
+            height: `${length}px`,
+            transform: `rotate(${angleDeg}deg)`
+        };
+    };
 
     return (
         <div className="flex flex-col gap-6">
@@ -113,15 +140,12 @@ const MoERoutingViz = () => {
                         </span>
                     </div>
 
-                    {/* Active Route Lines (Simplified visual) */}
+                    {/* Active Route Lines */}
                     {routes[activeToken] && routes[activeToken].map((expertIdx) => (
                         <div
                             key={expertIdx}
                             className="absolute top-full left-1/2 w-0.5 bg-blue-400/50 dark:bg-blue-500/50 origin-top transition-all duration-300"
-                            style={{
-                                height: '60px',
-                                transform: `rotate(${(expertIdx - (numExperts - 1) / 2) * (120 / numExperts)}deg)`
-                            }}
+                            style={calculateArrowStyle(expertIdx, numExperts)}
                         />
                     ))}
                 </div>
@@ -151,11 +175,11 @@ const MoERoutingViz = () => {
                 </div>
             </div>
 
-            <p className="text-center text-sm text-gray-500 dark:text-gray-400">
+            <Paragraph className="text-center text-sm text-gray-500 dark:text-gray-400">
                 The router selects the best <strong>{topK}</strong> expert{topK > 1 ? 's' : ''} for the current token "{tokens[activeToken]}".
                 <br />
                 Inactive experts perform no computation, saving resources.
-            </p>
+            </Paragraph>
         </div>
     );
 };
@@ -163,45 +187,45 @@ const MoERoutingViz = () => {
 const RoutingMechanisms = () => {
     return (
         <Section title="Routing Mechanisms" icon={Network}>
-            <p className="mb-4 text-gray-700 dark:text-gray-300">
+            <Paragraph className="mb-4 text-gray-700 dark:text-gray-300">
                 Routing is the brain of an MoE model. It determines which experts process which tokens.
-            </p>
+            </Paragraph>
 
             <InteractiveCard title="Routing Visualization">
                 <MoERoutingViz />
             </InteractiveCard>
 
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mt-6 mb-3">1. Token Choice Routing (Standard)</h3>
-            <p className="mb-4 text-gray-700 dark:text-gray-300">
+            <Header3 className="text-lg font-semibold text-gray-900 dark:text-white mt-6 mb-3">1. Token Choice Routing (Standard)</Header3>
+            <Paragraph className="mb-4 text-gray-700 dark:text-gray-300">
                 Tokens choose the top-k experts based on a gating score.
-            </p>
+            </Paragraph>
             <EquationBlock><Equation>
                 {`p_i(x) = \\text{Softmax}(x \\cdot W_g)_i`}
             </Equation></EquationBlock>
-            <p className="mb-4 text-gray-700 dark:text-gray-300">
+            <Paragraph className="mb-4 text-gray-700 dark:text-gray-300">
                 <strong>Pros:</strong> Simple. <strong>Cons:</strong> Can lead to load imbalance and dropped tokens.
-            </p>
+            </Paragraph>
 
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mt-6 mb-3">2. Expert Choice Routing (EC)</h3>
-            <p className="mb-4 text-gray-700 dark:text-gray-300">
+            <Header3 className="text-lg font-semibold text-gray-900 dark:text-white mt-6 mb-3">2. Expert Choice Routing (EC)</Header3>
+            <Paragraph className="mb-4 text-gray-700 dark:text-gray-300">
                 Proposed by Zhou et al. (2022), this inverts the relationship: <strong>experts choose the top-k tokens</strong>.
-            </p>
+            </Paragraph>
             <ul className="list-disc pl-5 space-y-2 text-gray-700 dark:text-gray-300 mb-4">
                 <li>Ensures perfect load balancing (each expert takes exactly <Equation>k</Equation> tokens).</li>
                 <li>Eliminates token dropping.</li>
                 <li>Allows variable compute per token (some tokens may be picked by many experts, others by few).</li>
             </ul>
 
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mt-6 mb-3">3. Soft MoE</h3>
-            <p className="mb-4 text-gray-700 dark:text-gray-300">
+            <Header3 className="text-lg font-semibold text-gray-900 dark:text-white mt-6 mb-3">3. Soft MoE</Header3>
+            <Paragraph className="mb-4 text-gray-700 dark:text-gray-300">
                 Puigcerver et al. (2023) proposed a fully differentiable approach. Instead of discrete routing, tokens are mixed into "slots" via soft weights.
-            </p>
+            </Paragraph>
             <EquationBlock><Equation>
                 {`\\text{Slot}_k = \\sum_t w_{t,k} x_t`}
             </Equation></EquationBlock>
-            <p className="mb-4 text-gray-700 dark:text-gray-300">
+            <Paragraph className="mb-4 text-gray-700 dark:text-gray-300">
                 Experts process these slots, and the results are distributed back to tokens. This avoids the non-differentiability of top-k selection.
-            </p>
+            </Paragraph>
         </Section>
     );
 };

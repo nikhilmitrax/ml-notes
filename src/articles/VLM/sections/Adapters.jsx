@@ -1,11 +1,12 @@
 import React from 'react';
-
+import Header4 from '../../../components/Header4';
+import Paragraph from '../../../components/Paragraph';
 export default function Adapters() {
     return (
         <div className="mt-6">
-            <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">
+            <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">
                 Adapters/MLPs/Fully Connected Layers in VLMs
-            </h4>
+            </Header4>
             <ol className="list-decimal pl-6 space-y-4 text-gray-700 dark:text-gray-300">
                 <li>
                     <strong>Purpose of Adapters</strong>: Adapters are small neural network modules inserted into pre-existing models. In the context of VLMs, they facilitate the integration of visual and textual data by transforming the representations from one modality to be compatible with the other.
@@ -29,9 +30,9 @@ export default function Adapters() {
                     <strong>Flexibility</strong>: Adapters offer flexibility in model training. They allow for fine-tuning a pre-trained model on a specific task without the need to retrain the entire model. This is particularly useful in VLMs where training from scratch is often computationally expensive.
                 </li>
             </ol>
-            <p className="mt-4 text-gray-700 dark:text-gray-300">
+            <Paragraph className="mt-4 text-gray-700 dark:text-gray-300">
                 In summary, adapters and linear layers in VLMs serve as critical components for bridging the gap between visual and textual modalities, enabling these models to perform tasks that require an understanding of both images and text.
-            </p>
+            </Paragraph>
         </div>
     );
 }

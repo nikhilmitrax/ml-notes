@@ -1,22 +1,24 @@
 import React from 'react';
 
 import { getAssetPath } from '../../../utils/assetUtils';
+import Header3 from '../../../components/Header3';
+import Header4 from '../../../components/Header4';
 
 export default function VLMsForUnderstanding() {
     return (
         <div className="mt-8">
-            <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
+            <Header3 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
                 VLMs for Understanding
-            </h3>
+            </Header3>
 
             <div className="space-y-8">
                 {/* CLIP */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://arxiv.org/abs/2103.00020" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             CLIP
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2103.00020" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Learning Transferable Visual Models From Natural Language Supervision</a> by Radford et al. from OpenAI, Contrastive Language-Image Pre-training (CLIP) is a pre-training task which efficiently learns visual concepts from natural language supervision. CLIP uses vision and language encoders trained in isolation and uses a contrastive loss to bring similar image-text pairs closer, while pulling apart dissimilar pairs as a part of pretaining. CLIP's unique aspect is its departure from traditional models reliant on fixed object categories, instead utilizing a massive dataset of 400 million image-text pairs.
@@ -62,11 +64,11 @@ export default function VLMsForUnderstanding() {
 
                 {/* MetaCLIP */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://arxiv.org/abs/2309.16671" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             MetaCLIP
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2309.16671" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Demystifying CLIP Data</a> by Xu et al. from FAIR Meta, NYU, and the University of Washington, MetaCLIP focuses on the Contrastive Language-Image Pre-training (CLIP) approach, which has significantly advanced research in computer vision. The authors believe the key to CLIP's success lies in its data curation rather than its model architecture or pre-training objective.
@@ -106,11 +108,11 @@ export default function VLMsForUnderstanding() {
 
                 {/* Alpha-CLIP */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://arxiv.org/abs/2312.03818" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             Alpha-CLIP
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2312.03818" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Alpha-CLIP: A CLIP Model Focusing on Wherever You Want</a>.
@@ -177,11 +179,11 @@ export default function VLMsForUnderstanding() {
 
                 {/* GLIP */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://arxiv.org/abs/2112.03857" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             GLIP
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2112.03857" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Grounded Language-Image Pre-training (GLIP)</a>.
@@ -239,11 +241,11 @@ export default function VLMsForUnderstanding() {
 
                 {/* ImageBind */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://arxiv.org/abs/2305.05665" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             ImageBind
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2305.05665" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">ImageBind: One Embedding Space To Bind Them All</a> by Girdhar et al. from Meta in CVPR 2023, ImageBind is an approach to learn a joint embedding across six different modalities - images, text, audio, depth, thermal, and IMU data.
@@ -277,11 +279,11 @@ export default function VLMsForUnderstanding() {
 
                 {/* SigLIP */}
                 <div>
-                    <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <Header4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                         <a href="https://arxiv.org/abs/2303.15343" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
                             SigLIP
                         </a>
-                    </h4>
+                    </Header4>
                     <ul className="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-300">
                         <li>
                             Proposed in <a href="https://arxiv.org/abs/2303.15343" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Sigmoid Loss for Language Image Pre-Training</a> by Zhai et al. from Google DeepMind, SigLIP (short for Sigmoid CLIP) is a novel approach to language-image pre-training, by proposing to replace the loss function used in CLIP by a simple pairwise Sigmoid loss. Put simply, SigLIP introduces a Sigmoid loss, contrasting with the softmax normalization used in OpenAI's CLIP, a prior breakthrough in image-text understanding. The pairwise Sigmoid results in better performance in terms of zero-shot classification accuracy on ImageNet.

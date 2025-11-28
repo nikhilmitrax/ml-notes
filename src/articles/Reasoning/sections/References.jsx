@@ -1,12 +1,13 @@
 import React from 'react';
 import { Database } from 'lucide-react';
 import Section from '../../../components/Section';
+import Paragraph from '../../../components/Paragraph';
 
 export default function References() {
     return (
         <Section title="References" icon={Database}>
             <div className="space-y-4 text-sm text-slate-600">
-                <p><strong>Key Papers:</strong></p>
+                <Paragraph><strong>Key Papers:</strong></Paragraph>
                 <ul className="list-disc pl-6 space-y-1">
                     <li>Wei et al. (2022). <em>Chain-of-Thought Prompting Elicits Reasoning in Large Language Models</em>.</li>
                     <li>Wang et al. (2022). <em>Self-Consistency Improves Chain-of-Thought Reasoning</em>.</li>

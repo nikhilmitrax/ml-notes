@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
+import Paragraph from '../../components/Paragraph';
 import { STEPS } from './constants';
 
 const Controls = ({ stepIndex, setStepIndex, kValue, setKValue }) => {
@@ -17,9 +18,9 @@ const Controls = ({ stepIndex, setStepIndex, kValue, setKValue }) => {
                         </div>
                         <h2 className="text-xl font-bold">{step.title}</h2>
                     </div>
-                    <p className="text-slate-600 leading-relaxed">
+                    <Paragraph className="text-slate-600 leading-relaxed">
                         {step.description}
-                    </p>
+                    </Paragraph>
 
                     {/* K-Value Slider (Only for relevant steps) */}
                     {(step.id === 'autoencoder' || step.id === 'comparison') && (

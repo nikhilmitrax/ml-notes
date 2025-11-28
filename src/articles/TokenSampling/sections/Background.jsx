@@ -3,10 +3,14 @@ import { List as ListIcon, Play, RotateCcw } from 'lucide-react';
 import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
 import EquationBlock from '../../../components/EquationBlock';
+
 import Header3 from '../../../components/Header3';
+import Header4 from '../../../components/Header4';
+import Paragraph from '../../../components/Paragraph';
 import List from '../../../components/List';
 import ListItem from '../../../components/ListItem';
 import InteractiveCard from '../../../components/InteractiveCard';
+import SideBySide from '../../../components/SideBySide';
 
 const AutoregressiveVisualizer = () => {
     const fullText = "The quick brown fox jumps over the lazy dog";
@@ -130,9 +134,9 @@ const SoftmaxVisualizer = () => {
 
     return (
         <div className="flex flex-col gap-6 p-4 bg-slate-50 rounded-lg border border-slate-200">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <SideBySide className="gap-8">
                 <div className="space-y-4">
-                    <h4 className="text-sm font-semibold text-slate-700">Input Logits (z)</h4>
+                    <Header4 className="text-sm font-semibold text-slate-700 mt-0 mb-0">Input Logits (z)</Header4>
                     {logits.map((logit, i) => (
                         <div key={i} className="flex items-center gap-2">
                             <span className="text-xs font-mono w-16">{labels[i]}</span>
@@ -151,7 +155,7 @@ const SoftmaxVisualizer = () => {
                 </div>
 
                 <div className="space-y-4">
-                    <h4 className="text-sm font-semibold text-slate-700">Output Probabilities (Softmax)</h4>
+                    <Header4 className="text-sm font-semibold text-slate-700 mt-0 mb-0">Output Probabilities (Softmax)</Header4>
                     {probabilities.map((prob, i) => (
                         <div key={i} className="space-y-1">
                             <div className="flex justify-between text-xs">
@@ -167,10 +171,10 @@ const SoftmaxVisualizer = () => {
                         </div>
                     ))}
                 </div>
-            </div>
-            <p className="text-xs text-slate-500">
+            </SideBySide>
+            <Paragraph variant="caption" className="mb-0">
                 Adjust the logits to see how the Softmax function normalizes them into a probability distribution that sums to 1. Notice how increasing one logit decreases the probabilities of others.
-            </p>
+            </Paragraph>
         </div>
     );
 };

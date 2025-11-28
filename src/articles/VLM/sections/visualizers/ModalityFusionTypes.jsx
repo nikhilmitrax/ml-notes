@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Layers, Image as ImageIcon, Type, ArrowRight, GitMerge } from 'lucide-react';
+import Header4 from '../../../../components/Header4';
 
 const FusionType = ({ type, isActive, onClick }) => (
     <button
@@ -39,7 +40,7 @@ const descriptions = {
             <strong className="block mb-2 text-blue-600 dark:text-blue-400">Early Fusion</strong>
             In this approach, visual and textual inputs are combined at an <em>early stage</em>, often before any deep processing.
             <ul className="list-disc list-inside mt-2 text-left pl-4">
-                <li>Concatenates raw features</li>
+                <li>Concatenates low-level features or shallow embeddings</li>
                 <li>Embeds both into a shared space immediately</li>
             </ul>
         </>
@@ -63,10 +64,10 @@ export default function ModalityFusionTypes() {
 
     return (
         <div className="my-8 p-6 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800">
-            <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
+            <Header4 className="flex items-center gap-2 text-gray-800 dark:text-white">
                 <GitMerge className="w-5 h-5" />
                 Fusion Architectures
-            </h4>
+            </Header4>
 
             <div className="flex gap-2 mb-8 justify-center">
                 {['Early', 'Intermediate', 'Late'].map((type) => (
@@ -144,14 +145,14 @@ export default function ModalityFusionTypes() {
                                     <Arrow />
                                     <Block label="Vision Model" />
                                     <Arrow />
-                                    <Block label="Pred A" />
+                                    <Block label="Scores or Embeddings" />
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <Block label="Text" icon={Type} />
                                     <Arrow />
                                     <Block label="Lang Model" />
                                     <Arrow />
-                                    <Block label="Pred B" />
+                                    <Block label="Scores or Embeddings" />
                                 </div>
                             </div>
                             <Arrow />

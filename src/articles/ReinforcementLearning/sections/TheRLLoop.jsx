@@ -3,6 +3,9 @@ import { Activity, Target, AlertTriangle, RotateCcw } from 'lucide-react';
 import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
 import InteractiveCard from '../../../components/InteractiveCard';
+import Header3 from '../../../components/Header3';
+import Paragraph from '../../../components/Paragraph';
+import SideBySide from '../../../components/SideBySide';
 
 const GridWorld = () => {
     const [agentPos, setAgentPos] = useState({ x: 0, y: 0 });
@@ -155,9 +158,9 @@ const GridWorld = () => {
                     )}
                 </div>
             </div>
-            <p className="text-xs text-slate-500 max-w-md text-center">
+            <Paragraph variant="caption" className="max-w-md text-center">
                 <strong>Rules:</strong> Start at (0,0). Reach the Goal <Target className="inline w-3 h-3" /> for +10. Avoid the Pit <AlertTriangle className="inline w-3 h-3" /> (-10). Each step costs -1 (to encourage shortest path).
-            </p>
+            </Paragraph>
         </div>
     );
 };
@@ -165,33 +168,33 @@ const GridWorld = () => {
 const TheRLLoop = () => {
     return (
         <Section title="The RL Loop" icon={Activity}>
-            <p className="mb-6 leading-relaxed text-slate-700 dark:text-slate-300">
+            <Paragraph className="mb-6">
                 At the core of RL is the interaction loop: The Agent observes the <strong>State</strong> <Equation>S_t</Equation>, takes an <strong>Action</strong> <Equation>A_t</Equation>,
                 and receives a <strong>Reward</strong> <Equation>R_t</Equation> and the next State <Equation>{`S_{t+1}`}</Equation>.
-            </p>
+            </Paragraph>
 
             <InteractiveCard title="Interactive Grid World Environment">
                 <GridWorld />
             </InteractiveCard>
 
-            <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <SideBySide className="mt-6">
                 <div className="p-4 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
-                    <h3 className="font-semibold text-slate-900 dark:text-white mb-2">Agent</h3>
-                    <p className="text-sm text-slate-600 dark:text-slate-400">The learner or decision-maker (the blue dot).</p>
+                    <Header3 className="mt-0 mb-2">Agent</Header3>
+                    <Paragraph variant="small">The learner or decision-maker (the blue dot).</Paragraph>
                 </div>
                 <div className="p-4 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
-                    <h3 className="font-semibold text-slate-900 dark:text-white mb-2">Environment</h3>
-                    <p className="text-sm text-slate-600 dark:text-slate-400">The world the agent interacts with (the grid, walls, pits).</p>
+                    <Header3 className="mt-0 mb-2">Environment</Header3>
+                    <Paragraph variant="small">The world the agent interacts with (the grid, walls, pits).</Paragraph>
                 </div>
                 <div className="p-4 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
-                    <h3 className="font-semibold text-slate-900 dark:text-white mb-2">State (<Equation>s</Equation>)</h3>
-                    <p className="text-sm text-slate-600 dark:text-slate-400">A specific situation or configuration (e.g., coordinates x, y).</p>
+                    <Header3 className="mt-0 mb-2">State (<Equation>s</Equation>)</Header3>
+                    <Paragraph variant="small">A specific situation or configuration (e.g., coordinates x, y).</Paragraph>
                 </div>
                 <div className="p-4 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
-                    <h3 className="font-semibold text-slate-900 dark:text-white mb-2">Reward (<Equation>r</Equation>)</h3>
-                    <p className="text-sm text-slate-600 dark:text-slate-400">Feedback signal indicating success or failure (+10, -10, -1).</p>
+                    <Header3 className="mt-0 mb-2">Reward (<Equation>r</Equation>)</Header3>
+                    <Paragraph variant="small">Feedback signal indicating success or failure (+10, -10, -1).</Paragraph>
                 </div>
-            </div>
+            </SideBySide>
         </Section>
     );
 };

@@ -3,6 +3,8 @@ import { Box, ArrowRight, ArrowLeft, Database, Layers, Zap, Activity, Archive } 
 import { motion, AnimatePresence } from 'framer-motion';
 import Section from '../../../components/Section';
 import InteractiveCard from '../../../components/InteractiveCard';
+import Equation from '../../../components/Equation';
+import Paragraph from '../../../components/Paragraph';
 
 // --- Simulation Hook ---
 
@@ -329,6 +331,30 @@ const TypicalTraining = () => {
         <Section title="Typical Training Workflow" icon={Box}>
             <InteractiveCard title="Typical Training Workflow">
                 <TrainingWorkflow />
+                <div className="mt-6 text-slate-700 space-y-4">
+                    <Paragraph>
+                        Training a Large Language Model (or any deep neural network) involves a repetitive cycle of four key steps:
+                    </Paragraph>
+                    <ul className="list-disc pl-5 space-y-2">
+                        <li>
+                            <strong>Forward Pass:</strong> Input tokens are processed layer by layer. Each layer computes <strong>activations</strong> based on its weights and the previous layer's output. These activations must be stored in memory for the backward pass.
+                        </li>
+                        <li>
+                            <strong>Backward Pass:</strong> Starting from the loss, we compute <strong>gradients</strong> for every parameter. This step traverses the layers in reverse order. The gradients indicate how much each weight contributed to the error.
+                        </li>
+                        <li>
+                            <strong>Optimizer State Update:</strong> Before updating the weights, the optimizer updates its own internal state. For a sophisticated optimizer like <strong>Adam</strong> (Adaptive Moment Estimation), this involves maintaining two extra values for every single parameter:
+                            <ul className="list-circle pl-5 mt-1 text-slate-600">
+                                <li><strong>First Moment (<Equation>m</Equation>):</strong> An exponential moving average of gradients (momentum).</li>
+                                <li><strong>Second Moment (<Equation>v</Equation>):</strong> An exponential moving average of squared gradients (variance).</li>
+                            </ul>
+                            <span className="text-sm italic block mt-1">These states consume significant memory—often more than the weights themselves!</span>
+                        </li>
+                        <li>
+                            <strong>Weight Update:</strong> Finally, the weights are updated using the gradients and the optimizer state. The memory used for activations and gradients can then be freed for the next batch.
+                        </li>
+                    </ul>
+                </div>
             </InteractiveCard>
         </Section >
     );
