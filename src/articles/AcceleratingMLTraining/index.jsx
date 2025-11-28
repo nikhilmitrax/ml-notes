@@ -3,6 +3,8 @@ import Article from '../../components/Article';
 import Overview from './sections/Overview';
 import CollectiveCommunication from './sections/CollectiveCommunication';
 import TypicalTraining from './sections/TypicalTraining';
+import GradientCheckpointing from './sections/GradientCheckpointing';
+import GradientAccumulation from './sections/GradientAccumulation';
 
 import Callout from '../../components/Callout';
 
@@ -18,6 +20,8 @@ const AcceleratingMLTraining = () => {
 
             <Overview />
             <TypicalTraining />
+            <GradientCheckpointing />
+            <GradientAccumulation />
             <CollectiveCommunication />
         </Article>
     );

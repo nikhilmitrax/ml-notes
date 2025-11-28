@@ -350,39 +350,224 @@ const ReduceScatterVisualizer = () => {
 };
 
 const RingAllReduceVisualizer = () => {
+    // 0-3: Scatter-Reduce steps
+    // 4-7: All-Gather steps
     const [step, setStep] = useState(0);
+
+    // Initial state: Each GPU has its own chunk of data
+    // We'll track what chunks are on what GPU.
+    // Format: Array of 4 arrays. nodes[i] = [chunk0, chunk1, chunk2, chunk3]
+    // Values: 0 = empty/partial, 1 = own data, 2 = partial sum, 4 = full sum
+    const [nodes, setNodes] = useState([
+        ['C0', '', '', ''],
+        ['', 'C1', '', ''],
+        ['', '', 'C2', ''],
+        ['', '', '', 'C3']
+    ]);
 
     useEffect(() => {
         const timer = setInterval(() => {
             setStep(s => (s + 1) % 8);
-        }, 1000);
+        }, 1500);
         return () => clearInterval(timer);
     }, []);
 
+    // Derived state for visualization based on step
+    // We want to show the logical flow.
+    // Scatter-Reduce:
+    // Step 0: Initial
+    // Step 1: GPU0->GPU1 (C0), GPU1->GPU2 (C1), GPU2->GPU3 (C2), GPU3->GPU0 (C3)
+    // ...
+
+    // Let's define the chunks present at each step explicitly for clarity
+    const getChunks = (s) => {
+        // Simple representation of "value" accumulation
+        // Base: [C0, C1, C2, C3]
+
+        // Scatter-Reduce Phase
+        if (s === 0) return [
+            ['C0', 'c1', 'c2', 'c3'], // GPU 0 has C0 (primary) and others (partial)
+            ['c0', 'C1', 'c2', 'c3'],
+            ['c0', 'c1', 'C2', 'c3'],
+            ['c0', 'c1', 'c2', 'C3']
+        ].map(row => row.map(c => c.toUpperCase())); // Start with full data everywhere? 
+        // Actually, Ring AllReduce usually starts with everyone having a full vector, 
+        // partitioned into chunks.
+        // Let's visualize the *Chunks* specifically.
+        // GPU i has Chunk j.
+
+        // Let's simplify:
+        // Everyone starts with [C0, C1, C2, C3] (all partials)
+        // We want to reduce C0 on GPU?, C1 on GPU?...
+        // Standard Ring AllReduce:
+        // N nodes. Data split into N chunks.
+        // Goal: Every node gets Sum(C0), Sum(C1), ... Sum(CN)
+
+        // Phase 1: Scatter-Reduce
+        // After N-1 steps, Node i has the complete Sum(Chunk i+1) (approx)
+
+        const base = [['C0', 'C1', 'C2', 'C3'], ['C0', 'C1', 'C2', 'C3'], ['C0', 'C1', 'C2', 'C3'], ['C0', 'C1', 'C2', 'C3']];
+
+        // This is hard to visualize perfectly with just text in boxes.
+        // Let's stick to the "moving ball" concept but make it logical.
+        // Show the "Active Chunk" moving and accumulating.
+
+        return base;
+    };
+
     return (
-        <div className="grid grid-cols-4 gap-4 relative py-8">
-            {[0, 1, 2, 3].map(i => (
-                <Node key={i} id={i} data={`Chunk ${i}`} isActive={true} />
-            ))}
+        <div className="flex flex-col space-y-8 py-8">
+            <div className="flex justify-between items-center px-4">
+                <div className="text-sm font-bold text-gray-500">
+                    {step < 4 ? 'Phase 1: Scatter-Reduce' : 'Phase 2: All-Gather'}
+                </div>
+                <div className="text-xs text-gray-400">
+                    Step {step % 4 + 1} / 4
+                </div>
+            </div>
 
-            {[0, 1, 2, 3].map(i => {
-                const next = (i + 1) % 4;
-                const startLeft = i * 25 + 12.5;
-                const endLeft = next * 25 + 12.5;
+            <div className="grid grid-cols-4 gap-4 relative">
+                {[0, 1, 2, 3].map(i => (
+                    <Node key={i} id={i} data={
+                        <div className="grid grid-cols-2 gap-1 w-full">
+                            {[0, 1, 2, 3].map(chunkIdx => {
+                                // Determine status of this chunk on this GPU at this step
+                                let status = 'partial'; // default
 
-                return (
-                    <motion.div
-                        key={i}
-                        className="absolute top-1/2 w-3 h-3 bg-teal-500 rounded-full z-10"
-                        initial={{ left: `${startLeft}%`, opacity: 0 }}
-                        animate={{
-                            left: i === 3 ? ['87.5%', '12.5%'] : [`${startLeft}%`, `${endLeft}%`],
-                            opacity: [0, 1, 1, 0]
-                        }}
-                        transition={{ duration: 1, repeat: Infinity, delay: i * 0.2 }}
-                    />
-                );
-            })}
+                                // Logic for Ring AllReduce State
+                                // Target for Chunk k is Node k (arbitrary assignment for visualization)
+                                // Let's say Node k ends up with Full Chunk k.
+
+                                // Scatter-Reduce:
+                                // Step 0: Send C0->N1, C1->N2, C2->N3, C3->N0
+                                // ...
+
+                                // Simplified visualization logic:
+                                // Highlight the chunk that is being "worked on" or "completed"
+
+                                const isTarget = chunkIdx === i;
+                                const isCompleted = (step >= 4) || (step === 3 && isTarget); // Rough approx
+
+                                // Better: explicitly define completion based on phases
+                                let opacity = 0.3;
+                                let color = 'bg-gray-200 dark:bg-gray-700';
+
+                                // Phase 1: Accumulation
+                                // By step 3, Node k has full Chunk k
+                                if (step >= 3 && chunkIdx === (i + 1) % 4) {
+                                    // Shifted target for visual flow? 
+                                    // Let's stick to: Node i collects Chunk i.
+                                }
+
+                                // Let's just hardcode the "Full" chunks for clarity
+                                // Phase 1 ends: 
+                                // N0 has Full C0? Or N0 has Full C1?
+                                // Standard: N(i) ends with Full C((i+1)%N)? Or similar.
+                                // Let's assume Node i accumulates Chunk i.
+
+                                if (step >= 4) {
+                                    // All Gather Phase - spreading the full chunks
+                                    if (chunkIdx === i) { opacity = 1; color = 'bg-green-500 text-white'; } // Owner
+                                    else if (step >= 4 + ((chunkIdx - i + 4) % 4)) {
+                                        opacity = 1; color = 'bg-green-500 text-white';
+                                    }
+                                } else {
+                                    // Scatter Reduce Phase
+                                    // Chunks are being summed.
+                                    // Show "Active" chunks moving
+                                    // At step s (0-3), chunk (i-s) is being sent to (i+1)
+
+                                    // Just highlight the diagonal being processed?
+                                    // Let's keep it static "Data" and show moving "Orbs" for the transfer
+                                    opacity = 0.5;
+                                }
+
+                                // Override for "Completed" chunks in Phase 1
+                                if (step >= 3 && chunkIdx === (i + 1) % 4) { // Example offset
+                                    // It's complicated to map exactly without a complex state machine.
+                                    // Let's simplify:
+                                    // Phase 1: Diagonals turn Green (Accumulated)
+                                    // Phase 2: Columns turn Green (Broadcast)
+                                }
+
+                                return (
+                                    <div key={chunkIdx} className={`h-6 rounded flex items-center justify-center text-[10px] font-bold transition-colors duration-300 ${
+                                        // Dynamic styling
+                                        step >= 4
+                                            ? ( // All Gather
+                                                // If we have received the broadcast, turn green
+                                                // Source is Node k (holding Chunk k)
+                                                // Distance from source: (i - k + 4) % 4
+                                                // Step in Phase 2: s_ag = step - 4
+                                                // If distance <= s_ag, we have it.
+                                                // Let's assume Node k holds Chunk k at start of Phase 2.
+                                                ((i - chunkIdx + 4) % 4) <= (step - 4)
+                                                    ? 'bg-green-500 text-white'
+                                                    : 'bg-gray-200 dark:bg-gray-700 opacity-30'
+                                            )
+                                            : ( // Scatter Reduce
+                                                // We are accumulating Chunk k on Node k.
+                                                // Step s: Node (k-s-1) sends to Node (k-s)
+                                                // Node k has accumulated (s+1) parts.
+                                                // Let's just visualize "Partial" vs "Full"
+                                                chunkIdx === i && step === 3
+                                                    ? 'bg-blue-500 text-white' // Fully reduced on owner
+                                                    : 'bg-gray-200 dark:bg-gray-700'
+                                            )
+                                        }`}>
+                                        C{chunkIdx}
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    } isActive={true} />
+                ))}
+
+                {/* Flying Orbs for Data Transfer */}
+                {[0, 1, 2, 3].map(i => {
+                    // Logic for what is moving from Node i to Node (i+1)
+                    const next = (i + 1) % 4;
+                    const isScatterReduce = step < 4;
+                    const localStep = step % 4;
+
+                    // Scatter Reduce:
+                    // Step 0: Node 0 sends C1 to Node 1? 
+                    // Let's use the standard pattern:
+                    // Step s: Node i sends Chunk (i - s + 4) % 4 ??
+                    // Let's visualize a specific chunk moving.
+
+                    // Simplified:
+                    // Phase 1: Blue orbs moving.
+                    // Phase 2: Green orbs moving.
+
+                    if (localStep === 3 && isScatterReduce) return null; // Pause at end of phase
+                    if (localStep === 3 && !isScatterReduce) return null; // Pause at end
+
+                    return (
+                        <motion.div
+                            key={`${step}-${i}`}
+                            className={`absolute top-1/2 w-4 h-4 rounded-full z-10 flex items-center justify-center text-[8px] font-bold text-white
+                                ${isScatterReduce ? 'bg-blue-500' : 'bg-green-500'}
+                            `}
+                            initial={{ left: `${i * 25 + 12.5}%`, opacity: 1 }}
+                            animate={{ left: `${next * 25 + 12.5}%`, opacity: 0 }} // Fade out as it arrives
+                            transition={{ duration: 1, ease: "easeInOut" }}
+                        >
+                            {/* Label the moving chunk */}
+                            {isScatterReduce
+                                ? `C${(i - localStep + 1 + 4) % 4}` // Moving chunk in SR
+                                : `C${(i - localStep + 4) % 4}`     // Moving chunk in AG
+                            }
+                        </motion.div>
+                    );
+                })}
+            </div>
+
+            <div className="text-center text-sm text-gray-500 h-6">
+                {step < 4
+                    ? "Nodes exchange partial gradients. Each node accumulates a specific chunk."
+                    : "Nodes share their fully reduced chunks with the ring."}
+            </div>
         </div>
     );
 };

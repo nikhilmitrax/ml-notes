@@ -1,25 +1,25 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Box, ArrowRight, ArrowLeft, Database, Layers, Zap, Activity, Archive, ArrowUp, ArrowDown } from 'lucide-react';
+import { Box, ArrowRight, ArrowLeft, Database, Layers, Zap, Activity, Archive, RefreshCw } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Section from '../../../components/Section';
 import InteractiveCard from '../../../components/InteractiveCard';
 import Equation from '../../../components/Equation';
 import Paragraph from '../../../components/Paragraph';
 import AnimationControls from '../../../components/AnimationControls';
-import List from '../../../components/List';
-import ListItem from '../../../components/ListItem';
 
 // --- Simulation Hook ---
 
 const NUM_LAYERS = 6;
-const DELAY_FAST = 400;
-const DELAY_NORMAL = 800;
-const DELAY_LONG = 1500;
+const CHECKPOINT_INTERVAL = 3; // Checkpoint every 3 layers (0, 3)
+const DELAY_FAST = 300;
+const DELAY_NORMAL = 600;
+const DELAY_LONG = 1200;
 
 const useTrainingSimulation = () => {
-    // Phase: 'idle', 'forward', 'backward', 'update'
+    // Phase: 'idle', 'forward', 'backward', 'recompute', 'update'
     const [phase, setPhase] = useState('idle');
     const [activeLayerIndex, setActiveLayerIndex] = useState(-1);
+    const [recomputeStartIndex, setRecomputeStartIndex] = useState(-1);
     const [isPlaying, setIsPlaying] = useState(true);
     const isPlayingRef = React.useRef(isPlaying);
     const [resetTrigger, setResetTrigger] = useState(0);
@@ -29,12 +29,11 @@ const useTrainingSimulation = () => {
     }, [isPlaying]);
 
     // State for each layer's memory components
-    // Each layer has: weights (always present), activations (present/absent), gradients (present/absent), optimizerState (always present)
     const [layers, setLayers] = useState(() =>
         Array.from({ length: NUM_LAYERS }).map((_, i) => ({
             id: i,
             weights: { version: 0, highlighted: false },
-            activations: { present: false, highlighted: false },
+            activations: { present: false, highlighted: false, isCheckpoint: false },
             gradients: { present: false, highlighted: false },
             optimizerState: { version: 0, highlighted: false }
         }))
@@ -52,7 +51,7 @@ const useTrainingSimulation = () => {
 
     const reset = useCallback(() => {
         setResetTrigger(prev => prev + 1);
-        setIsPlaying(true); // Auto-play on reset? Or stay paused? Let's auto-play.
+        setIsPlaying(true);
     }, []);
 
     useEffect(() => {
@@ -82,10 +81,11 @@ const useTrainingSimulation = () => {
             // --- 1. Idle / Reset ---
             setPhase('idle');
             setActiveLayerIndex(-1);
-            // Reset activations and gradients, keep weights and optimizer state
+            setRecomputeStartIndex(-1);
+
             updateAllLayers(l => ({
                 ...l,
-                activations: { present: false, highlighted: false },
+                activations: { present: false, highlighted: false, isCheckpoint: false },
                 gradients: { present: false, highlighted: false },
                 weights: { ...l.weights, highlighted: false },
                 optimizerState: { ...l.optimizerState, highlighted: false }
@@ -93,54 +93,97 @@ const useTrainingSimulation = () => {
             await wait(DELAY_LONG);
             if (isCancelled) return;
 
-            // --- 2. Forward Pass ---
+            // --- 2. Forward Pass (with Checkpointing) ---
             setPhase('forward');
             for (let i = 0; i < NUM_LAYERS; i++) {
                 if (isCancelled) return;
                 setActiveLayerIndex(i);
 
-                // Create activation
+                const isCheckpoint = i % CHECKPOINT_INTERVAL === 0;
+
+                // Compute activation
                 updateLayer(i, {
-                    activations: { present: true, highlighted: true }
+                    activations: { present: true, highlighted: true, isCheckpoint }
                 });
 
                 await wait(DELAY_NORMAL);
 
-                // Dim activation highlight
-                updateLayer(i, {
-                    activations: { present: true, highlighted: false }
-                });
+                // If NOT a checkpoint, discard it immediately to save memory
+                if (!isCheckpoint) {
+                    updateLayer(i, {
+                        activations: { present: false, highlighted: false, isCheckpoint: false }
+                    });
+                } else {
+                    // Keep checkpoint
+                    updateLayer(i, {
+                        activations: { present: true, highlighted: false, isCheckpoint: true }
+                    });
+                }
             }
             if (isCancelled) return;
-            setActiveLayerIndex(-1); // Finished forward
+            setActiveLayerIndex(-1);
             await wait(DELAY_FAST);
 
-            // --- 3. Backward Pass ---
+            // --- 3. Backward Pass (with Recomputation) ---
             setPhase('backward');
             for (let i = NUM_LAYERS - 1; i >= 0; i--) {
                 if (isCancelled) return;
                 setActiveLayerIndex(i);
 
-                // Create gradient
+                // Check if we have the activation
+                // In our simulation, we know exactly which ones are missing (non-checkpoints)
+                const isCheckpoint = i % CHECKPOINT_INTERVAL === 0;
+
+                if (!isCheckpoint) {
+                    // --- Recompute Phase ---
+                    setPhase('recompute');
+                    // Find nearest checkpoint start
+                    const start = Math.floor(i / CHECKPOINT_INTERVAL) * CHECKPOINT_INTERVAL;
+                    setRecomputeStartIndex(start);
+
+                    // Re-run forward from start to i
+                    for (let r = start; r <= i; r++) {
+                        if (isCancelled) return;
+                        // Temporarily show activation
+                        updateLayer(r, {
+                            activations: { present: true, highlighted: true, isCheckpoint: r % CHECKPOINT_INTERVAL === 0 }
+                        });
+                        await wait(DELAY_FAST);
+                        // Dim it but keep it until we are done with this segment
+                        updateLayer(r, {
+                            activations: { present: true, highlighted: false, isCheckpoint: r % CHECKPOINT_INTERVAL === 0 }
+                        });
+                    }
+                    setPhase('backward'); // Back to backward
+                    setRecomputeStartIndex(-1);
+                }
+
+                // Now we have activation, compute gradient
                 updateLayer(i, {
                     gradients: { present: true, highlighted: true }
                 });
 
                 await wait(DELAY_NORMAL);
 
-                // Dim gradient highlight
+                // Dim gradient
                 updateLayer(i, {
                     gradients: { present: true, highlighted: false }
                 });
+
+                // If this was a recomputed (non-checkpoint) activation, we can discard it now?
+                // In real implementations, we discard it after using it.
+                if (!isCheckpoint) {
+                    updateLayer(i, {
+                        activations: { present: false, highlighted: false, isCheckpoint: false }
+                    });
+                }
             }
             if (isCancelled) return;
-            setActiveLayerIndex(-1); // Finished backward
+            setActiveLayerIndex(-1);
             await wait(DELAY_FAST);
 
-            // --- 4. Optimizer Step (Update Weights) ---
+            // --- 4. Optimizer Step ---
             setPhase('update');
-
-            // Highlight weights and optimizer state to show update
             updateAllLayers(l => ({
                 ...l,
                 weights: { ...l.weights, highlighted: true, version: l.weights.version + 1 },
@@ -149,18 +192,16 @@ const useTrainingSimulation = () => {
 
             await wait(DELAY_LONG);
 
-            // Clear gradients and activations (memory freed), dim weights/optimizer
+            // Cleanup
             updateAllLayers(l => ({
                 ...l,
                 weights: { ...l.weights, highlighted: false },
                 optimizerState: { ...l.optimizerState, highlighted: false },
-                activations: { present: false, highlighted: false },
+                activations: { present: false, highlighted: false, isCheckpoint: false },
                 gradients: { present: false, highlighted: false }
             }));
 
             if (isCancelled) return;
-
-            // Loop
             runCycle();
         };
 
@@ -169,14 +210,14 @@ const useTrainingSimulation = () => {
         return () => {
             isCancelled = true;
         };
-    }, [updateLayer, updateAllLayers, resetTrigger]); // Re-run on resetTrigger
+    }, [updateLayer, updateAllLayers, resetTrigger]);
 
-    return { phase, layers, activeLayerIndex, isPlaying, setIsPlaying, reset };
+    return { phase, layers, activeLayerIndex, recomputeStartIndex, isPlaying, setIsPlaying, reset };
 };
 
 // --- Components ---
 
-const MemoryBlock = React.forwardRef(({ label, color, active, icon: Icon }, ref) => (
+const MemoryBlock = React.forwardRef(({ label, color, active, icon: Icon, dashed = false }, ref) => (
     <motion.div
         ref={ref}
         initial={{ scale: 0, opacity: 0 }}
@@ -189,10 +230,11 @@ const MemoryBlock = React.forwardRef(({ label, color, active, icon: Icon }, ref)
         className={`
             w-full h-6 rounded flex items-center justify-between px-1.5 text-[9px] font-bold border
             ${active ? 'shadow-sm' : ''}
+            ${dashed ? 'border-dashed border-2' : ''}
         `}
         style={{
-            backgroundColor: active ? color : '#f1f5f9', // slate-100 for inactive
-            color: active ? '#fff' : '#94a3b8', // slate-400 for inactive
+            backgroundColor: active ? color : '#f1f5f9',
+            color: active ? '#fff' : '#94a3b8',
             borderColor: active ? 'rgba(0,0,0,0.1)' : 'transparent'
         }}
     >
@@ -206,7 +248,6 @@ const MemoryBlock = React.forwardRef(({ label, color, active, icon: Icon }, ref)
 const LayerNode = ({ layer, phase, isActive }) => {
     return (
         <div className="relative flex flex-col items-center gap-2">
-            {/* Layer Box */}
             <motion.div
                 className="w-24 bg-white rounded-lg border border-slate-200 shadow-sm p-2 flex flex-col gap-1.5"
                 animate={{
@@ -219,45 +260,42 @@ const LayerNode = ({ layer, phase, isActive }) => {
                     {layer.weights.highlighted && <Zap size={10} className="text-emerald-500 fill-emerald-500" />}
                 </div>
 
-                {/* Weights (Always present) */}
                 <MemoryBlock
                     label="Weights"
-                    color="#10b981" // emerald-500
+                    color="#10b981"
                     active={true}
                     icon={Database}
                 />
 
-                {/* Optimizer State (Always present) */}
                 <MemoryBlock
                     label="Opt State"
-                    color="#8b5cf6" // violet-500
+                    color="#8b5cf6"
                     active={true}
                     icon={Archive}
                 />
 
-                {/* Activations (Transient) */}
-                <div className="h-6 w-full"> {/* Placeholder to prevent layout shift if we wanted fixed height, but here we stack */}
+                <div className="h-6 w-full">
                     <AnimatePresence mode='popLayout'>
                         {layer.activations.present && (
                             <MemoryBlock
                                 key="act"
-                                label="Activations"
-                                color="#06b6d4" // cyan-500
-                                active={true} // Always colored if present
+                                label={layer.activations.isCheckpoint ? "Checkpoint" : "Activation"}
+                                color={layer.activations.isCheckpoint ? "#0e7490" : "#06b6d4"} // Darker cyan for checkpoint
+                                active={true}
                                 icon={Activity}
+                                dashed={!layer.activations.isCheckpoint} // Dashed for temporary recomputed ones
                             />
                         )}
                     </AnimatePresence>
                 </div>
 
-                {/* Gradients (Transient) */}
                 <div className="h-6 w-full">
                     <AnimatePresence mode='popLayout'>
                         {layer.gradients.present && (
                             <MemoryBlock
                                 key="grad"
                                 label="Gradients"
-                                color="#f97316" // orange-500
+                                color="#f97316"
                                 active={true}
                                 icon={Layers}
                             />
@@ -277,11 +315,11 @@ const ConnectionArrow = ({ active, direction = 'right', color = 'text-slate-300'
     );
 };
 
-const TrainingWorkflow = () => {
-    const { phase, layers, activeLayerIndex, isPlaying, setIsPlaying, reset } = useTrainingSimulation();
+const GradientCheckpointingWorkflow = () => {
+    const { phase, layers, activeLayerIndex, recomputeStartIndex, isPlaying, setIsPlaying, reset } = useTrainingSimulation();
 
     return (
-        <div className="relative p-8 my-4 bg-slate-50 rounded-xl overflow-hidden flex flex-col items-center gap-8 font-sans select-none min-h-[400px] justify-center">
+        <div className="relative p-8 bg-slate-50 rounded-xl overflow-hidden flex flex-col items-center gap-8 font-sans select-none min-h-[400px] justify-center">
             <AnimationControls
                 isPlaying={isPlaying}
                 onTogglePlay={() => setIsPlaying(!isPlaying)}
@@ -296,6 +334,9 @@ const TrainingWorkflow = () => {
                 <div className={`flex items-center gap-2 transition-colors duration-300 ${phase === 'backward' ? 'text-orange-500 font-bold' : 'text-gray-300'}`}>
                     <Layers size={16} /> Backward
                 </div>
+                <div className={`flex items-center gap-2 transition-colors duration-300 ${phase === 'recompute' ? 'text-blue-600 font-bold' : 'text-gray-300'}`}>
+                    <RefreshCw size={16} className={phase === 'recompute' ? 'animate-spin' : ''} /> Recompute
+                </div>
                 <div className={`flex items-center gap-2 transition-colors duration-300 ${phase === 'update' ? 'text-emerald-600 font-bold' : 'text-gray-300'}`}>
                     <Zap size={16} /> Update
                 </div>
@@ -303,7 +344,6 @@ const TrainingWorkflow = () => {
 
             {/* Pipeline */}
             <div className="flex items-center gap-1">
-                {/* Input */}
                 <div className="text-slate-300 px-2">Input</div>
                 <ConnectionArrow active={phase === 'forward' && activeLayerIndex === 0} direction="right" color="text-cyan-500" />
 
@@ -317,8 +357,8 @@ const TrainingWorkflow = () => {
                         {i < NUM_LAYERS - 1 && (
                             <div className="flex flex-col gap-1">
                                 {/* Forward Arrow */}
-                                <motion.div animate={{ opacity: phase === 'forward' && i === activeLayerIndex ? 1 : 0.1 }}>
-                                    <ArrowRight size={16} className="text-cyan-500" />
+                                <motion.div animate={{ opacity: (phase === 'forward' || phase === 'recompute') && i === activeLayerIndex ? 1 : 0.1 }}>
+                                    <ArrowRight size={16} className={phase === 'recompute' ? "text-blue-500" : "text-cyan-500"} />
                                 </motion.div>
                                 {/* Backward Arrow */}
                                 <motion.div animate={{ opacity: phase === 'backward' && i === activeLayerIndex ? 1 : 0.1 }}>
@@ -329,7 +369,6 @@ const TrainingWorkflow = () => {
                     </React.Fragment>
                 ))}
 
-                {/* Output / Loss */}
                 <div className="flex flex-col gap-1 ml-2">
                     <motion.div animate={{ opacity: phase === 'forward' && activeLayerIndex === -1 ? 1 : 0.1 }}>
                         <ArrowRight size={16} className="text-cyan-500" />
@@ -344,16 +383,12 @@ const TrainingWorkflow = () => {
             {/* Memory Legend */}
             <div className="flex gap-6 text-xs text-slate-500 mt-4">
                 <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded bg-emerald-500"></div>
-                    <span>Weights</span>
-                </div>
-                <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded bg-violet-500"></div>
-                    <span>Optimizer State</span>
+                    <div className="w-3 h-3 rounded bg-cyan-700"></div>
+                    <span>Checkpoint</span>
                 </div>
                 <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded bg-cyan-500"></div>
-                    <span>Activations</span>
+                    <span>Activation (Temp)</span>
                 </div>
                 <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded bg-orange-500"></div>
@@ -364,51 +399,36 @@ const TrainingWorkflow = () => {
     );
 };
 
-const TypicalTraining = () => {
+const GradientCheckpointing = () => {
     return (
-        <Section title="Typical Training Workflow" icon={Box}>
-            <InteractiveCard title="Typical Training Workflow">
+        <Section title="Gradient Checkpointing" icon={RefreshCw}>
+            <InteractiveCard title="Gradient Checkpointing">
                 <div className="mt-6 text-slate-700 space-y-4">
                     <Paragraph>
-                        Training a Large Language Model (or any deep neural network) involves a repetitive cycle of four key steps:
+                        As models grow deeper, storing all activations for the backward pass becomes a massive memory bottleneck. <strong>Gradient Checkpointing</strong> (also known as Activation Checkpointing) is a technique to trade <strong>compute for memory</strong>.
                     </Paragraph>
-
-                    <div className="p-3 bg-cyan-50 border border-cyan-100 rounded text-lg text-cyan-800">
-                        <div className='py-2 flex items-center gap-2'>
-                            <ArrowRight size={16} className="text-cyan-800" />
-                            <strong>Forward Pass</strong>
-                        </div>
-                        Input tokens are processed layer by layer. Each layer computes <strong>activations</strong> based on its weights and the previous layer's output. These activations must be stored in memory for the backward pass.
-                    </div>
-                    <div className="p-3 bg-orange-50 border border-orange-100 rounded text-lg text-orange-800">
-                        <div className='py-2 flex items-center gap-2'>
-                            <ArrowLeft size={16} className="text-orange-800" />
-                            <strong>Backward Pass</strong>
-                        </div>
-                        Starting from the loss, we compute <strong>gradients</strong> for every parameter. This step traverses the layers in reverse order. The gradients indicate how much each weight contributed to the error.
-                    </div>
-                    <div className="p-3 bg-violet-50 border border-violet-100 rounded text-lg !text-violet-800">
-                        <div className='py-2 flex items-center gap-2'>
-                            <ArrowUp size={16} className="text-violet-800" />
-                            <strong>Optimizer State Update</strong></div>
-
-                        Before updating the weights, the optimizer updates its own internal state. For a sophisticated optimizer like <strong>Adam</strong> (Adaptive Moment Estimation), this involves maintaining two extra values for every single parameter:
-                        <List>
-                            <ListItem><strong>First Moment (<Equation>m</Equation>):</strong> An exponential moving average of gradients (momentum).</ListItem>
-                            <ListItem><strong>Second Moment (<Equation>v</Equation>):</strong> An exponential moving average of squared gradients (variance).</ListItem>
-                        </List>
-                    </div>
-                    <div className="p-3 bg-emerald-50 border border-emerald-100 rounded text-lg !text-emerald-800">
-                        <div className='py-2 flex items-center gap-2'>
-                            <ArrowDown size={16} className="text-emerald-800" />
-                            <strong>Update Weights</strong></div>
-                        Finally, we update the weights using the gradients and optimizer state. The memory used for activations and gradients can then be freed for the next batch.
-                    </div>
+                    <Paragraph>
+                        Instead of storing activations for <em>every</em> layer during the forward pass, we only store them for a subset of "checkpoint" layers.
+                    </Paragraph>
+                    <ul className="list-disc pl-5 space-y-2">
+                        <li>
+                            <strong>Forward Pass (Memory Saving):</strong> We run the forward pass as usual but drop the intermediate activations between checkpoints. This significantly reduces peak memory usage.
+                        </li>
+                        <li>
+                            <strong>Backward Pass (Recomputation):</strong> When the backward pass needs an activation that was dropped, we <strong>recompute</strong> it by running a partial forward pass starting from the nearest checkpoint.
+                        </li>
+                    </ul>
+                    <Paragraph>
+                        This technique can reduce activation memory by a factor of <Equation>\sqrt{'{'}N{'}'}</Equation> (where <Equation>N</Equation> is the number of layers) at the cost of performing roughly 33% more floating-point operations (one extra forward pass per layer).
+                    </Paragraph>
+                    <Paragraph>
+                        Most training frameworks these days use <strong>FlashAttention</strong>, which natively integrates activation recomputation in its optimization strategy by recomputing attention scores and matrices in the backward pass instead of storing them.
+                    </Paragraph>
                 </div>
-                <TrainingWorkflow />
+                <GradientCheckpointingWorkflow />
             </InteractiveCard>
         </Section >
     );
 };
 
-export default TypicalTraining;
+export default GradientCheckpointing;
