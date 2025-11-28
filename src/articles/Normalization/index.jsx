@@ -7,7 +7,7 @@ import LayerNormalization from './sections/LayerNormalization';
 import GroupNormalization from './sections/GroupNormalization';
 import DecisionGuide from './sections/DecisionGuide';
 
-export const unfinished = true;
+export const unfinished = false;
 
 export default function Normalization() {
     return (

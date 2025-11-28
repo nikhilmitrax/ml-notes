@@ -11,7 +11,7 @@ import MoEBeyondMLP from './sections/MoEBeyondMLP';
 import ExpertParallelism from './sections/ExpertParallelism';
 import PopularModels from './sections/PopularModels';
 
-export const unfinished = true;
+export const unfinished = false;
 
 export default function MixtureOfExperts() {
     return (
