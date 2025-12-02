@@ -1,8 +1,10 @@
 import React from 'react';
 import Article from '../../components/Article';
 import Overview from './sections/Overview';
+import RooflineAnalysis from './sections/RooflineAnalysis';
 import CollectiveCommunication from './sections/CollectiveCommunication';
 import TypicalTraining from './sections/TypicalTraining';
+import MemoryUsage from './sections/MemoryUsage';
 import GradientCheckpointing from './sections/GradientCheckpointing';
 import GradientAccumulation from './sections/GradientAccumulation';
 
@@ -19,7 +21,9 @@ const AcceleratingMLTraining = () => {
             </Callout>
 
             <Overview />
+            <RooflineAnalysis />
             <TypicalTraining />
+            <MemoryUsage />
             <GradientCheckpointing />
             <GradientAccumulation />
             <CollectiveCommunication />

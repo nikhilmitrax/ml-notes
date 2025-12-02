@@ -14,7 +14,7 @@ const EquationBlock = ({ children }) => {
     const iconButtonClasses = 'inline-flex h-9 w-9 items-center justify-center rounded-md text-slate-500 transition hover:bg-slate-100 hover:text-slate-700';
 
     // Check if there are any hidden equations to determine if we need the toggle button
-    const hasHiddenEquations = childrenArray.some(child => child.props.hidden);
+    const hasHiddenEquations = childrenArray.some(child => React.isValidElement(child) && child.props.hidden);
 
     const toggleExpand = () => setIsExpanded(!isExpanded);
     const openLightbox = () => setIsLightboxOpen(true);
@@ -39,7 +39,7 @@ const EquationBlock = ({ children }) => {
     };
 
     const handleCopyVisibleEquations = async () => {
-        const visibleEquations = childrenArray.filter(child => isExpanded || !child.props.hidden);
+        const visibleEquations = childrenArray.filter(child => isExpanded || (React.isValidElement(child) && !child.props.hidden));
 
         if (!visibleEquations.length) return;
 

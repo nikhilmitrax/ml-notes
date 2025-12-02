@@ -32,6 +32,9 @@ const References = () => {
                 <ListItem>
                     <a href="https://aman.ai" className="text-blue-600 hover:underline">Jain, Vinija and Chadha, Aman. "Attention." Aman's AI Journal (2021)</a>
                 </ListItem>
+                <ListItem>
+                    <a href="https://github.com/deepseek-ai/DeepSeek-V3.2-Exp/blob/main/DeepSeek_V3_2.pdf" className="text-blue-600 hover:underline">DeepSeek-V3.2-Exp: Boosting Long-Context Efficiency with DeepSeek Sparse Attention</a>
+                </ListItem>
             </List>
         </Section>
     );
