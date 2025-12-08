@@ -9,6 +9,8 @@ import ListItem from '../../components/ListItem';
 import Equation from '../../components/Equation';
 import EquationBlock from '../../components/EquationBlock';
 
+export const section = 'coalesced';
+
 const DeepLearningDistillation = () => {
     return (
         <Article

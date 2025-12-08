@@ -13,6 +13,8 @@ import RLHF from './sections/RLHF';
 
 import References from './sections/References';
 
+export const section = 'coalesced';
+
 export default function ReinforcementLearning() {
     return (
         <Article

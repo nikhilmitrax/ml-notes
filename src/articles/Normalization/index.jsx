@@ -8,6 +8,7 @@ import GroupNormalization from './sections/GroupNormalization';
 import DecisionGuide from './sections/DecisionGuide';
 
 export const unfinished = false;
+export const section = 'coalesced';
 
 export default function Normalization() {
     return (

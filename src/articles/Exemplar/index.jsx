@@ -5,6 +5,7 @@ import InteractiveDemo from './sections/InteractiveDemo';
 import LayoutDemo from './sections/LayoutDemo';
 
 export const unfinished = true;
+export const section = 'coalesced';
 
 export default function Exemplar() {
     return (

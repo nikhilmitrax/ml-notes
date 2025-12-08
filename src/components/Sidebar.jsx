@@ -1,8 +1,29 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { BookOpen } from 'lucide-react';
+import { BookOpen, Layers, FileText } from 'lucide-react';
+
+const SECTIONS = [
+  { key: 'coalesced', label: 'Coalesced', icon: Layers },
+  { key: 'papers', label: 'Papers', icon: FileText },
+];
 
 const Sidebar = ({ articles, isOpen, onClose }) => {
+  const renderArticleLink = (article) => (
+    <NavLink
+      key={article.path}
+      to={article.path}
+      onClick={() => onClose?.()}
+      className={({ isActive }) =>
+        `block px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 ${isActive
+          ? 'bg-blue-50 text-blue-700'
+          : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+        }`
+      }
+    >
+      {article.name}
+    </NavLink>
+  );
+
   return (
     <aside
       className={`
@@ -27,22 +48,23 @@ const Sidebar = ({ articles, isOpen, onClose }) => {
           </svg>
         </button>
       </div>
-      <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
-        {articles.map((article) => (
-          <NavLink
-            key={article.path}
-            to={article.path}
-            onClick={() => onClose?.()}
-            className={({ isActive }) =>
-              `block px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 ${isActive
-                ? 'bg-blue-50 text-blue-700'
-                : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
-              }`
-            }
-          >
-            {article.name}
-          </NavLink>
-        ))}
+      <nav className="flex-1 p-4 overflow-y-auto">
+        {SECTIONS.map(({ key, label, icon: Icon }) => {
+          const sectionArticles = articles.filter(a => a.section === key);
+          if (sectionArticles.length === 0) return null;
+
+          return (
+            <div key={key} className="mb-4">
+              <div className="flex items-center gap-2 px-2 py-2 text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                <Icon className="w-4 h-4" />
+                <span>{label}</span>
+              </div>
+              <div className="space-y-1">
+                {sectionArticles.map(renderArticleLink)}
+              </div>
+            </div>
+          );
+        })}
       </nav>
     </aside>
   );

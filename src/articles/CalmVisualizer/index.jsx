@@ -10,6 +10,7 @@ import Paragraph from '../../components/Paragraph';
 import { STEPS, COLORS } from './constants';
 
 export const unfinished = true;
+export const section = 'coalesced';
 
 const MainScene = ({ step, kValue }) => {
   return (

@@ -12,6 +12,7 @@ import ExpertParallelism from './sections/ExpertParallelism';
 import PopularModels from './sections/PopularModels';
 
 export const unfinished = false;
+export const section = 'coalesced';
 
 export default function MixtureOfExperts() {
     return (

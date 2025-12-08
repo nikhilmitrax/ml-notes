@@ -10,6 +10,8 @@ import GradientAccumulation from './sections/GradientAccumulation';
 
 import Callout from '../../components/Callout';
 
+export const section = 'coalesced';
+
 const AcceleratingMLTraining = () => {
     return (
         <Article

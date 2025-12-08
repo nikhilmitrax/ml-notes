@@ -9,6 +9,8 @@ import BetaVAE from './sections/BetaVAE';
 import PosteriorCollapse from './sections/PosteriorCollapse';
 import LatentSpaceInterpolation from './sections/LatentSpaceInterpolation';
 
+export const section = 'coalesced';
+
 export default function VAE() {
   return (
     <Article

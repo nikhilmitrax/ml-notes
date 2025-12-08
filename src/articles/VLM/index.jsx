@@ -13,6 +13,7 @@ import ComparativeAnalysis from './sections/ComparativeAnalysis';
 import FurtherReading from './sections/FurtherReading';
 
 export const unfinished = true;
+export const section = 'coalesced';
 
 export default function VLM() {
     return (

@@ -14,6 +14,8 @@ import ComplexityAnalysis from './sections/ComplexityAnalysis';
 
 import References from './sections/References';
 
+export const section = 'coalesced';
+
 export default function Attention() {
     return (
         <Article

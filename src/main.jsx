@@ -23,7 +23,8 @@ const articles = Object.entries(articleModules)
       path: routePath,
       name: name,
       component: module.default,
-      unfinished: module.unfinished || false
+      unfinished: module.unfinished || false,
+      section: module.section || 'coalesced'
     };
   })
   .filter(article => {

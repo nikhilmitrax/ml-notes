@@ -13,6 +13,8 @@ import GreedyVsTopKTopP from './sections/GreedyVsTopKTopP';
 import MinP from './sections/MinP';
 import References from './sections/References';
 
+export const section = 'coalesced';
+
 export default function TokenSampling() {
     return (
         <Article

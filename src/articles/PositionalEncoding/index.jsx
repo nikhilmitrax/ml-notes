@@ -9,6 +9,7 @@ import AliBi from './sections/AliBi';
 import RealWorldAdoption from './sections/RealWorldAdoption';
 
 export const unfinished = false;
+export const section = 'coalesced';
 
 export default function PositionalEncoding() {
   return (

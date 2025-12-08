@@ -30,6 +30,7 @@ import References from './sections/References';
 import Citation from './sections/Citation';
 
 export const unfinished = true;
+export const section = 'coalesced';
 
 export default function Reasoning() {
     return (
