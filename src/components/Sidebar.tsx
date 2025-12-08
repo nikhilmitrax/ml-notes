@@ -1,14 +1,27 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { BookOpen, Layers, FileText } from 'lucide-react';
+import { BookOpen, Layers, FileText, LucideIcon } from 'lucide-react';
+import type { Article } from '../types';
 
-const SECTIONS = [
+interface SectionConfig {
+  key: string;
+  label: string;
+  icon: LucideIcon;
+}
+
+const SECTIONS: SectionConfig[] = [
   { key: 'coalesced', label: 'Coalesced', icon: Layers },
   { key: 'papers', label: 'Papers', icon: FileText },
 ];
 
-const Sidebar = ({ articles, isOpen, onClose }) => {
-  const renderArticleLink = (article) => (
+interface SidebarProps {
+  articles: Article[];
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ articles, isOpen, onClose }) => {
+  const renderArticleLink = (article: Article) => (
     <NavLink
       key={article.path}
       to={article.path}

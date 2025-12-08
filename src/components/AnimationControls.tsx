@@ -2,7 +2,13 @@ import React from 'react';
 import { Play, Pause, RotateCcw } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const AnimationControls = ({ isPlaying, onTogglePlay, onReset }) => {
+interface AnimationControlsProps {
+    isPlaying: boolean;
+    onTogglePlay: () => void;
+    onReset: () => void;
+}
+
+const AnimationControls: React.FC<AnimationControlsProps> = ({ isPlaying, onTogglePlay, onReset }) => {
     return (
         <div className="absolute bottom-4 right-4 flex items-center gap-2 bg-white/90 backdrop-blur-sm p-1.5 rounded-lg border border-slate-200 shadow-sm z-10">
             <button

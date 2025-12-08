@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
-const DecisionStep = ({ number, title, children }) => (
+interface DecisionStepProps {
+    number: number | string;
+    title: string;
+    children?: ReactNode;
+}
+
+const DecisionStep: React.FC<DecisionStepProps> = ({ number, title, children }) => (
     <div className="flex items-start gap-4 p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
         <div className="bg-purple-100 dark:bg-purple-900/30 p-2 rounded-full text-purple-600 dark:text-purple-400 font-bold">
             {number}

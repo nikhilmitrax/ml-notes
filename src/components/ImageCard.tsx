@@ -1,6 +1,12 @@
 import React from 'react';
 
-const ImageCard = ({ src, alt, caption }) => {
+interface ImageCardProps {
+    src: string;
+    alt: string;
+    caption?: string;
+}
+
+const ImageCard: React.FC<ImageCardProps> = ({ src, alt, caption }) => {
     return (
         <div className="mb-6 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 shadow-sm">
             <img src={src} alt={alt} className="w-full h-auto" />

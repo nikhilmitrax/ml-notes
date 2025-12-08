@@ -1,4 +1,9 @@
-export default function ArticleHeader({ title, description }) {
+interface ArticleHeaderProps {
+    title: string;
+    description: string;
+}
+
+export default function ArticleHeader({ title, description }: ArticleHeaderProps) {
     return (
         <div className="font-sans text-slate-900 dark:text-white mb-12">
             <h1 className="text-4xl font-extrabold text-slate-900 dark:text-white mb-4">

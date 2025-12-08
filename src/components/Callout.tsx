@@ -1,7 +1,19 @@
-import React from 'react';
-import { AlertTriangle, Info, AlertCircle, CheckCircle } from 'lucide-react';
+import React, { ReactNode } from 'react';
+import { AlertTriangle, Info, AlertCircle, CheckCircle, LucideIcon } from 'lucide-react';
 
-const variants = {
+type CalloutType = 'caution' | 'info' | 'warning' | 'tip';
+
+interface VariantConfig {
+    bg: string;
+    border: string;
+    iconColor: string;
+    titleColor: string;
+    textColor: string;
+    icon: LucideIcon;
+    defaultTitle: string;
+}
+
+const variants: Record<CalloutType, VariantConfig> = {
     caution: {
         bg: 'bg-amber-50',
         border: 'border-amber-500',
@@ -40,7 +52,14 @@ const variants = {
     }
 };
 
-const Callout = ({ type = 'info', title, children, className = '' }) => {
+interface CalloutProps {
+    type?: CalloutType;
+    title?: string;
+    children?: ReactNode;
+    className?: string;
+}
+
+const Callout: React.FC<CalloutProps> = ({ type = 'info', title, children, className = '' }) => {
     const variant = variants[type] || variants.info;
     const Icon = variant.icon;
 

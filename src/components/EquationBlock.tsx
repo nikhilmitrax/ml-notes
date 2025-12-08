@@ -1,20 +1,34 @@
-import React, { useState, Children, cloneElement, useRef, useEffect } from 'react';
+import React, { useState, Children, cloneElement, useRef, useEffect, ReactNode, ReactElement } from 'react';
 import { createPortal } from 'react-dom';
 import { Maximize2, ChevronDown, ChevronUp, X, Copy, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Equation from './Equation';
 
-const EquationBlock = ({ children }) => {
+interface EquationBlockProps {
+    children?: ReactNode;
+}
+
+interface EquationChildProps {
+    hidden?: boolean;
+    block?: boolean;
+    children?: string | string[];
+}
+
+const EquationBlock: React.FC<EquationBlockProps> = ({ children }) => {
     const [isExpanded, setIsExpanded] = useState(false);
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);
     const [copied, setCopied] = useState(false);
-    const copyResetTimeout = useRef(null);
+    const copyResetTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     const childrenArray = Children.toArray(children);
     const iconButtonClasses = 'inline-flex h-9 w-9 items-center justify-center rounded-md text-slate-500 transition hover:bg-slate-100 hover:text-slate-700';
 
     // Check if there are any hidden equations to determine if we need the toggle button
-    const hasHiddenEquations = childrenArray.some(child => React.isValidElement(child) && child.props.hidden);
+    const hasHiddenEquations = childrenArray.some(child => {
+        if (React.isValidElement<EquationChildProps>(child)) {
+            return child.props.hidden;
+        }
+        return false;
+    });
 
     const toggleExpand = () => setIsExpanded(!isExpanded);
     const openLightbox = () => setIsLightboxOpen(true);
@@ -28,18 +42,25 @@ const EquationBlock = ({ children }) => {
         };
     }, []);
 
-    const getEquationText = (child) => {
+    const getEquationText = (child: ReactElement<EquationChildProps>): string => {
         const content = child.props.children;
 
         if (typeof content === 'string') {
             return content;
         }
 
-        return Children.toArray(content).join('');
+        if (Array.isArray(content)) {
+            return content.join('');
+        }
+
+        return '';
     };
 
     const handleCopyVisibleEquations = async () => {
-        const visibleEquations = childrenArray.filter(child => isExpanded || (React.isValidElement(child) && !child.props.hidden));
+        const visibleEquations = childrenArray.filter(child => {
+            if (!React.isValidElement<EquationChildProps>(child)) return false;
+            return isExpanded || !child.props.hidden;
+        }) as ReactElement<EquationChildProps>[];
 
         if (!visibleEquations.length) return;
 
@@ -92,7 +113,7 @@ const EquationBlock = ({ children }) => {
                 <AnimatePresence initial={false}>
                     {childrenArray.map((child, index) => {
                         // Skip non-element children (like whitespace strings) to avoid cloneElement errors
-                        if (!React.isValidElement(child)) return null;
+                        if (!React.isValidElement<EquationChildProps>(child)) return null;
 
                         const isHidden = child.props.hidden;
                         const shouldShow = isExpanded || !isHidden;
@@ -125,9 +146,10 @@ const EquationBlock = ({ children }) => {
                             <X size={24} />
                         </button>
                         <div className="flex-1 space-y-4 overflow-y-auto pr-2">
-                            {childrenArray.map((child, index) => (
-                                cloneElement(child, { key: index, hidden: false, block: true })
-                            ))}
+                            {childrenArray.map((child, index) => {
+                                if (!React.isValidElement<EquationChildProps>(child)) return null;
+                                return cloneElement(child, { key: index, hidden: false, block: true });
+                            })}
                         </div>
                     </div>
                 </div>,

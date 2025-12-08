@@ -2,23 +2,28 @@ import React, { useEffect, useRef } from 'react';
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
 
-const Equation = ({ children, hidden = false, className = '', block = false }) => {
-    const containerRef = useRef(null);
-    const Container = block ? 'div' : 'span';
+interface EquationProps {
+    children?: string | string[];
+    hidden?: boolean;
+    className?: string;
+    block?: boolean;
+}
+
+const Equation: React.FC<EquationProps> = ({ children, hidden = false, className = '', block = false }) => {
+    const containerRef = useRef<HTMLElement>(null);
 
     useEffect(() => {
         if (containerRef.current) {
-            let latex = children;
+            let latex: string;
 
             // Handle non-string children (e.g., numbers, arrays of strings)
             if (Array.isArray(children)) {
                 latex = children.join('');
-            } else if (typeof children !== 'string' && children !== undefined && children !== null) {
+            } else if (typeof children === 'string') {
+                latex = children;
+            } else if (children !== undefined && children !== null) {
                 latex = String(children);
-            }
-
-            // Ensure we have a string
-            if (typeof latex !== 'string') {
+            } else {
                 latex = '';
             }
 
@@ -46,11 +51,21 @@ const Equation = ({ children, hidden = false, className = '', block = false }) =
         className,
     ].filter(Boolean).join(' ');
 
+    if (block) {
+        return (
+            <div
+                ref={containerRef as React.RefObject<HTMLDivElement>}
+                className={combinedClassName}
+                onClick={(e) => e.stopPropagation()}
+            />
+        );
+    }
+
     return (
-        <Container
-            ref={containerRef}
+        <span
+            ref={containerRef as React.RefObject<HTMLSpanElement>}
             className={combinedClassName}
-            onClick={(e) => e.stopPropagation()} // Prevent clicks from bubbling if needed
+            onClick={(e) => e.stopPropagation()}
         />
     );
 };

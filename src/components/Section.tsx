@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
+import { LucideIcon } from 'lucide-react';
 
-const Section = ({ title, children, icon: Icon }) => (
+interface SectionProps {
+  title: string;
+  children?: ReactNode;
+  icon?: LucideIcon;
+}
+
+const Section: React.FC<SectionProps> = ({ title, children, icon: Icon }) => (
   <section className="mb-16 border-l-2 border-slate-200 pl-6 relative">
     <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-slate-200 border-2 border-white" />
     <div className="flex items-center gap-3 mb-6">

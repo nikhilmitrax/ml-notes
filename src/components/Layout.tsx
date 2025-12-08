@@ -1,8 +1,13 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
+import type { Article } from '../types';
 
-const Layout = ({ articles }) => {
+interface LayoutProps {
+  articles: Article[];
+}
+
+const Layout: React.FC<LayoutProps> = ({ articles }) => {
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
 
   return (
