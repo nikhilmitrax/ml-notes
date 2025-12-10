@@ -16,8 +16,8 @@ const articles: Article[] = Object.entries(articleModules)
     const parts = path.split('/');
     const folderName = parts[parts.length - 2];
 
-    // Simple regex to add space before capital letters
-    const name = folderName.replace(/([A-Z])/g, ' $1').trim();
+    // Use custom name if provided, otherwise add space before capital letters
+    const name = module.name || folderName.replace(/([A-Z])/g, ' $1').trim();
     const routePath = folderName.toLowerCase();
 
     return {

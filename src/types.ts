@@ -19,6 +19,7 @@ export interface ArticleModule {
     default: ComponentType;
     unfinished?: boolean;
     section?: 'coalesced' | 'papers';
+    name?: string;
 }
 
 /**
