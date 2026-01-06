@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Scale, XCircle } from 'lucide-react';
 import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
-import EquationBlock from '../../../components/EquationBlock';
 import InteractiveCard from '../../../components/InteractiveCard';
 import Header3 from '../../../components/Header3';
 import Header4 from '../../../components/Header4';
@@ -127,9 +126,9 @@ const ExpertCapacity = () => {
             <Paragraph className="mb-4 text-gray-700 dark:text-gray-300">
                 The expert capacity <Equation>C</Equation> is defined as:
             </Paragraph>
-            <EquationBlock><Equation>
+            <Equation block>
                 {`C = \\frac{T}{N} \\times \\alpha`}
-            </Equation></EquationBlock>
+            </Equation>
             <ul className="list-disc pl-5 space-y-2 text-gray-700 dark:text-gray-300 mb-4">
                 <li><Equation>T</Equation>: Total number of tokens in the batch.</li>
                 <li><Equation>N</Equation>: Total number of experts.</li>

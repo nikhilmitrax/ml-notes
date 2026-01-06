@@ -20,9 +20,9 @@ export default function ToolAugmented() {
                 <Paragraph>
                     The formalism for tool-augmented reasoning can be expressed as a hybrid reasoning policy:
                 </Paragraph>
-                <EquationBlock><Equation>
+                <Equation block>
                     {`\\pi_\\theta(a_t \\mid s_t) = \\begin{cases} \\text{generate reasoning step } z_t, & \\text{if } a_t = \\text{think}, \\\\ \\text{invoke tool } \\mathcal{T}_i(s_t), & \\text{if } a_t = \\text{act} \\end{cases}`}
-                </Equation></EquationBlock>
+                </Equation>
                 <ul className="list-disc pl-6 space-y-2">
                     <li>where <Equation>{`s_t`}</Equation> is the current reasoning state, and <Equation>{`\\mathcal{T}_i`}</Equation> denotes a callable external tool.</li>
                 </ul>
@@ -38,9 +38,9 @@ export default function ToolAugmented() {
                 <Paragraph>
                     This concept was formalized in <em>ReAct: Synergizing Reasoning and Acting in Language Models</em> by <a href="https://arxiv.org/abs/2210.03629" className="text-blue-600 hover:underline">Yao et al. (2022)</a>, where an LLM engages in iterative cycles of <strong>thinking</strong>, <strong>acting</strong>, and <strong>observing</strong>, following the trajectory:
                 </Paragraph>
-                <EquationBlock><Equation>
+                <Equation block>
                     {`x \\rightarrow \\text{Thought}_1 \\rightarrow \\text{Action}_1 \\rightarrow \\text{Observation}_1 \\rightarrow \\text{Thought}_2 \\rightarrow \\text{Action}_2 \\rightarrow \\cdots \\rightarrow y`}
-                </Equation></EquationBlock>
+                </Equation>
                 <Paragraph>
                     Each thought is an internal deliberation; each action interacts with an external environment (e.g., a search query or calculator call); and each observation provides feedback that informs the next reasoning step.
                 </Paragraph>
@@ -64,9 +64,9 @@ Thought: That confirms Einstein’s 1905 paper.`}
                     <li>
                         <strong>Iterative Reasoning Loop</strong>: This continues until the model converges on a final conclusion or the task's stopping condition is met.
                         <Paragraph className="mt-2">Formally, the reasoning trajectory is:</Paragraph>
-                        <EquationBlock><Equation>
+                        <Equation block>
                             {`\\tau = (x, \\{(t_i, a_i, o_i)\\}_{i=1}^T, y)`}
-                        </Equation></EquationBlock>
+                        </Equation>
                         <ul className="list-disc pl-6 space-y-1">
                             <li>where <Equation>{`t_i`}</Equation> are reasoning traces, <Equation>{`a_i`}</Equation> are actions, and <Equation>{`o_i`}</Equation> are observations.</li>
                         </ul>
@@ -77,9 +77,9 @@ Thought: That confirms Einstein’s 1905 paper.`}
                 <ul className="list-disc pl-6 space-y-2">
                     <li>
                         ReAct operationalizes reasoning as a <strong>policy</strong> over both thoughts and actions:
-                        <EquationBlock><Equation>
+                        <Equation block>
                             {`\\pi_\\theta(t_i, a_i \\mid s_i)`}
-                        </Equation></EquationBlock>
+                        </Equation>
                         where <Equation>{`s_i`}</Equation> is the model's current state (context + prior outputs).
                     </li>
                     <li>This allows the model to perform <strong>goal-directed reasoning</strong>, selectively gathering new information, evaluating results, and iteratively refining its understanding—essentially turning passive inference into <strong>interactive cognition</strong>.</li>
@@ -125,9 +125,9 @@ Thought: That confirms Einstein’s 1905 paper.`}
                     <li>
                         <strong>Inference-Time Behavior</strong>: During generation, the model autonomously decides when to invoke a tool. Tool outputs are inserted inline and directly influence subsequent reasoning steps.
                         <Paragraph className="mt-2">Formally, the tool-augmented generation process is modeled as:</Paragraph>
-                        <EquationBlock><Equation>
+                        <Equation block>
                             {`p(y\\mid x) = \\sum_{\\mathcal{T}} p_\\theta(y, \\mathcal{T}(x))`}
-                        </Equation></EquationBlock>
+                        </Equation>
                         <ul className="list-disc pl-6 space-y-1">
                             <li>where the model implicitly marginalizes over possible tool calls <Equation>{`\\mathcal{T}`}</Equation> to produce the most likely reasoning continuation.</li>
                         </ul>

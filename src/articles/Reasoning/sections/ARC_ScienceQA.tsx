@@ -33,9 +33,9 @@ export default function ARC_ScienceQA() {
                 <ul className="list-disc pl-6 space-y-2">
                     <li>
                         Performance is computed as plain accuracy:
-                        <EquationBlock><Equation>
+                        <Equation block>
                             {`\\text{Acc} = \\frac{1}{N}\\sum_i \\mathbb{I}[y_i = y_i^\\star].`}
-                        </Equation></EquationBlock>
+                        </Equation>
                     </li>
                     <li>However, modern setups also log reasoning traces <Equation>z</Equation> and check whether the final selected option follows a coherent causal explanation.</li>
                 </ul>
@@ -78,9 +78,9 @@ export default function ARC_ScienceQA() {
                 <ul className="list-disc pl-6 space-y-2">
                     <li>
                         Performance is the fraction of tasks for which all output grids exactly match ground truth:
-                        <EquationBlock><Equation>
+                        <Equation block>
                             {`\\text{Acc}_{\\text{task}} = \\frac{1}{N}\\sum_i \\mathbb{I}[y_i = y_i^\\star].`}
-                        </Equation></EquationBlock>
+                        </Equation>
                     </li>
                     <li>Since each task has a single correct transformation, partial credit is not given.</li>
                     <li>Some studies additionally compute <em>object-level F1</em> for graded evaluation.</li>

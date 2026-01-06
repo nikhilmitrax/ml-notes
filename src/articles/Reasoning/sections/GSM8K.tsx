@@ -37,9 +37,9 @@ export default function GSM8K() {
                 <Paragraph>
                     Because reasoning is brittle, we often evaluate using <strong>Pass@K</strong> (generate <Equation>K</Equation> solutions, check if <em>any</em> are correct) or <strong>Majority Vote@K</strong> (generate <Equation>K</Equation>, take the most common answer).
                 </Paragraph>
-                <EquationBlock><Equation>
+                <Equation block>
                     {`\\text{Maj@K} = \\text{mode}(\\{y_1, y_2, \\dots, y_K\\})`}
-                </Equation></EquationBlock>
+                </Equation>
                 <Paragraph>
                     On GSM8K, Majority Vote often boosts performance by 5-10% over greedy decoding.
                 </Paragraph>

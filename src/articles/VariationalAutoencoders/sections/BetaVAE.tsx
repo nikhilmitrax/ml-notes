@@ -44,7 +44,7 @@ const BetaVAEViz = () => {
                 {/* Controls */}
                 <div className="w-full md:w-1/2 space-y-6">
                     <div className="bg-orange-50 dark:bg-orange-900/20 p-4 rounded-lg border border-orange-100 dark:border-orange-800">
-                        <label className="text-sm font-bold text-orange-800 dark:text-orange-300 mb-1 block flex justify-between">
+                        <label className="text-sm font-bold text-orange-800 dark:text-orange-300 mb-1 flex justify-between">
                             <span>Beta (<Equation>\beta</Equation>) Parameter</span>
                             <span>{beta}</span>
                         </label>
@@ -126,9 +126,9 @@ const BetaVAE = () => {
                 <strong><Equation>\beta</Equation>-VAE</strong> introduces a hyperparameter <Equation>\beta</Equation> to the KL divergence term in the objective function:
             </Paragraph>
 
-            <EquationBlock><Equation>
+            <Equation block>
                 {`\\mathcal{L}_{\\beta} = \\mathbb{E}_{q(z|x)}[\\log p(x|z)] - \\beta \\cdot D_{KL}(q(z|x) || p(z))`}
-            </Equation></EquationBlock>
+            </Equation>
 
             <Paragraph className="mb-4 text-gray-700 dark:text-gray-300">
                 By setting <Equation>{'\\beta > 1'}</Equation>, we force the model to prioritize the independence of latent factors (matching the isotropic unit Gaussian prior).

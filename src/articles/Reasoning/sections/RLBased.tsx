@@ -2,7 +2,6 @@ import React from 'react';
 import { Zap } from 'lucide-react';
 import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
-import EquationBlock from '../../../components/EquationBlock';
 import Header3 from '../../../components/Header3';
 import Header4 from '../../../components/Header4';
 import Paragraph from '../../../components/Paragraph';
@@ -42,9 +41,9 @@ export default function RLBased() {
                     <li>Finally, the policy is refined via rejection sampling (and optionally RL) with respect to that reward model: the top-ranked answers by the reward model are selected.</li>
                     <li>
                         <strong>Browsing environment:</strong> At each time step <Equation>t</Equation> the model is given browser state <Equation>{`s_t`}</Equation>, chooses an action <Equation>{`a_t \\in \\{\\text{Search}, \\text{Click}, \\text{Scroll}, \\text{Quote}\\}`}</Equation>, and obtains the next state <Equation>{`s_{t+1}`}</Equation>. After <Equation>T</Equation> steps, it produces answer <Equation>y</Equation> with supporting references <Equation>z</Equation>. The reward model assigns <Equation>{`R(y,z)`}</Equation>. The training objective is to increase the probability of trajectories leading to high <Equation>R</Equation>.
-                        <EquationBlock><Equation>
+                        <Equation block>
                             {`\\mathcal{J}(\\theta) = \\mathbb{E}_{(x, (z,y) \\sim \\pi_\\theta(\\cdot\\mid x))} [R(y,z)]`}
-                        </Equation></EquationBlock>
+                        </Equation>
                         <ul className="list-circle pl-6 mt-2 space-y-1">
                             <li>where <Equation>x</Equation> is the question and <Equation>z</Equation> is the set of quoted references.</li>
                         </ul>
@@ -64,15 +63,15 @@ export default function RLBased() {
                 <Paragraph>
                     Formally, for a given problem <Equation>x</Equation>, reasoning trace <Equation>z</Equation>, and final answer <Equation>y</Equation>,
                 </Paragraph>
-                <EquationBlock><Equation>
+                <Equation block>
                     {`R(y, z) = \\mathbb{I}[\\text{correct}(y)] - \\lambda \\cdot \\text{cost}(z)`}
-                </Equation></EquationBlock>
+                </Equation>
                 <Paragraph>
                     ... and the objective is to maximize the expected reward:
                 </Paragraph>
-                <EquationBlock><Equation>
+                <Equation block>
                     {`\\mathcal{J}(\\theta) = \\mathbb{E}_{x \\sim \\mathcal{D}, z,y \\sim p_\\theta(\\cdot\\mid x)}[R(y, z)]`}
-                </Equation></EquationBlock>
+                </Equation>
                 <Paragraph>
                     The model parameters are updated using RL methods such as policy gradient or Proximal Policy Optimization (PPO).
                 </Paragraph>
@@ -92,9 +91,9 @@ export default function RLBased() {
                     </li>
                     <li>
                         <strong>Policy optimization:</strong> Update the model parameters <Equation>{`\\theta`}</Equation> to maximize expected reward using policy-gradient methods.
-                        <EquationBlock><Equation>
+                        <Equation block>
                             {`\\nabla_\\theta \\mathcal{J}(\\theta) = \\mathbb{E}[(R - b)\\nabla_\\theta \\log p_\\theta(y,z\\mid x)]`}
-                        </Equation></EquationBlock>
+                        </Equation>
                         <ul className="list-circle pl-6 mt-2 space-y-1">
                             <li>where <Equation>b</Equation> is a baseline to reduce variance.</li>
                         </ul>
@@ -118,18 +117,18 @@ export default function RLBased() {
                 <Paragraph>
                     Through this mechanism, models alternate between <em>linguistic reasoning</em> and <em>computational execution</em>, forming a hybrid cognitive process that grounds natural language thought in verifiable computation. Formally, a TIR process can be expressed as:
                 </Paragraph>
-                <EquationBlock><Equation>
+                <Equation block>
                     {`s_t = \\{r_1, c_1, o_1, \\ldots, r_t, c_t, o_t\\}`}
-                </Equation></EquationBlock>
+                </Equation>
                 <ul className="list-disc pl-6 space-y-2">
                     <li>where <Equation>{`r_t`}</Equation> is a reasoning step, <Equation>{`c_t`}</Equation> a tool command, and <Equation>{`o_t = I(c_t)`}</Equation> the corresponding output from an interpreter <Equation>I</Equation>.</li>
                 </ul>
                 <Paragraph>
                     <strong>Tool-Integrated Reinforcement Learning (TIRL)</strong> extends this paradigm by introducing <strong>reinforcement learning (RL)</strong> into the TIR loop. In TIRL, models are not merely taught to use tools—they <strong>learn</strong> when and how to use them optimally through trial, feedback, and reward.
                 </Paragraph>
-                <EquationBlock><Equation>
+                <Equation block>
                     {`J(\\theta) = \\mathbb{E}_{\\pi_\\theta} \\left[\\sum_{t=0}^{T} \\gamma^t r(s_t, a_t, o_t)\\right]`}
-                </Equation></EquationBlock>
+                </Equation>
                 <ul className="list-disc pl-6 space-y-2">
                     <li>where the policy <Equation>{`\\pi_\\theta(a_t \\mid s_t)`}</Equation> produces both reasoning and tool actions.</li>
                 </ul>
@@ -170,9 +169,9 @@ export default function RLBased() {
                 <Paragraph>
                     Tool learning expands the scope of reasoning beyond static text generation to <strong>interactive environments</strong>, where a foundation model acts as a <em>controller</em> that plans, executes, and refines multi-step tool usage.
                 </Paragraph>
-                <EquationBlock><Equation>
+                <Equation block>
                     {`\\text{Reason} \\rightarrow \\text{Act (via tools)} \\rightarrow \\text{Observe} \\rightarrow \\text{Reward} \\rightarrow \\text{Refine}`}
-                </Equation></EquationBlock>
+                </Equation>
 
             </div>
         </Section>

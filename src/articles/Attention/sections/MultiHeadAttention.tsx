@@ -2,7 +2,6 @@ import React from 'react';
 import { Layers } from 'lucide-react';
 import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
-import EquationBlock from '../../../components/EquationBlock';
 import Header3 from '../../../components/Header3';
 import Paragraph from '../../../components/Paragraph';
 
@@ -13,9 +12,9 @@ const MultiHeadAttention = () => {
             <Paragraph className="mb-4">
                 Allows the model to focus on different subspaces of representation simultaneously.
             </Paragraph>
-            <EquationBlock><Equation>
+            <Equation block>
                 {`\\text{MultiHead}(Q, K, V) = \\text{Concat}(\\text{head}_1, \\dots, \\text{head}_h)W^O`}
-            </Equation></EquationBlock>
+            </Equation>
 
             <Header3 className="text-lg font-semibold text-slate-800 mb-2 mt-6">Cross Attention</Header3>
             <Paragraph className="mb-4">

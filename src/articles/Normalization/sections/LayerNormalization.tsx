@@ -2,7 +2,6 @@ import React from 'react';
 import { Layers, Check, X } from 'lucide-react';
 import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
-import EquationBlock from '../../../components/EquationBlock';
 import Header4 from '../../../components/Header4';
 import Paragraph from '../../../components/Paragraph';
 import SideBySide from '../../../components/SideBySide';
@@ -14,9 +13,9 @@ const LayerNormalization = () => {
                 <strong>Layer Normalization</strong> normalizes all features within a single sample. It computes statistics using all channels for a given input, independent of other samples in the batch.
             </Paragraph>
 
-            <EquationBlock><Equation>
+            <Equation block>
                 {`\\hat{x}_{b,c} = \\frac{x_{b,c} - \\mu_b}{\\sqrt{\\sigma_b^2 + \\epsilon}}`}
-            </Equation></EquationBlock>
+            </Equation>
 
             <SideBySide className="mt-6">
                 <div className="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-100 dark:border-green-800">

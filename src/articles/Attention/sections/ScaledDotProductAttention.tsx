@@ -2,7 +2,6 @@ import React, { useState, useMemo } from 'react';
 import { Eye } from 'lucide-react';
 import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
-import EquationBlock from '../../../components/EquationBlock';
 import InteractiveCard from '../../../components/InteractiveCard';
 import Header3 from '../../../components/Header3';
 import Header4 from '../../../components/Header4';
@@ -122,9 +121,9 @@ const ScaledDotProductAttention = () => {
             <Paragraph className="mb-4">
                 The core building block of modern Transformers is <strong>Scaled Dot-Product Attention</strong> (Vaswani et al., 2017).
             </Paragraph>
-            <EquationBlock><Equation>
+            <Equation block>
                 {`Attention(Q, K, V) = \\text{softmax}\\left(\\frac{QK^T}{\\sqrt{d_k}}\\right)V`}
-            </Equation></EquationBlock>
+            </Equation>
             <Paragraph className="mb-4 text-slate-700">
                 The scaling factor <Equation>{`\\frac{1}{\\sqrt{d_k}}`}</Equation> prevents small gradients when dot products are large.
             </Paragraph>
@@ -140,11 +139,11 @@ const ScaledDotProductAttention = () => {
                     <ul className="list-disc list-inside text-slate-700 space-y-2 ml-4">
                         <li>
                             <strong>Additive Attention</strong>: Proposed by Bahdanau et al. (2015). It computes the alignment score using a feed-forward neural network with a single hidden layer.
-                            <EquationBlock><Equation>{`e_{ij} = v^T \\tanh(W_q q_i + W_k k_j)`}</Equation></EquationBlock>
+                            <Equation block>{`e_{ij} = v^T \\tanh(W_q q_i + W_k k_j)`}</Equation>
                         </li>
                         <li>
                             <strong>Scaled Dot-Product Attention</strong>: Introduced by Vaswani et al. (2017). It computes the alignment score by taking the dot product of query and key vectors, scaled by <Equation>{`\\sqrt{d_k}`}</Equation>.
-                            <EquationBlock><Equation>{`e_{ij} = \\frac{q_i \\cdot k_j}{\\sqrt{d_k}}`}</Equation></EquationBlock>
+                            <Equation block>{`e_{ij} = \\frac{q_i \\cdot k_j}{\\sqrt{d_k}}`}</Equation>
                         </li>
                     </ul>
                 </div>

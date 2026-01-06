@@ -24,9 +24,9 @@ export default function AhaMoment() {
                 <Paragraph>
                     Formally, given a problem input <Equation>x</Equation>, the model samples reasoning traces <Equation>z</Equation> leading to outcomes <Equation>y</Equation>, maximizing
                 </Paragraph>
-                <EquationBlock><Equation>
+                <Equation block>
                     {`\\mathcal{J}(\\theta) = \\mathbb{E}_{x \\sim \\mathcal{D}, z, y \\sim p_\\theta(\\cdot\\mid x)}[R(y, z)]`}
-                </Equation></EquationBlock>
+                </Equation>
                 <Paragraph>
                     Initially, reward gradients are sparse—most reasoning attempts fail verification. But once the model discovers an internal representation <Equation>h</Equation> that decomposes the problem space (e.g., through implicit subgoal inference), reward signals align with coherent reasoning structure, triggering a <strong>phase transition</strong> in <Equation>{`p_\\theta(z \\mid x)`}</Equation>.
                 </Paragraph>

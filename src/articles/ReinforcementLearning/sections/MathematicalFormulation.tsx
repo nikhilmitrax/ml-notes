@@ -2,7 +2,6 @@ import React from 'react';
 import { Layers } from 'lucide-react';
 import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
-import EquationBlock from '../../../components/EquationBlock';
 import Header3 from '../../../components/Header3';
 import Paragraph from '../../../components/Paragraph';
 
@@ -24,9 +23,9 @@ const MathematicalFormulation = () => {
             <Paragraph>
                 The agent wants to maximize the expected <strong>Return</strong> <Equation>G_t</Equation>, which is the sum of discounted future rewards:
             </Paragraph>
-            <EquationBlock><Equation>
+            <Equation block>
                 {`G_t = \\sum_{k=0}^{\\infty} \\gamma^k R_{t+k+1} = R_{t+1} + \\gamma R_{t+2} + \\gamma^2 R_{t+3} + \\dots`}
-            </Equation></EquationBlock>
+            </Equation>
         </Section>
     );
 };

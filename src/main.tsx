@@ -10,30 +10,35 @@ import type { Article, ArticleModule } from './types';
 // For a larger app, you might switch to lazy loading with React.Suspense.
 const articleModules = import.meta.glob<ArticleModule>('./articles/*/index.tsx', { eager: true });
 
-const articles: Article[] = Object.entries(articleModules)
-  .map(([path, module]) => {
-    // Extract folder name: ./articles/PositionalEncoding/index.tsx -> PositionalEncoding
-    const parts = path.split('/');
-    const folderName = parts[parts.length - 2];
+import ConceptsPage from './concepts/ConceptsLibrary';
 
-    // Use custom name if provided, otherwise add space before capital letters
-    const name = module.name || folderName.replace(/([A-Z])/g, ' $1').trim();
-    const routePath = folderName.toLowerCase();
+const articles: Article[] = [
+  ...Object.entries(articleModules)
+    .map(([path, module]) => {
+      const parts = path.split('/');
+      const folderName = parts[parts.length - 2];
+      const name = module.name || folderName.replace(/([A-Z])/g, ' $1').trim();
+      const routePath = folderName.toLowerCase();
 
-    return {
-      path: routePath,
-      name: name,
-      component: module.default,
-      unfinished: module.unfinished || false,
-      section: module.section || 'coalesced'
-    };
-  })
-  .filter(article => {
-    // Show all articles in DEV mode
-    if (import.meta.env.DEV) return true;
-    // In production, hide unfinished articles
-    return !article.unfinished;
-  });
+      return {
+        path: routePath,
+        name: name,
+        component: module.default,
+        unfinished: module.unfinished || false,
+        section: (module.section || 'coalesced') as 'coalesced' | 'papers' | 'concepts'
+      };
+    }),
+  {
+    path: 'concepts',
+    name: 'Concepts Library',
+    component: ConceptsPage,
+    unfinished: false,
+    section: 'concepts' as const
+  }
+].filter(article => {
+  if (import.meta.env.DEV) return true;
+  return !article.unfinished;
+});
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

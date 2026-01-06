@@ -13,9 +13,9 @@ export default function Multimodal() {
                 <Paragraph>
                     Multimodal reasoning integrates visual evidence <Equation>v</Equation> into the reasoning chain <Equation>z</Equation>:
                 </Paragraph>
-                <EquationBlock><Equation>
+                <Equation block>
                     {`p_\\theta(y \\mid x,v) = \\sum_{z} p_\\theta(y \\mid x,v,z) p_\\theta(z \\mid x,v)`}
-                </Equation></EquationBlock>
+                </Equation>
                 <Paragraph>
                     This requires <strong>grounding</strong>—linking abstract concepts to specific pixels or regions.
                 </Paragraph>

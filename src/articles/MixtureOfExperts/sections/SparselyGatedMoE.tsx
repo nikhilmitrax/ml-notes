@@ -2,7 +2,6 @@ import React from 'react';
 import { Zap } from 'lucide-react';
 import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
-import EquationBlock from '../../../components/EquationBlock';
 import Header3 from '../../../components/Header3';
 import Paragraph from '../../../components/Paragraph';
 
@@ -20,21 +19,21 @@ const SparselyGatedMoE = () => {
             <Paragraph className="mb-4 text-gray-700 dark:text-gray-300">
                 The layer consists of <Equation>N</Equation> expert networks (simple FFNs) and a trainable <strong>Gating Network</strong>.
             </Paragraph>
-            <EquationBlock><Equation>
+            <Equation block>
                 {`y = \\sum_{i=1}^N G(x)_i E_i(x)`}
-            </Equation></EquationBlock>
+            </Equation>
             <Paragraph className="mb-4 text-gray-700 dark:text-gray-300">
                 Crucially, the gating function <Equation>G(x)</Equation> is sparse. The authors introduced <strong>Noisy Top-k Gating</strong> to ensure effective training:
             </Paragraph>
-            <EquationBlock><Equation>
+            <Equation block>
                 {`G(x) = \\text{Softmax}(\\text{TopK}(H(x), k))`}
-            </Equation></EquationBlock>
+            </Equation>
             <Paragraph className="mb-4 text-gray-700 dark:text-gray-300">
                 Where <Equation>H(x)</Equation> includes a tunable Gaussian noise term to aid exploration and load balancing:
             </Paragraph>
-            <EquationBlock><Equation>
+            <Equation block>
                 {`H(x)_i = (x \\cdot W_g)_i + \\text{StandardNormal}() \\cdot \\text{Softplus}((x \\cdot W_{noise})_i)`}
-            </Equation></EquationBlock>
+            </Equation>
         </Section>
     );
 };

@@ -47,9 +47,9 @@ export default function AIME_IMO() {
                     <li>AIME problems are deliberately <strong>non-retrievable</strong>—they do not rely on memorized facts but on algebraic and logical construction.</li>
                     <li>
                         This means models cannot rely on pattern recognition alone; instead, they must generate intermediate transformations such as:
-                        <EquationBlock><Equation>
+                        <Equation block>
                             {`n^2 + 12n - 2007 = k^2 \\Rightarrow (n+6)^2 - k^2 = 2043.`}
-                        </Equation></EquationBlock>
+                        </Equation>
                         Then solve for integer factors of 2043, reasoning about parity and divisibility.
                     </li>
                     <li>Thus, performance on AIME directly reflects the model's <em>symbolic abstraction ability</em>, <em>logical completeness</em>, and <em>numerical stability</em> in long reasoning chains.</li>
@@ -59,9 +59,9 @@ export default function AIME_IMO() {
                 <ul className="list-disc pl-6 space-y-2">
                     <li>
                         <strong>Accuracy</strong> is measured as the percentage of correct integer answers across 15 problems:
-                        <EquationBlock><Equation>
+                        <Equation block>
                             {`\\text{Acc} = \\frac{1}{15} \\sum_i \\mathbb{I}[y_i = y_i^\\star].`}
-                        </Equation></EquationBlock>
+                        </Equation>
                     </li>
                     <li>Given the discrete numeric range, random guessing yields only 0.1% expected accuracy. Hence, even modest accuracy (20–40%) represents nontrivial reasoning ability.</li>
                     <li>Modern evaluations also include <strong>CoT verification</strong>, where models must show step-by-step derivations.</li>

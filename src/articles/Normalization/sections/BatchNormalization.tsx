@@ -2,7 +2,6 @@ import React from 'react';
 import { Layers, Check, X } from 'lucide-react';
 import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
-import EquationBlock from '../../../components/EquationBlock';
 import CodeBlock from '../../../components/CodeBlock';
 import Header3 from '../../../components/Header3';
 import Header4 from '../../../components/Header4';
@@ -16,9 +15,9 @@ const BatchNormalization = () => {
                 <strong>Batch Normalization</strong> normalizes each feature independently across the mini-batch. It computes the mean and variance for channel <Equation>c</Equation> using data from all samples in the batch.
             </Paragraph>
 
-            <EquationBlock><Equation>
+            <Equation block>
                 {`\\hat{x}_{b,c} = \\frac{x_{b,c} - \\mu_c}{\\sqrt{\\sigma_c^2 + \\epsilon}}`}
-            </Equation></EquationBlock>
+            </Equation>
 
             <SideBySide className="mt-6">
                 <div className="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-100 dark:border-green-800">

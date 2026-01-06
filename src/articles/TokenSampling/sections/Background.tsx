@@ -209,9 +209,9 @@ const Background = () => {
             <List>
                 <ListItem>LLMs produce class probabilities with logit vector <Equation>{`\\mathbf{z}`}</Equation> where <Equation>{`\\mathbf{z}=\\left(z_{1}, \\ldots, z_{n}\\right)`}</Equation> by performing the softmax function to produce probability vector <Equation>{`\\mathbf{q}=\\left(q_{1}, \\ldots, q_{n}\\right)`}</Equation> by comparing <Equation>{`z_{i}`}</Equation> with the other logits.</ListItem>
             </List>
-            <EquationBlock><Equation>
+            <Equation block>
                 {`q_{i}=\\frac{\\exp \\left(z_{i}\\right)}{\\sum_{j} \\exp \\left(z_{j}\\right)}`}
-            </Equation></EquationBlock>
+            </Equation>
             <List>
                 <ListItem>The softmax function normalizes the candidates at each iteration of the network based on their exponential values by ensuring the network outputs are all between zero and one at every timestep, thereby easing their interpretation as probability values.</ListItem>
             </List>

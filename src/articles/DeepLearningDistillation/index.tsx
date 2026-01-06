@@ -7,7 +7,6 @@ import Paragraph from '../../components/Paragraph';
 import List from '../../components/List';
 import ListItem from '../../components/ListItem';
 import Equation from '../../components/Equation';
-import EquationBlock from '../../components/EquationBlock';
 
 export const section = 'coalesced';
 
@@ -43,9 +42,7 @@ const DeepLearningDistillation = () => {
                 <Paragraph>
                     Since the seminal work of Hinton et al. in 2015, the standard loss function for knowledge distillation has been the Forward Kullback-Leibler (KL) divergence, typically formulated as:
                 </Paragraph>
-                <EquationBlock>
-                    <Equation>{`D_{KL}(P_T || P_S) = \\sum_{x} P_T(x) \\log \\left( \\frac{P_T(x)}{P_S(x)} \\right)`}</Equation>
-                </EquationBlock>
+                <Equation block>{`D_{KL}(P_T || P_S) = \\sum_{x} P_T(x) \\log \\left( \\frac{P_T(x)}{P_S(x)} \\right)`}</Equation>
                 <Paragraph>
                     In this formulation, the expectation is taken over the <em>teacher's</em> distribution. The implications of this are profound and, in the context of generative modeling, often deleterious.
                 </Paragraph>
@@ -76,9 +73,7 @@ const DeepLearningDistillation = () => {
                 <Paragraph>
                     Modern generative distillation therefore pivots to <strong>Reverse KL Divergence</strong>:
                 </Paragraph>
-                <EquationBlock>
-                    <Equation>{`D_{KL}(P_S || P_T) = \\sum_{x} P_S(x) \\log \\left( \\frac{P_S(x)}{P_T(x)} \\right)`}</Equation>
-                </EquationBlock>
+                <Equation block>{`D_{KL}(P_S || P_T) = \\sum_{x} P_S(x) \\log \\left( \\frac{P_S(x)}{P_T(x)} \\right)`}</Equation>
                 <Paragraph>
                     Here, the expectation is over the <em>student's</em> distribution.
                 </Paragraph>
@@ -111,17 +106,13 @@ const DeepLearningDistillation = () => {
                 <Paragraph>
                     The gradient of the DMD loss (<Equation>{`\\mathcal{L}_{DMD}`}</Equation>) with respect to the generator parameters <Equation>{`\\theta`}</Equation> is approximated as:
                 </Paragraph>
-                <EquationBlock>
-                    <Equation>{`\\nabla_\\theta \\mathcal{L}_{DMD} \\approx \\mathbb{E}_{z \\sim \\mathcal{N}(0, I)} \\left[ \\dots \\right]`}</Equation>
-                </EquationBlock>
+                <Equation block>{`\\nabla_\\theta \\mathcal{L}_{DMD} \\approx \\mathbb{E}_{z \\sim \\mathcal{N}(0, I)} \\left[ \\dots \\right]`}</Equation>
 
                 <Header3>The Evolution: From Regression to Pure Distribution Matching</Header3>
                 <Paragraph>
                     In its initial iteration (DMD v1), the authors found that pure distribution matching was unstable. The generator could produce realistic textures that did not correspond to the text prompt, or drift into hallucinations. To stabilize this, DMD v1 incorporated a Regression Loss:
                 </Paragraph>
-                <EquationBlock>
-                    <Equation>{`\\mathcal{L}_{reg} = || G_\\theta(z) - \\text{Teacher}(z) ||^2 + \\mathcal{L}_{LPIPS}`}</Equation>
-                </EquationBlock>
+                <Equation block>{`\\mathcal{L}_{reg} = || G_\\theta(z) - \\text{Teacher}(z) ||^2 + \\mathcal{L}_{LPIPS}`}</Equation>
                 <Paragraph>
                     This required generating a massive dataset of (noise, image) pairs using the slow teacher model. While effective, this reintroduced the "trajectory matching" constraint—the student was forced to copy the teacher's specific mapping from noise <Equation>z</Equation> to image <Equation>x</Equation>, limiting its flexibility and increasing training costs.
                 </Paragraph>

@@ -28,9 +28,7 @@ const ATLAS: React.FC = () => {
             <Paragraph className="mb-4 text-slate-700 leading-relaxed">
                 ATLAS addresses this by shifting from single-step updates to Sliding-Window Optimization. Instead of minimizing <Equation>{'\\mathcal{L}(\\mathcal{M}_{t-1}, x_t)'}</Equation>, ATLAS minimizes the loss over a local window of history:
             </Paragraph>
-            <EquationBlock>
-                <Equation>{'\\mathcal{L}_{\\text{window}} = \\sum_{i=0}^{k} \\mathcal{L}(\\mathcal{M}, x_{t-i})'}</Equation>
-            </EquationBlock>
+            <Equation block>{'\\mathcal{L}_{\\text{window}} = \\sum_{i=0}^{k} \\mathcal{L}(\\mathcal{M}, x_{t-i})'}</Equation>
             <Paragraph className="mb-6 text-slate-700 leading-relaxed">
                 This transitions the memory update from Stochastic Gradient Descent (SGD) on a single point to Mini-Batch Optimization. By optimizing the memory to explain a window of recent tokens simultaneously, ATLAS forces the memory to find a more stable and generalizable configuration. This allows the model to "consolidate" recent history into a robust representation before moving forward, significantly reducing the rate of forgetting.
             </Paragraph>

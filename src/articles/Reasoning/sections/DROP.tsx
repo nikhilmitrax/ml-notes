@@ -38,9 +38,9 @@ export default function DROP() {
                 <Paragraph>
                     DROP was created to probe whether language models can perform <strong>discrete reasoning operations</strong>—arithmetic, comparison, and logic—over textual contexts. It shifts evaluation from "pattern recognition" to <em>programmatic inference</em>, where solving a question entails recovering the latent computational procedure:
                 </Paragraph>
-                <EquationBlock><Equation>
+                <Equation block>
                     {`y^\\star = f(x) = \\text{Compute}(\\text{Extract}(x)).`}
-                </Equation></EquationBlock>
+                </Equation>
                 <Paragraph>
                     Here, Extract identifies relevant numbers and entities, while Compute performs arithmetic or comparison.
                 </Paragraph>
@@ -49,9 +49,9 @@ export default function DROP() {
                 <ol className="list-decimal pl-6 space-y-2">
                     <li>
                         <strong>Exact Match (EM):</strong>
-                        <EquationBlock><Equation>
+                        <Equation block>
                             {`\\text{EM} = \\frac{1}{N}\\sum_i \\mathbb{I}[y_i = y_i^\\star]`}
-                        </Equation></EquationBlock>
+                        </Equation>
                         This metric is strict—minor numeric formatting differences cause failure.
                     </li>
                     <li>

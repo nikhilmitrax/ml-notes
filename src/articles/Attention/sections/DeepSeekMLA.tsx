@@ -1,7 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import Section from '../../../components/Section';
 import Paragraph from '../../../components/Paragraph';
-import EquationBlock from '../../../components/EquationBlock';
 import Equation from '../../../components/Equation';
 import InteractiveCard from '../../../components/InteractiveCard';
 import Callout from '../../../components/Callout';
@@ -102,7 +101,7 @@ const LightningIndexerDemo = () => {
             <div className="mt-4 text-center h-8 font-sans">
                 {hoveredIdx !== null ? (
                     <p className="text-sm text-gray-700">
-                        For Query <Equation inline>{`t_{${hoveredIdx}}`}</Equation>, computing <Equation inline>{`I_{${hoveredIdx}, s}`}</Equation>. Selecting top {k} past tokens.
+                        For Query <Equation>{`t_{${hoveredIdx}}`}</Equation>, computing <Equation>{`I_{${hoveredIdx}, s}`}</Equation>. Selecting top {k} past tokens.
                     </p>
                 ) : (
                     <p className="text-sm text-gray-400 italic">Hover over a token to activate the indexer.</p>
@@ -141,7 +140,7 @@ const MLAExplorer = () => {
                 {/* Common Input */}
                 <div className="absolute left-10 flex flex-col items-center">
                     <div className="w-16 h-48 bg-gray-200 border-2 border-gray-400 rounded flex items-center justify-center text-xs font-bold text-gray-600" style={{ writingMode: 'vertical-rl' }}>
-                        Input Hidden State (<Equation inline>{`h_t`}</Equation>)
+                        Input Hidden State (<Equation>{`h_t`}</Equation>)
                     </div>
                 </div>
 
@@ -305,13 +304,13 @@ export default function DeepSeekMLA() {
     return (
         <Section title="DeepSeek Sparse Attention & MLA">
             <Callout title="Abstract" type="info">
-                Transformers struggle with long contexts because standard attention is quadratic, <Equation inline>{`O(L^2)`}</Equation>.
+                Transformers struggle with long contexts because standard attention is quadratic, <Equation>{`O(L^2)`}</Equation>.
                 DeepSeek-V3.2 introduces <strong>DeepSeek Sparse Attention (DSA)</strong>. By using a fast "Lightning Indexer" to select only the most relevant tokens,
-                it reduces computation to <Equation inline>{`O(Lk)`}</Equation> without sacrificing performance.
+                it reduces computation to <Equation>{`O(Lk)`}</Equation> without sacrificing performance.
             </Callout>
 
             <Paragraph>
-                In a standard Transformer, every token attends to every previous token. As the sequence length (<Equation inline>{`L`}</Equation>) grows, the computation grows quadratically.
+                In a standard Transformer, every token attends to every previous token. As the sequence length (<Equation>{`L`}</Equation>) grows, the computation grows quadratically.
                 For a 128K context window, a dense attention map is massive.
             </Paragraph>
             <Paragraph>
@@ -328,31 +327,27 @@ export default function DeepSeekMLA() {
 
             <ol className="list-decimal pl-6 mb-6 space-y-2 text-slate-700 font-serif leading-relaxed">
                 <li><strong>Coarse Selection (The Lightning Indexer):</strong> A lightweight mechanism scans previous tokens and assigns a "relevance score".</li>
-                <li><strong>Fine-grained Attention:</strong> Standard attention is performed <em>only</em> on the top-<Equation inline>{`k`}</Equation> tokens identified by the indexer.</li>
+                <li><strong>Fine-grained Attention:</strong> Standard attention is performed <em>only</em> on the top-<Equation>{`k`}</Equation> tokens identified by the indexer.</li>
             </ol>
 
             <h4 className="text-lg font-bold text-slate-800 mb-3 mt-8">The Lightning Indexer</h4>
             <Paragraph>
-                The indexer computes a score <Equation inline>{`I_{t,s}`}</Equation> between a query token <Equation inline>{`t`}</Equation> and a past token <Equation inline>{`s`}</Equation>. It uses a ReLU activation to enforce sparsity naturally.
+                The indexer computes a score <Equation>{`I_{t,s}`}</Equation> between a query token <Equation>{`t`}</Equation> and a past token <Equation>{`s`}</Equation>. It uses a ReLU activation to enforce sparsity naturally.
             </Paragraph>
 
-            <EquationBlock>
-                <Equation>{`I_{t,s} = \\sum_{j=1}^{H^I} w_{t,j}^I \\cdot \\text{ReLU}(q_{t,j}^I \\cdot k_s^I)`}</Equation>
-            </EquationBlock>
+            <Equation block>{`I_{t,s} = \\sum_{j=1}^{H^I} w_{t,j}^I \\cdot \\text{ReLU}(q_{t,j}^I \\cdot k_s^I)`}</Equation>
 
-            <Callout type="note">
-                The indexer uses fewer heads (<Equation inline>{`H^I`}</Equation>) and can run in FP8 precision, making it incredibly fast compared to the main attention block.
+            <Callout type="info">
+                The indexer uses fewer heads (<Equation>{`H^I`}</Equation>) and can run in FP8 precision, making it incredibly fast compared to the main attention block.
             </Callout>
 
             <LightningIndexerDemo />
 
             <Paragraph>
-                Once the scores are computed, we select the set of indices where the score is in the top-<Equation inline>{`k`}</Equation>.
-                The main attention output <Equation inline>{`u_t`}</Equation> is then:
+                Once the scores are computed, we select the set of indices where the score is in the top-<Equation>{`k`}</Equation>.
+                The main attention output <Equation>{`u_t`}</Equation> is then:
             </Paragraph>
-            <EquationBlock>
-                <Equation>{`u_t = \\text{Attn}(h_t, \\{c_s \\mid I_{t,s} \\in \\text{Top-}k(I_{t,\\cdot})\\})`}</Equation>
-            </EquationBlock>
+            <Equation block>{`u_t = \\text{Attn}(h_t, \\{c_s \\mid I_{t,s} \\in \\text{Top-}k(I_{t,\\cdot})\\})`}</Equation>
 
             <h3 className="text-xl font-bold text-slate-800 mb-4 mt-12">The Foundation: Multi-Head Latent Attention (MLA)</h3>
             <Paragraph>
@@ -368,28 +363,24 @@ export default function DeepSeekMLA() {
 
             <h4 className="text-lg font-bold text-slate-800 mb-3 mt-8">MLA Mathematical Formulation</h4>
             <Paragraph>
-                To achieve this compression, MLA projects the input hidden state <Equation inline>{`h_t`}</Equation> into a low-dimensional latent vector <Equation inline>{`c_{KV}`}</Equation> using a down-projection matrix <Equation inline>{`W_{DKV}`}</Equation>.
+                To achieve this compression, MLA projects the input hidden state <Equation>{`h_t`}</Equation> into a low-dimensional latent vector <Equation>{`c_{KV}`}</Equation> using a down-projection matrix <Equation>{`W_{DKV}`}</Equation>.
             </Paragraph>
-            <EquationBlock>
-                <Equation>{`c_{KV} = h_t W_{DKV}`}</Equation>
-            </EquationBlock>
+            <Equation block>{`c_{KV} = h_t W_{DKV}`}</Equation>
             <Paragraph>
-                This compressed latent vector is then stored in the KV cache. When needed, the Key and Value vectors for each head <Equation inline>{`i`}</Equation> are generated by up-projecting <Equation inline>{`c_{KV}`}</Equation> using head-specific matrices <Equation inline>{`W_{UK}^i`}</Equation> and <Equation inline>{`W_{UV}^i`}</Equation>.
+                This compressed latent vector is then stored in the KV cache. When needed, the Key and Value vectors for each head <Equation>{`i`}</Equation> are generated by up-projecting <Equation>{`c_{KV}`}</Equation> using head-specific matrices <Equation>{`W_{UK}^i`}</Equation> and <Equation>{`W_{UV}^i`}</Equation>.
             </Paragraph>
-            <EquationBlock>
-                <Equation>{`\\begin{aligned}
+            <Equation block>{`\\begin{aligned}
                 k_{t,i} &= c_{KV} W_{UK}^i \\\\
                 v_{t,i} &= c_{KV} W_{UV}^i
                 \\end{aligned}`}</Equation>
-            </EquationBlock>
             <Callout type="info">
-                This means we only store the small <Equation inline>{`c_{KV}`}</Equation> vector in memory, while the large <Equation inline>{`k_{t,i}`}</Equation> and <Equation inline>{`v_{t,i}`}</Equation> matrices are computed on-the-fly during the attention step.
+                This means we only store the small <Equation>{`c_{KV}`}</Equation> vector in memory, while the large <Equation>{`k_{t,i}`}</Equation> and <Equation>{`v_{t,i}`}</Equation> matrices are computed on-the-fly during the attention step.
             </Callout>
 
             <h3 className="text-xl font-bold text-slate-800 mb-4 mt-12">Performance Results</h3>
             <Paragraph>
                 The combination of MLA (memory efficiency) and DSA (compute efficiency) leads to dramatic gains.
-                Core attention complexity drops from <Equation inline>{`O(L^2)`}</Equation> to roughly <Equation inline>{`O(Lk)`}</Equation>.
+                Core attention complexity drops from <Equation>{`O(L^2)`}</Equation> to roughly <Equation>{`O(Lk)`}</Equation>.
             </Paragraph>
             <Paragraph>
                 As shown below, the inference cost for DeepSeek-V3.2 remains nearly flat as context length increases,

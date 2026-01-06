@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { GitBranch, Zap } from 'lucide-react';
 import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
-import EquationBlock from '../../../components/EquationBlock';
 import InteractiveCard from '../../../components/InteractiveCard';
 import Header3 from '../../../components/Header3';
 import Header4 from '../../../components/Header4';
@@ -109,9 +108,9 @@ const DecodingBased = () => {
                 <Paragraph>
                     Formally, this can be written as:
                 </Paragraph>
-                <EquationBlock><Equation>
+                <Equation block>
                     {`\\hat{y} = \\arg\\max_{y} \\sum_{k=1}^{K} \\mathbb{I}[y^{(k)} = y]`}
-                </Equation></EquationBlock>
+                </Equation>
                 <List>
                     <ListItem><Equation>{`\\hat{y}`}</Equation>: the final predicted answer obtained by selecting the most frequently occurring outcome among sampled reasoning paths.</ListItem>
                     <ListItem><Equation>y</Equation>: a candidate answer being evaluated for consistency across reasoning trajectories.</ListItem>
@@ -139,9 +138,9 @@ const DecodingBased = () => {
                 <Paragraph>
                     This implicitly integrates over multiple latent reasoning variables <Equation>z</Equation>, approximating the marginalization in
                 </Paragraph>
-                <EquationBlock><Equation>
+                <Equation block>
                     {`p_\\theta(y\\mid x) = \\sum_z p_\\theta(y\\mid x,z) p_\\theta(z\\mid x)`}
-                </Equation></EquationBlock>
+                </Equation>
 
                 <Header4 className="text-xl font-semibold text-slate-800 mt-6">Intuition</Header4>
                 <List>
@@ -181,9 +180,9 @@ const DecodingBased = () => {
                 <Paragraph>
                     This process can be formalized as:
                 </Paragraph>
-                <EquationBlock><Equation>
+                <Equation block>
                     {`x \\xrightarrow{\\text{reason}} (z, y) \\xrightarrow{\\text{reflect}} c \\xrightarrow{\\text{revise}} (z', y')`}
-                </Equation></EquationBlock>
+                </Equation>
                 <Paragraph>
                     Each iteration ideally brings the reasoning trace closer to correctness or coherence.
                 </Paragraph>
@@ -201,9 +200,9 @@ const DecodingBased = () => {
                     <ListItem>Reflection can be viewed as <strong>approximate gradient descent in the space of reasoning traces</strong>, where the model updates its "beliefs" about a solution through internal self-assessment.</ListItem>
                     <ListItem>
                         Given an initial reasoning trace <Equation>{`z^{(0)}`}</Equation>, the update rule can be seen as:
-                        <EquationBlock><Equation>
+                        <Equation block>
                             {`z^{(t+1)} = \\text{Refine}\\big(z^{(t)}, \\text{Critique}(z^{(t)})\\big)`}
-                        </Equation></EquationBlock>
+                        </Equation>
                         where <strong>Critique</strong> is an operator producing feedback and <strong>Refine</strong> modifies the reasoning accordingly.
                     </ListItem>
                     <ListItem>This closely parallels iterative inference in classical optimization and meta-learning frameworks.</ListItem>

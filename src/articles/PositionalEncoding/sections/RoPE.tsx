@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { RotateCw, Maximize } from 'lucide-react';
 import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
-import EquationBlock from '../../../components/EquationBlock';
 import InteractiveCard from '../../../components/InteractiveCard';
 import CodeBlock from '../../../components/CodeBlock';
 import Header4 from '../../../components/Header4';
@@ -168,11 +167,11 @@ const RoPE = () => {
                 It unifies absolute and relative approaches: we apply an absolute operation (rotation by angle <Equation>m\theta</Equation>) that results in a relative interaction in the dot product.
             </Paragraph>
 
-            <EquationBlock><Equation>
+            <Equation block>
                 {`\\begin{aligned}
  f(x, m) &= R_m x \\ 
  R_m &= \\begin{pmatrix} \\cos(m\\theta) & -\\sin(m\\theta) \\\\ \\sin(m\\theta) & \\cos(m\\theta) \\end{pmatrix} \\end{aligned}`}
-            </Equation></EquationBlock>
+            </Equation>
 
             <div className="my-6">
                 <Header4 className="text-sm font-bold text-slate-800 mb-2">Implementation (Complex Numbers)</Header4>
@@ -197,9 +196,9 @@ def rotate_half(x):
                 When we take the dot product of Query at <Equation>m</Equation> and Key at <Equation>n</Equation>:
             </Paragraph>
 
-            <EquationBlock><Equation>
+            <Equation block>
                 {`(R_m q) \\cdot (R_n k) = q^T (R_m^T R_n) k = q^T R_{n-m} k`}
-            </Equation></EquationBlock>
+            </Equation>
 
             <Paragraph variant="small" className="mb-6">
                 The result only depends on <Equation>n - m</Equation> (relative distance).

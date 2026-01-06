@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Type } from 'lucide-react';
 import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
-import EquationBlock from '../../../components/EquationBlock';
 import InteractiveCard from '../../../components/InteractiveCard';
 import CodeBlock from '../../../components/CodeBlock';
 import Header4 from '../../../components/Header4';
@@ -77,9 +76,9 @@ const AliBi = () => {
                 It subtracts a static bias proportional to the distance between query and key.
             </Paragraph>
 
-            <EquationBlock><Equation>
+            <Equation block>
                 {`\\text{Attention}(q_i, k_j) = \\text{softmax}(q_i k_j^T + m \\cdot -(i - j))`}
-            </Equation></EquationBlock>
+            </Equation>
 
             <div className="my-6">
                 <Header4 className="text-sm font-bold text-slate-800 mb-2 mt-0">Implementation (Bias Injection)</Header4>

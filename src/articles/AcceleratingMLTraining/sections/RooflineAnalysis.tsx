@@ -6,7 +6,6 @@ import Header3 from '../../../components/Header3';
 import Paragraph from '../../../components/Paragraph';
 import Callout from '../../../components/Callout';
 import Equation from '../../../components/Equation';
-import EquationBlock from '../../../components/EquationBlock';
 
 const RooflineAnalysis = () => {
     // H100 Specs (FP8)
@@ -56,9 +55,7 @@ const RooflineAnalysis = () => {
                 Arithmetic Intensity is the ratio of floating-point operations (FLOPs) performed to the amount of data (Bytes) moved from memory.
             </Paragraph>
 
-            <EquationBlock>
-                <Equation>{`\\text{Arithmetic Intensity} = \\frac{\\text{FLOPs}}{\\text{Bytes}}`}</Equation>
-            </EquationBlock>
+            <Equation block>{`\\text{Arithmetic Intensity} = \\frac{\\text{FLOPs}}{\\text{Bytes}}`}</Equation>
 
             <Paragraph>
                 It tells us how much "work" we do for every byte of data we fetch.
@@ -178,15 +175,11 @@ const RooflineAnalysis = () => {
                 <Paragraph>
                     <b>Arithmetic Intensity:</b>
                 </Paragraph>
-                <EquationBlock>
-                    <Equation>{`\\frac{2MKN}{2(MK + KN + MN)} \\approx \\frac{MKN}{MK + KN + MN}`}</Equation>
-                </EquationBlock>
+                <Equation block>{`\\frac{2MKN}{2(MK + KN + MN)} \\approx \\frac{MKN}{MK + KN + MN}`}</Equation>
                 <Paragraph>
                     For large square matrices where <Equation>M=N=K</Equation>:
                 </Paragraph>
-                <EquationBlock>
-                    <Equation>{`\\text{Intensity} \\approx \\frac{N ^ 3}{3N^2} = \\frac{N}{3}`}</Equation>
-                </EquationBlock>
+                <Equation block>{`\\text{Intensity} \\approx \\frac{N ^ 3}{3N^2} = \\frac{N}{3}`}</Equation>
             </div>
 
             <Paragraph>

@@ -20,9 +20,9 @@ const DerivingELBO = () => {
                 <Equation>{`\\log p(x) = \\log \\int p(x, z) dz`}</Equation>
                 <Equation hidden>{`= \\log \\int q(z|x) \\frac{p(x, z)}{q(z|x)} dz`}</Equation>
                 <Equation hidden>{`= \\log \\mathbb{E}_{q(z|x)} \\left[ \\frac{p(x, z)}{q(z|x)} \\right]`}</Equation>
-                <Equation hidden>{`\\ge \\mathbb{E}_{q(z|x)} \\left[ \\log \\frac{p(x, z)}{q(z|x)} \\right] \\quad (\\text{Jensen's Inequality})`}</Equation>
+                <Equation hidden conceptId="jensensinequality">{`\\ge \\mathbb{E}_{q(z|x)} \\left[ \\log \\frac{p(x, z)}{q(z|x)} \\right]`}</Equation>
                 <Equation hidden>{`\\ge \\mathbb{E}_q [\\log p(x|z) + \\log p(z) - \\log q(z|x)]`}</Equation>
-                <Equation>{`\\ge \\underbrace{\\mathbb{E}_q [\\log p(x|z)]}_{\\text{Reconstruction}} - \\underbrace{D_{KL}(q(z|x) || p(z))}_{\\text{Regularization}}`}</Equation>
+                <Equation conceptId="kldivergence">{`\\ge \\underbrace{\\mathbb{E}_q [\\log p(x|z)]}_{\\text{Reconstruction}} - \\underbrace{D_{KL}(q(z|x) || p(z))}_{\\text{Regularization}}`}</Equation>
             </EquationBlock>
 
             <p className="mt-4 text-gray-700 dark:text-gray-300">

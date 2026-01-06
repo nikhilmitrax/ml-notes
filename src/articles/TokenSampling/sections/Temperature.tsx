@@ -2,7 +2,6 @@ import React, { useState, useMemo } from 'react';
 import { Thermometer } from 'lucide-react';
 import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
-import EquationBlock from '../../../components/EquationBlock';
 import InteractiveCard from '../../../components/InteractiveCard';
 import Header3 from '../../../components/Header3';
 import Header4 from '../../../components/Header4';
@@ -88,9 +87,9 @@ const Temperature = () => {
             <List>
                 <ListItem>The "vanilla" softmax function incorporates the temperature hyperparameter <Equation>{`T`}</Equation> as follows:</ListItem>
             </List>
-            <EquationBlock><Equation>
+            <Equation block>
                 {`q_{i}=\\frac{\\exp(z_{i}/T)}{\\sum_{j} \\exp(z_{j}/T)}`}
-            </Equation></EquationBlock>
+            </Equation>
             <List>
                 <ListItem>where <Equation>{`T`}</Equation> is the temperature parameter (set to 1 by default).</ListItem>
                 <ListItem>When the temperature is 1, we compute the softmax directly on the logits (the unscaled output of earlier layers). Using a temperature of 0.6, the model computes the softmax on <Equation>{`\\frac{\\text{logits}}{0.6}`}</Equation>, resulting in a larger value. Performing softmax on larger values makes the model more <strong>confident</strong> (less input is needed to activate the output layer) but also more <strong>conservative</strong> in its samples (it is less likely to sample from unlikely candidates).</ListItem>

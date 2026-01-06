@@ -9,7 +9,7 @@ export interface Article {
     name: string;
     component: ComponentType;
     unfinished: boolean;
-    section: 'coalesced' | 'papers';
+    section: 'coalesced' | 'papers' | 'concepts';
 }
 
 /**

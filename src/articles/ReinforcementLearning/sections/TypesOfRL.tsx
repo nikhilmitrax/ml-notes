@@ -2,7 +2,6 @@ import React from 'react';
 import { Layers } from 'lucide-react';
 import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
-import EquationBlock from '../../../components/EquationBlock';
 import Header3 from '../../../components/Header3';
 import Header4 from '../../../components/Header4';
 import Paragraph from '../../../components/Paragraph';
@@ -31,9 +30,9 @@ const TypesOfRL = () => {
                     <Paragraph>
                         These methods directly learn a parameterized policy <Equation>{`\\pi_\\theta(a|s)`}</Equation> without consulting a value function. They optimize the policy parameters <Equation>\theta</Equation> using gradient ascent on the expected return.
                     </Paragraph>
-                    <EquationBlock><Equation>
+                    <Equation block>
                         {`\\nabla_\\theta J(\\theta) \\approx \\mathbb{E} [\\nabla_\\theta \\log \\pi_\\theta(a|s) G_t]`}
-                    </Equation></EquationBlock>
+                    </Equation>
                     <Paragraph className="mt-2">
                         <strong>REINFORCE</strong> is a classic algorithm that uses the Policy Gradient Theorem.
                     </Paragraph>

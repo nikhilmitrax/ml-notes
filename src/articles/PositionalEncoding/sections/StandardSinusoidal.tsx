@@ -2,7 +2,6 @@ import React, { useState, useMemo } from 'react';
 import { Move } from 'lucide-react';
 import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
-import EquationBlock from '../../../components/EquationBlock';
 import InteractiveCard from '../../../components/InteractiveCard';
 import CodeBlock from '../../../components/CodeBlock';
 import Header4 from '../../../components/Header4';
@@ -145,11 +144,11 @@ const StandardSinusoidal = () => {
                 It uses frequencies that form a geometric progression.
             </Paragraph>
 
-            <EquationBlock><Equation>
+            <Equation block>
                 {`\\begin{aligned}
 PE_{(pos, 2i)} &= \\sin(pos / 10000^{2i/d_{model}}) \\ 
 PE_{(pos, 2i+1)} &= \\cos(pos / 10000^{2i/d_{model}}) \\end{aligned}`}
-            </Equation></EquationBlock>
+            </Equation>
 
             <div className="my-6">
                 <Header4 className="text-sm font-bold text-slate-800 mb-2">Implementation (PyTorch Style)</Header4>

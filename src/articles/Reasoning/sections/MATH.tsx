@@ -2,7 +2,6 @@ import React from 'react';
 import { Sigma } from 'lucide-react';
 import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
-import EquationBlock from '../../../components/EquationBlock';
 import Header3 from '../../../components/Header3';
 import Header4 from '../../../components/Header4';
 import Paragraph from '../../../components/Paragraph';

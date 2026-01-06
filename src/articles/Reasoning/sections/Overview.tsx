@@ -2,7 +2,6 @@ import React from 'react';
 import { Brain } from 'lucide-react';
 import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
-import EquationBlock from '../../../components/EquationBlock';
 import Header3 from '../../../components/Header3';
 import Paragraph from '../../../components/Paragraph';
 
@@ -13,15 +12,15 @@ const Overview = () => {
                 <Paragraph>
                     Large Language Models (LLMs) are sequence models that learn a conditional distribution over tokens. Given a context <Equation>{`x_{<t}`}</Equation>, an LLM parameterized by <Equation>{`\\theta`}</Equation> predicts the next token via:
                 </Paragraph>
-                <EquationBlock><Equation>
+                <Equation block>
                     {`p_\\theta(x_t \\mid x_{<t}) = \\mathrm{softmax}\\left(f_\\theta(x_{<t})\\right)`}
-                </Equation></EquationBlock>
+                </Equation>
                 <Paragraph>
                     Reasoning, in this primer, is the process by which an LLM instantiates and manipulates intermediate structures to transform inputs into solutions that satisfy constraints beyond surface-level pattern completion. A useful abstraction is to introduce latent "thoughts" <Equation>z</Equation> and write:
                 </Paragraph>
-                <EquationBlock><Equation>
+                <Equation block>
                     {`p_\\theta(y\\mid x)=\\sum_{z} p_\\theta(y\\mid x,z) p_\\theta(z\\mid x)`}
-                </Equation></EquationBlock>
+                </Equation>
                 <ul className="list-disc pl-6 space-y-2">
                     <li>
                         where <Equation>z</Equation> ranges over intermediate steps such as plans, subgoals, tool calls, or formal derivations. Externalizing <Equation>z</Equation> in the output (for example, step-by-step rationales) is one way we can probe, debug, and improve this process.

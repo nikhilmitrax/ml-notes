@@ -2,7 +2,6 @@ import React from 'react';
 import { Scale } from 'lucide-react';
 import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
-import EquationBlock from '../../../components/EquationBlock';
 import Header3 from '../../../components/Header3';
 import Paragraph from '../../../components/Paragraph';
 
@@ -17,9 +16,9 @@ const LoadBalancing = () => {
             <Paragraph className="mb-4 text-gray-700 dark:text-gray-300">
                 The load on expert <Equation>i</Equation> is defined by the <strong>fraction of tokens</strong> assigned to it (<Equation>f_i</Equation>) and the <strong>average routing probability</strong> (<Equation>P_i</Equation>).
             </Paragraph>
-            <EquationBlock><Equation>
+            <Equation block>
                 {`\\text{Load}_i = f_i \\times P_i`}
-            </Equation></EquationBlock>
+            </Equation>
             <Paragraph className="mb-4 text-gray-700 dark:text-gray-300">
                 Where:
             </Paragraph>
@@ -32,9 +31,9 @@ const LoadBalancing = () => {
             <Paragraph className="mb-4 text-gray-700 dark:text-gray-300">
                 To encourage balanced routing, an auxiliary loss term is added to the training objective:
             </Paragraph>
-            <EquationBlock><Equation>
+            <Equation block>
                 {`\\mathcal{L}_{balance} = \\alpha N \\sum_{i=1}^N f_i P_i`}
-            </Equation></EquationBlock>
+            </Equation>
             <Paragraph className="mb-4 text-gray-700 dark:text-gray-300">
                 This loss is minimized when routing is uniform (<Equation>{`f_i = P_i = \\frac{1}{N}`}</Equation>).
             </Paragraph>

@@ -2,7 +2,6 @@ import React from 'react';
 import { GitMerge } from 'lucide-react';
 import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
-import EquationBlock from '../../../components/EquationBlock';
 import Header4 from '../../../components/Header4';
 import Paragraph from '../../../components/Paragraph';
 import SideBySide from '../../../components/SideBySide';
@@ -16,21 +15,21 @@ const Extensions = () => {
             <SideBySide className="mb-6">
                 <div className="p-4 bg-white rounded-lg border border-slate-200">
                     <Header4 className="font-bold text-slate-800 mb-2">Bahdanau (Concat)</Header4>
-                    <EquationBlock><Equation>
+                    <Equation block>
                         {`score(s_t, h_i) = v_a^T \\tanh(W_a [s_t; h_i])`}
-                    </Equation></EquationBlock>
+                    </Equation>
                 </div>
                 <div className="p-4 bg-white rounded-lg border border-slate-200">
                     <Header4 className="font-bold text-slate-800 mb-2">Luong (Dot)</Header4>
-                    <EquationBlock><Equation>
+                    <Equation block>
                         {`score(s_t, h_i) = s_t^T h_i`}
-                    </Equation></EquationBlock>
+                    </Equation>
                 </div>
                 <div className="p-4 bg-white rounded-lg border border-slate-200">
                     <Header4 className="font-bold text-slate-800 mb-2">Luong (General)</Header4>
-                    <EquationBlock><Equation>
+                    <Equation block>
                         {`score(s_t, h_i) = s_t^T W_a h_i`}
-                    </Equation></EquationBlock>
+                    </Equation>
                 </div>
             </SideBySide>
         </Section>

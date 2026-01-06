@@ -2,7 +2,6 @@ import React from 'react';
 import { Brain } from 'lucide-react';
 import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
-import EquationBlock from '../../../components/EquationBlock';
 import Header3 from '../../../components/Header3';
 import Header4 from '../../../components/Header4';
 import Paragraph from '../../../components/Paragraph';
@@ -15,9 +14,9 @@ const ObjectiveFunction = () => {
                 We train VAEs by maximizing the Evidence Lower Bound (ELBO). The loss function generally consists of two opposing terms:
             </Paragraph>
 
-            <EquationBlock><Equation>
+            <Equation block>
                 {`\\mathcal(L) = \\underbrace{\\mathbb{E}_{q(z|x)}[\\log p(x|z)]}_{\\text{Reconstruction Loss}} - \\underbrace{D_{KL}(q(z|x) || p(z))}_{\\text{Regularization}}`}
-            </Equation></EquationBlock>
+            </Equation>
 
             <SideBySide className="mt-6">
                 <div className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
@@ -46,9 +45,9 @@ const ObjectiveFunction = () => {
                     <Paragraph variant="small" className="mb-2">
                         If you assume each pixel is a Bernoulli variable, the negative log-likelihood <Equation>-\log p_\theta(x|z)</Equation> becomes <strong>Binary Cross Entropy (BCE)</strong>.
                     </Paragraph>
-                    <EquationBlock><Equation>
+                    <Equation block>
                         {`-\\log p(x|z) = \\text{BCE}(x, \\hat{x})`}
-                    </Equation></EquationBlock>
+                    </Equation>
                 </div>
 
                 <div className="p-4 bg-gray-50 dark:bg-gray-900 rounded-lg">
@@ -56,9 +55,9 @@ const ObjectiveFunction = () => {
                     <Paragraph variant="small" className="mb-2">
                         If you assume the data follows a Gaussian distribution <Equation>{`p(x|z) = \\mathcal{N}(\\mu_\\theta(z), \\sigma^2 I)`}</Equation>, the loss is proportional to <strong>Mean Squared Error (MSE)</strong>.
                     </Paragraph>
-                    <EquationBlock><Equation>
+                    <Equation block>
                         {`-\\log p(x|z) \\propto ||x - \\mu_\\theta(z)||^2`}
-                    </Equation></EquationBlock>
+                    </Equation>
                 </div>
             </div>
 

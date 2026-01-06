@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Cpu } from 'lucide-react';
 import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
-import EquationBlock from '../../../components/EquationBlock';
 import InteractiveCard from '../../../components/InteractiveCard';
 import Header3 from '../../../components/Header3';
 import Header4 from '../../../components/Header4';
@@ -303,9 +302,9 @@ const FrontierLLMs = () => {
             <div className="space-y-4 mb-6">
                 <div>
                     <Paragraph className="font-semibold text-slate-800 mb-2">1. Compressed Latent Vector for Keys and Values:</Paragraph>
-                    <EquationBlock><Equation>
+                    <Equation block>
                         {`c_{KV_t} = W_{DKV} h_t`}
-                    </Equation></EquationBlock>
+                    </Equation>
                     <Paragraph variant="small" className="mt-2">
                         where <Equation>{`W_{DKV} \\in \\mathbb{R}^{d_c \\times d}`}</Equation> is a down-projection matrix and <Equation>{`d_c`}</Equation> is the compressed dimension.
                     </Paragraph>
@@ -313,9 +312,9 @@ const FrontierLLMs = () => {
 
                 <div>
                     <Paragraph className="font-semibold text-slate-800 mb-2">2. Up-projection to Keys and Values:</Paragraph>
-                    <EquationBlock><Equation>
+                    <Equation block>
                         {`k_C^{(i)} = W_{UK}^{(i)} c_{KV_t}, \\quad v_C^{(i)} = W_{UV}^{(i)} c_{KV_t}`}
-                    </Equation></EquationBlock>
+                    </Equation>
                     <Paragraph variant="small" className="mt-2">
                         where <Equation>{`W_{UK}^{(i)}, W_{UV}^{(i)} \\in \\mathbb{R}^{d_h \\times d_c}`}</Equation> are the up-projection matrices for the <Equation>{`i`}</Equation>-th head.
                     </Paragraph>

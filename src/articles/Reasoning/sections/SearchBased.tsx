@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Search } from 'lucide-react';
 import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
-import EquationBlock from '../../../components/EquationBlock';
 import InteractiveCard from '../../../components/InteractiveCard';
 import Header3 from '../../../components/Header3';
 import Header4 from '../../../components/Header4';
@@ -105,15 +104,15 @@ export default function SearchBased() {
                 <ul className="list-disc pl-6 space-y-2">
                     <li>
                         CoT prompting treats reasoning as a single sampled trajectory:
-                        <EquationBlock><Equation>
-                            {`x \\rightarrow z_1 \\rightarrow z_2 \\rightarrow \\cdots \\rightarrow z_T \\rightarrow y`}
-                        </Equation></EquationBlock>
+                        <Equation block>
+                            {`x \\rightarrow z_1 \\rightarrow z_2 \\cdots \\rightarrow z_T \\rightarrow y`}
+                        </Equation>
                     </li>
                     <li>
                         while ToT treats reasoning as an <strong>exploration problem</strong> over multiple possible continuations at each step:
-                        <EquationBlock><Equation>
+                        <Equation block>
                             {`\\mathcal{T} = \\{z_{1:t} \\mid z_{1:t-1} \\in \\mathcal{T},\\ z_t \\in \\text{Expand}(z_{1:t-1})\\}`}
-                        </Equation></EquationBlock>
+                        </Equation>
                     </li>
                 </ul>
                 <Paragraph>
@@ -134,9 +133,9 @@ export default function SearchBased() {
                 <Paragraph>
                     Mathematically, this resembles a policy/value formulation:
                 </Paragraph>
-                <EquationBlock><Equation>
+                <Equation block>
                     {`z_{t+1} \\sim \\pi_\\theta(z_t \\mid z_{1:t}) \\quad \\text{and} \\quad V_\\phi(z_{1:t}) \\approx \\mathbb{E}[R \\mid z_{1:t}]`}
-                </Equation></EquationBlock>
+                </Equation>
                 <ul className="list-disc pl-6 space-y-2">
                     <li>where <Equation>R</Equation> is a reward for a correct or high-quality final output.</li>
                 </ul>
@@ -188,18 +187,18 @@ export default function SearchBased() {
                 <Paragraph>
                     Formally, reasoning unfolds as a growing search tree <Equation>{`\\mathcal{T}`}</Equation>:
                 </Paragraph>
-                <EquationBlock><Equation>
+                <Equation block>
                     {`\\mathcal{T} = \\{ z_{1:t} \\mid z_{1:t-1} \\in \\mathcal{T},\\ z_t \\in \\text{Expand}(z_{1:t-1}) \\}`}
-                </Equation></EquationBlock>
+                </Equation>
                 <ul className="list-disc pl-6 space-y-2">
                     <li>where the <strong>Expand</strong> step is guided by the LLM's conditional distribution <Equation>{`p_\\theta(z_t \\mid z_{1:t-1}, x)`}</Equation>, and the <strong>evaluation function</strong> <Equation>{`V_\\phi(z_{1:t})`}</Equation> estimates how promising each partial reasoning sequence is.</li>
                 </ul>
                 <Paragraph>
                     MCTS then uses <strong>simulated rollouts</strong>—partial reasoning trajectories extended to completion—to estimate downstream rewards, which are <strong>backpropagated</strong> through the tree to update value and visit counts. The algorithm repeatedly selects nodes using an upper-confidence bound (UCB) criterion that trades off exploration and exploitation:
                 </Paragraph>
-                <EquationBlock><Equation>
+                <Equation block>
                     {`a^* = \\arg\\max_a \\left( Q(s, a) + c \\sqrt{\\frac{\\log N(s)}{N(s, a) + 1}} \\right)`}
-                </Equation></EquationBlock>
+                </Equation>
                 <ul className="list-disc pl-6 space-y-2">
                     <li>where <Equation>{`Q(s, a)`}</Equation> is the average reward for taking reasoning step <Equation>a</Equation> in state <Equation>s</Equation>, <Equation>{`N(s, a)`}</Equation> the number of visits, and <Equation>c</Equation> a temperature constant controlling exploration.</li>
                 </ul>
@@ -221,9 +220,9 @@ export default function SearchBased() {
                 <ul className="list-disc pl-6 space-y-2">
                     <li>
                         MCTS-based reasoning can be interpreted as an <strong>approximate Bayesian inference</strong> mechanism, marginalizing over reasoning paths by repeated stochastic sampling and value-based weighting. It formalizes reasoning as a <strong>policy–value system</strong>:
-                        <EquationBlock><Equation>
+                        <Equation block>
                             {`z_{t+1} \\sim \\pi_\\theta(z_t \\mid z_{1:t}, x), \\quad V_\\phi(z_{1:t}) \\approx \\mathbb{E}[R \\mid z_{1:t}]`}
-                        </Equation></EquationBlock>
+                        </Equation>
                         where <Equation>{`\\pi_\\theta`}</Equation> is the reasoning policy and <Equation>{`V_\\phi`}</Equation> the expected reward estimator.
                     </li>
                     <li>This structure directly parallels <strong>AlphaZero</strong>-style planning in RL: reasoning steps are "moves," the value function measures progress toward correctness, and search iterations improve reasoning through <strong>self-guided exploration</strong>.</li>

@@ -12,6 +12,7 @@ interface SectionConfig {
 const SECTIONS: SectionConfig[] = [
   { key: 'coalesced', label: 'Coalesced', icon: Layers },
   { key: 'papers', label: 'Papers', icon: FileText },
+  { key: 'concepts', label: 'Concepts', icon: BookOpen },
 ];
 
 interface SidebarProps {

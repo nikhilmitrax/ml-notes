@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Shuffle } from 'lucide-react';
 import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
-import EquationBlock from '../../../components/EquationBlock';
 import InteractiveCard from '../../../components/InteractiveCard';
 
 const ReparameterizationViz = () => {
@@ -130,9 +129,9 @@ const ReparameterizationTrick = () => {
                 of the parameters and an independent noise source <Equation>\epsilon</Equation>:
             </p>
 
-            <EquationBlock><Equation>
+            <Equation block>
                 {`z = \\mu + \\sigma \\odot \\epsilon, \\quad \\text{where } \\epsilon \\sim \\mathcal(N)(0, I)`}
-            </Equation></EquationBlock>
+            </Equation>
 
             <p className="mb-6">
                 This moves the randomness to <Equation>\epsilon</Equation>, allowing gradients to flow through <Equation>\mu</Equation> and <Equation>\sigma</Equation>.

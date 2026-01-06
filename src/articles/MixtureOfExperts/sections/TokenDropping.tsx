@@ -2,7 +2,6 @@ import React from 'react';
 import { AlertTriangle } from 'lucide-react';
 import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
-import EquationBlock from '../../../components/EquationBlock';
 import Header3 from '../../../components/Header3';
 import Header4 from '../../../components/Header4';
 import Paragraph from '../../../components/Paragraph';
@@ -18,9 +17,9 @@ const TokenDropping = () => {
             <Paragraph className="mb-4 text-gray-700 dark:text-gray-300">
                 The <strong>drop rate</strong> <Equation>r</Equation> is the fraction of tokens that are not processed by any expert:
             </Paragraph>
-            <EquationBlock><Equation>
+            <Equation block>
                 {`r = \\frac{1}{T} \\sum_{i=1}^N \\max(0, T_i - C)`}
-            </Equation></EquationBlock>
+            </Equation>
             <Paragraph className="mb-4 text-gray-700 dark:text-gray-300">
                 Where <Equation>T_i</Equation> is the number of tokens assigned to expert <Equation>i</Equation>.
             </Paragraph>

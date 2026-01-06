@@ -2,7 +2,6 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { Network, Brain } from 'lucide-react';
 import Section from '../../../components/Section';
 import Equation from '../../../components/Equation';
-import EquationBlock from '../../../components/EquationBlock';
 import InteractiveCard from '../../../components/InteractiveCard';
 import Header3 from '../../../components/Header3';
 import Paragraph from '../../../components/Paragraph';
@@ -199,9 +198,9 @@ const RoutingMechanisms = () => {
             <Paragraph className="mb-4 text-gray-700 dark:text-gray-300">
                 Tokens choose the top-k experts based on a gating score.
             </Paragraph>
-            <EquationBlock><Equation>
+            <Equation block>
                 {`p_i(x) = \\text{Softmax}(x \\cdot W_g)_i`}
-            </Equation></EquationBlock>
+            </Equation>
             <Paragraph className="mb-4 text-gray-700 dark:text-gray-300">
                 <strong>Pros:</strong> Simple. <strong>Cons:</strong> Can lead to load imbalance and dropped tokens.
             </Paragraph>
@@ -220,9 +219,9 @@ const RoutingMechanisms = () => {
             <Paragraph className="mb-4 text-gray-700 dark:text-gray-300">
                 Puigcerver et al. (2023) proposed a fully differentiable approach. Instead of discrete routing, tokens are mixed into "slots" via soft weights.
             </Paragraph>
-            <EquationBlock><Equation>
+            <Equation block>
                 {`\\text{Slot}_k = \\sum_t w_{t,k} x_t`}
-            </Equation></EquationBlock>
+            </Equation>
             <Paragraph className="mb-4 text-gray-700 dark:text-gray-300">
                 Experts process these slots, and the results are distributed back to tokens. This avoids the non-differentiability of top-k selection.
             </Paragraph>
