@@ -10,6 +10,7 @@ import MultiHeadAttention from './sections/MultiHeadAttention';
 import GhostAttention from './sections/GhostAttention';
 import FrontierLLMs from './sections/FrontierLLMs';
 import DeepSeekMLA from './sections/DeepSeekMLA';
+import FlexAttention from './sections/FlexAttention';
 import ComplexityAnalysis from './sections/ComplexityAnalysis';
 
 import References from './sections/References';
@@ -32,6 +33,7 @@ export default function Attention() {
             <GhostAttention />
             <FrontierLLMs />
             <DeepSeekMLA />
+            <FlexAttention />
             <ComplexityAnalysis />
             <References />
         </Article>

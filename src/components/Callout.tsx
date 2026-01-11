@@ -73,7 +73,7 @@ const Callout: React.FC<CalloutProps> = ({ type = 'info', title, children, class
                     <h4 className={`font-bold ${variant.titleColor} mb-1`}>
                         {title || variant.defaultTitle}
                     </h4>
-                    <div className={`${variant.textColor} text-sm`}>
+                    <div className={`${variant.textColor} text-sm [&_a]:underline [&_a]:font-semibold hover:[&_a]:opacity-80`}>
                         {children}
                     </div>
                 </div>
