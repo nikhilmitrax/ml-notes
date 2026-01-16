@@ -169,7 +169,7 @@ const initialEdges = [
     { id: 'e_pv_mm2', source: 'proj_v', target: 'matmul_2', label: 'V [BT\'KH]', ...edgeOptions },
 
     // MatMul1 -> Add
-    { id: 'e_mm1_add', source: 'matmul_1', target: 'add_mask', label: '=[BTT\'KG]', ...edgeOptions },
+    { id: 'e_mm1_add', source: 'matmul_1', target: 'add_mask', label: '[BTT\'KG]', ...edgeOptions },
     // Masks -> Add
     { id: 'e_mask_add', source: 'masks', target: 'add_mask', targetHandle: 'top', ...edgeOptions, markerEnd: { type: MarkerType.ArrowClosed, color: '#fff' } },
 
@@ -233,6 +233,28 @@ export default function AttentionSchematic() {
                     <div style={{ marginBottom: 5 }}>N/K - Query/KV Heads</div>
                     <div style={{ marginBottom: 5 }}>H - Head Dimension</div>
                     <div>G = n//k Query heads per KV</div>
+                </div>
+
+                {/* Variants Caption */}
+                <div style={{
+                    position: 'absolute',
+                    bottom: 20,
+                    left: 20,
+                    padding: 20,
+                    background: 'rgba(20, 20, 20, 0.9)',
+                    border: '1px solid #444',
+                    borderRadius: 8,
+                    color: '#ccc',
+                    fontFamily: 'monospace',
+                    fontSize: 14,
+                    pointerEvents: 'none',
+                    lineHeight: '1.6'
+                }}>
+                    <div style={{ color: '#fff', fontWeight: 'bold', marginBottom: 8 }}>Conditions</div>
+                    <div><span style={{ color: '#8cb4ff' }}>Self-Attention:</span> x1 = x2</div>
+                    <div><span style={{ color: '#8cb4ff' }}>MHA:</span> N = K (G=1)</div>
+                    <div><span style={{ color: '#8cb4ff' }}>MQA:</span> K = 1 (G=N)</div>
+                    <div><span style={{ color: '#8cb4ff' }}>GQA:</span> 1 &lt; K &lt; N</div>
                 </div>
             </ReactFlow>
         </div>
