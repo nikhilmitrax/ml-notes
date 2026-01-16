@@ -12,7 +12,7 @@ import FrontierLLMs from './sections/FrontierLLMs';
 import DeepSeekMLA from './sections/DeepSeekMLA';
 import FlexAttention from './sections/FlexAttention';
 import ComplexityAnalysis from './sections/ComplexityAnalysis';
-
+import AttentionSchematic from './sections/AttentionSchematic';
 import References from './sections/References';
 
 export const section = 'coalesced';
@@ -24,6 +24,7 @@ export default function Attention() {
             description="The attention mechanism has revolutionized many Natural Language Processing (NLP) and Computer Vision (CV) tasks by addressing the limitations of traditional seq2seq models by alleviating the context vector bottleneck. Attention enables models to dynamically focus on relevant parts of the input sequence, enhancing their ability to handle long and complex sentences."
         >
             <Overview />
+            <AttentionSchematic />
             <Origins />
             <Seq2Seq />
             <Seq2SeqWithAttention />
