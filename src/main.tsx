@@ -40,6 +40,7 @@ const articles: Article[] = [
   return !article.unfinished;
 });
 
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <HashRouter>
@@ -58,3 +59,4 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     </HashRouter>
   </React.StrictMode>
 );
+// Force HMR update for new article detection
